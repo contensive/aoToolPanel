@@ -1,0 +1,259 @@
+/*
+* --------------------------------------------
+* toolPanel
+* --------------------------------------------
+*/
+#toolPanel {
+    background-color: transparent;
+}
+#toolPanel
+,#toolPanel p 
+,#toolPanel div
+,#toolPanel li
+{
+    font-family: verdana,arial,sans-serif;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+/*
+* --------------------------------------------
+* Pulldown Tab Zone
+* --------------------------------------------
+*/
+
+#toolPanel #tpTabZone {
+    border: 1px solid red;
+    height: 20px;
+    position: absolute;
+    width: 100%;
+}
+
+/*
+* --------------------------------------------
+* Pulldown Panels
+* --------------------------------------------
+*/
+
+#toolPanel .tpPanels {
+}
+#toolPanel .tpPanels .tpPanelCon {
+	background-color: #eee;
+	border-bottom: 2px solid #bbb;
+	margin: 0;
+	padding:0;
+	display:none;
+}
+#toolPanel .tpPanels .tpPanelCon .tpPanelInner {
+	margin: 0;
+	padding:10px;
+}
+
+/*
+* --------------------------------------------
+* Account Pulldown
+* --------------------------------------------
+*/
+
+#toolPanel #tpAccountPanel {
+	height: 200px;
+}
+
+/*
+* --------------------------------------------
+* hanging tabs
+* --------------------------------------------
+*/
+#toolPanel .tpTabs {
+    background-color: #333333;
+    border: 1px solid #888888;
+    height: 30px;
+    left: 100%;
+    margin: 0 0 0 -250px;
+    position: absolute;
+    right: 0;
+    width: 250px;
+}
+
+#toolPanel .tpTabs > ul {
+    background-color: #DDDDDD;
+    border-radius: 0 0 10px 10px;
+    border-top: 0 none;
+    box-shadow: 1px 1px 3px #666666;
+    left: 100%;
+    list-style-type: none;
+    margin: 0 0 0 -115px;
+    padding: 0 20px;
+    position: absolute;
+    top: 0;
+    width: 75px;
+    z-index: 10;
+}
+#toolPanel .tpTabs > ul.tpOpen {
+	background-color: #eee;
+}
+
+#toolPanel .tpTabs > ul li.tpButton {
+	float: left;
+}
+
+#toolPanel li.tpButton a {
+	color: #444;
+}
+
+#toolPanel  ul.tpOpen li.tpButton a {
+	color: #222;
+}
+
+#toolPanel .tpTabs > ul li.tpLock {
+    float: left;
+    height: 10px;
+    margin: 4px 0;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+
+/*
+* --------------------------------------------
+* fixed tabs
+* --------------------------------------------
+*/
+#toolPanel .tpFixedTabs {
+    background-color: transparent;
+    left: 50%;
+    margin: 0 0 0 -250px;
+    position: fixed;
+    width: 500px;
+}
+
+#toolPanel .tpFixedTabs > ul {
+	background-color: #ddd;
+	border-radius: 0 0 10px 10px;
+	box-shadow: 1px 1px 3px #666666;
+	display: table;
+	list-style-type: none;
+	margin: 0 auto;
+	padding: 0 20px;
+	border-top: 0;
+}
+#toolPanel .tpFixedTabs > ul.tpOpen {
+	background-color: #eee;
+}
+
+#toolPanel .tpFixedTabs > ul li.tpButton {
+	float: left;
+}
+
+#toolPanel .tpFixedTabs > ul li.tpEditLock {
+    float: left;
+    height: 10px;
+    margin: 7px 0;
+    padding: 11px 0;
+    cursor: pointer;
+}
+
+/*
+* --------------------------------------------
+* Editor Tab
+* --------------------------------------------
+*/
+
+#toolPanel ul#tpEditTab li.tpEditButton {
+	float: left;
+}
+
+#toolPanel ul#tpEditTab li.tpEditButton a {
+	display: block;
+	margin: 7px 3px;
+	padding: 8px;
+	border: 1px solid #ddd;
+	border-radius: 3px 3px 3px 3px;
+	text-decoration: none;
+	font-weight: bold;
+	background-color: #888;
+	color: white;
+}
+#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonDown {
+	border: 1px solid #ddd;
+	background-color: #eee;
+	color: #222;
+	box-shadow: 1px 1px 3px #888 inset;
+}
+#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonDown:hover {
+	border: 1px solid #444;
+}
+/*
+#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonUp {
+	border: 1px solid #ddd;
+	background-color: #888;
+	color: white;
+}
+*/
+#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonUp:hover {
+	border: 1px solid #444;
+}
+/*
+* --------------------------------------------
+* Account Tab
+* --------------------------------------------
+*/
+
+#toolPanel ul#tpAccountTab li.tpButton a {
+    border-radius: 3px 3px 3px 3px;
+    display: block;
+    margin: 4px;
+    padding: 2px;
+    text-decoration: none;
+	font-weight: bold;
+}
+/*
+* --------------------------------------------
+* Login Tab
+* --------------------------------------------
+*/
+
+#toolPanel ul#tpLoginTab li.tpButton a {
+    border-radius: 3px 3px 3px 3px;
+    display: block;
+    margin: 4px;
+    padding: 2px;
+    text-decoration: none;
+	font-weight: bold;
+}
+/*
+* --------------------------------------------
+* Footer
+* --------------------------------------------
+*/
+#toolPanelFooter
+,#toolPanelFooter p 
+,#toolPanelFooter div
+,#toolPanelFooter li
+{
+    font-family: verdana,arial,sans-serif;
+    font-size: 11px;
+    line-height: 11px;
+}
+
+#toolPanelFooter {
+	background-color: #e0e0e0;
+	border-top: 1px solid #f8f8f8;
+	border-bottom: 1px solid #aaa;
+}
+#toolPanelFooter .tpInner {
+	padding: 5px;
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #f8f8f8;
+}
+
+#toolPanelFooter .tpInner span {
+	padding: 0 10px 0 10px;
+}
+
+
+
+
+
+
+

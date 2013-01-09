@@ -1,0 +1,32 @@
+#toolPanel #tpTabZone {
+    border: 1px solid red;
+    height: 20px;
+    position: absolute;
+    width: 100%;
+}
+
+#toolPanel .tpTabs {
+    background-color: #333333;
+    border: 1px solid #888888;
+    height: 30px;
+    left: 100%;
+    margin: 0 0 0 -250px;
+    position: absolute;
+    right: 0;
+    width: 250px;
+}
+
+#toolPanel .tpTabs > ul {
+    background-color: #DDDDDD;
+    border-radius: 0 0 10px 10px;
+    border-top: 0 none;
+    box-shadow: 1px 1px 3px #666666;
+    left: 100%;
+    list-style-type: none;
+    margin: 0 0 0 -115px;
+    padding: 0 20px;
+    position: absolute;
+    top: 0;
+    width: 75px;
+    z-index: 10;
+}
