@@ -22,7 +22,7 @@ namespace Contensive.Addons.aoToolPanel
         public override object Execute(Contensive.BaseClasses.CPBaseClass cp)
         {
             string s = "";
-            string js = "";
+            //string js = "";
             bool errFlag = cp.Utils.EncodeBoolean(cp.Doc.get_Var("Error Flag"));    //   problem with login
             bool emailFlag = cp.Utils.EncodeBoolean(cp.Doc.get_Var("Email Flag"));  //  email password sent
             bool errEmailFlag = cp.Utils.EncodeBoolean(cp.Doc.get_Var("Email Error Flag")); //  problem with email password
