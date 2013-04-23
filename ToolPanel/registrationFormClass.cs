@@ -45,7 +45,7 @@ namespace Contensive.Addons.aoToolPanel
             }
             else
             {
-                lO.SetInner(".panelInstructionContainer", cp.Content.GetCopy("Default Account Registration Instructions", "Use the form below to register with this site."));
+                lO.SetInner(".panelInstructionContainer", cp.Content.GetCopy("Default Account Registration Instructions", "To register, complete and submit this form."));
             }
             //
             //  ALLOWEMAILLOGIN check
@@ -65,7 +65,7 @@ namespace Contensive.Addons.aoToolPanel
             //
             if (cp.Utils.EncodeBoolean(cp.Site.GetProperty("ALLOWNOPASSWORDLOGIN", "")))
             {
-                //lO.SetInner("#panelRowPassword", "");
+                lO.SetInner(".passwordRequired", "");
                 hiddenString += cp.Html.Hidden("reqPassword", "0", "", "reqPassword");
             }
             else
@@ -150,16 +150,17 @@ namespace Contensive.Addons.aoToolPanel
         {
             bool errFlag = false;
             string s = "";
-            string firstName = cp.Doc.get_Var("panelRegistrationFirstName");
-            string lastName = cp.Doc.get_Var("panelRegistrationLastName");
-            string email = cp.Doc.get_Var("panelRegistrationEmail");
-            string username = cp.Doc.get_Var("panelRegistrationUsername");
-            string password = cp.Doc.get_Var("panelRegistrationPassword");
+            string firstName = cp.Doc.GetText("panelRegistrationFirstName");
+            string lastName = cp.Doc.GetText("panelRegistrationLastName");
+            string email = cp.Doc.GetText("panelRegistrationEmail");
+            string username = cp.Doc.GetText("panelRegistrationUsername");
+            string password = cp.Doc.GetText("panelRegistrationPassword");
+            bool usernameValid = !cp.Site.GetBoolean("ALLOWEMAILLOGIN", "");
             CPCSBaseClass cs = cp.CSNew();
             //
             //  check for duplicate in username if account requires username
             //
-            if (!cp.Utils.EncodeBoolean(cp.Site.GetProperty("ALLOWEMAILLOGIN", "")))
+            if (usernameValid)
             {
                 if (cs.Open("People", "(ID<>" + cp.User.Id + ") and (username=" + cp.Db.EncodeSQLText(username) + ")", "", false, "", 1, 1))
                 {
@@ -169,33 +170,40 @@ namespace Contensive.Addons.aoToolPanel
                 }
                 cs.Close();
             }
-            else
+            if (!errFlag)
             {
                 if (cs.Open("People", "(ID<>" + cp.User.Id + ") and (email=" + cp.Db.EncodeSQLText(email) + ")", "", false, "", 1, 1))
                 {
                     errFlag = true;
                     cp.Doc.set_Var("errFlag", "1");
-                    cp.Doc.set_Var("errMessage", "The email entered is already registered, please verify you have not already registered or enter an alternate email address.");
+                    cp.Doc.set_Var("errMessage", "The email entered is already registered. Please verify you have not already registered or enter an alternate email address.");
                 }
                 cs.Close();
             }
             //
             if (!errFlag)
             {
+                if ((cp.User.IsRecognized )&&( !cp.User.IsAuthenticated ))
+                {
+                    cp.User.Logout();
+                }
                 if (cs.Open("People", "ID=" + cp.User.Id, "", false, "", 1, 1))
                 {
                     cs.SetField("name", firstName + " " + lastName);
                     cs.SetField("firstName", firstName);
                     cs.SetField("lastName", lastName);
                     cs.SetField("email", email);
-                    cs.SetField("username", username);
                     cs.SetField("password", password);
+                    if (usernameValid)
+                    {
+                        cs.SetField("username", username);
+                    }
                 }
                 cs.Close();
                 //
                 //  authenticate the user
                 //
-                cp.User.LoginByID(cp.User.Id.ToString(), false);
+                cp.User.LoginByID(cp.User.Id.ToString() );
                 //
                 s = "";
             }

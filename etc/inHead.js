@@ -1,3 +1,4 @@
+
 //
 // --------------------------------
 // properties
@@ -22,34 +23,25 @@ function tpBindEvents(){
 	//
 	$(document).ready(function(){
 		//
-		jQuery('#panelLoginPassword').keypress( function(e){ tpLoginFormKeypress(e) });
-		jQuery('#panelLoginEmail').keypress( function(e){ tpLoginFormKeypress(e) });
-		jQuery('#panelLoginUsername').keypress( function(e){ tpLoginFormKeypress(e) });
-		jQuery('#tpTabZone').mouseenter( function(){ tpMouseEnterTabZone() });
-		jQuery('#tpTabZone').mouseleave( function(){ tpMouseLeaveTabZone() });
-		jQuery('#tpAccountLock').click( function (){ tpClickAccountTabLock() });
-		jQuery('#tpAccountTab').mouseenter( function(){ tpMouseEnterAccountTab() });
-		jQuery('#tpAccountTab').mouseleave( function(){ tpMouseLeaveAccountTab() });
-		jQuery("#tpAccountButton").click( function(){ tpToggleAccountPanel(); return false; });
-		jQuery('#tpLoginLock').click( function (){ clickLoginTabLock() });
-		jQuery('#tpLoginTab').mouseenter( function(){ mouseEnterLoginTab() });
-		jQuery('#tpLoginTab').mouseleave( function(){ mouseLeaveLoginTab() });
-		jQuery("#tpLoginButton").click( function(){ tpToggleLoginPanel(); return false; });
-		jQuery('#loginSubmit').click( function() { tpLoginFormSubmit(); return false; });
-		jQuery('#emailSubmit').click(function(){
-			if (!validateEmailForm()) {
-				return false;
-			} else {
-				cj.ajax.addon('toolPanelLoginFormHandler', '', 'panelLoginForm', 'panelFormContainer', '', '');
-				tpSetSpinner('panelFormContainer', 'Gathering Account Information....', jQuery('#panelFormContainer').height());
-			}
-		});
-		jQuery('#registrationClick').click(function(){
-			cj.ajax.addon('toolPanelDefaultRegistrationForm','', '', 'panelFormContainer', '', '');
-			tpSetSpinner('panelFormContainer', 'Building Registration Form....', jQuery('#panelFormContainer').height());
-		});
-		//
-		return false;
+		jQuery('#panelLoginPassword').unbind('keypress').keypress( function(e){ tpLoginFormKeypress(e) });
+		jQuery('#panelLoginEmail').unbind('keypress').keypress( function(e){ tpLoginFormKeypress(e) });
+		jQuery('#panelLoginUsername').unbind('keypress').keypress( function(e){ tpLoginFormKeypress(e) });
+		jQuery('#tpTabZone').unbind('mouseenter').mouseenter( tpMouseEnterTabZone );
+		jQuery('#tpTabZone').unbind('mouseleave').mouseleave( tpMouseLeaveTabZone );
+		jQuery('#tpAccountLock').unbind('click').click( tpClickAccountTabLock );
+		jQuery('#tpAccountTab').unbind('mouseenter').mouseenter( tpMouseEnterAccountTab );
+		jQuery('#tpAccountTab').unbind('mouseleave').mouseleave( tpMouseLeaveAccountTab );
+		jQuery("#tpAccountButton").unbind('click').click( tpToggleAccountPanel );
+		jQuery('#tpLoginLock').unbind('click').click( clickLoginTabLock );
+		jQuery('#tpLoginTab').unbind('mouseenter').mouseenter( mouseEnterLoginTab );
+		jQuery('#tpLoginTab').unbind('mouseleave').mouseleave( mouseLeaveLoginTab );
+		jQuery("#tpLoginButton").unbind('click').click( tpToggleLoginPanel );
+		jQuery('#tpLoginFormSubmit').unbind('click').click( tpLoginFormSubmit );
+		jQuery('#tpEmailFormSubmit').unbind('click').click( tpEmailFormSubmit );
+		jQuery('#tpLoginFormRegister').unbind('click').click( tpRequestRegister );
+		jQuery('#accountSubmit').unbind('click').click( tpAccountSubmit );
+		jQuery('#logoutClick').unbind('click').click( tpAccountLogoutClick );
+		jQuery('#tpRegisterSubmit').unbind('click').click( tpRegisterSubmit );
 	})
 }
 //
@@ -79,15 +71,13 @@ function tpGetParameterByName( name )
 }
 
 function tpRedirectHome(returnVal, container){
-        var testString = returnVal;
-        //
-        testString = testString.replace(/(\r\n|\n|\r)/gm,' ').replace(/(\s)/g, '');
-        //
- 	if (testString=='')
-        {
+	var testString = returnVal;
+	//
+	testString = testString.replace(/(\r\n|\n|\r)/gm,' ').replace(/(\s)/g, '');
+	//
+ 	if (testString=='') {
 		window.location = document.head.baseURI;
-	}
-	else{
+	} else {
 		jQuery('#'+container).html(returnVal);
 	}
 } 
@@ -158,12 +148,10 @@ function tpCloseAccountPanel () {
 }
 function tpClickAccountTabLock() {
 	if (isLockedAccountTab) {
-		//alert('unlock account tab lock');
 		jQuery('#tpAccountLock').html('<img src="/toolPanel/lockOpen.png" height="10" width="10">');
 		cj.ajax.addon('setUserProperty','n=isLockedAccountTab&v=0');
 		isLockedAccountTab=false;
 	} else {
-		//alert('lock account tab lock');
 		jQuery('#tpAccountLock').html('<img src="/toolPanel/lockClosed.png" height="10" width="10">');
 		cj.ajax.addon('setUserProperty','n=isLockedAccountTab&v=1');
 		isLockedAccountTab=true;
@@ -197,7 +185,6 @@ function accountTabClose() {
 	if(!tpIsWantedAccountTab)
 	{
 		jQuery("#tpAccountTab").slideUp("slow");
-		//alert('accountTabClose');
 	} else {
 		tpIsWantedAccountTab = tpIsWantedAccountTab;
 	}
@@ -245,16 +232,13 @@ function closeLoginPanel () {
 	jQuery("#tpLoginPanel").slideUp("slow");
 	jQuery("#tpLoginTab").removeClass("tpOpen");
 	isOpenLoginPanel=false;
-	alert('closeLoginPanel - exit');
 }
 function clickLoginTabLock() {
 	if (tpLoginTabIsPinned) {
-		//alert('unlock Login tab lock');
 		jQuery('#tpLoginLock').html('<img src="/toolPanel/lockOpen.png" height="10" width="10">');
 		cj.ajax.addon('setUserProperty','n=tpLoginTabIsPinned&v=0');
 		tpLoginTabIsPinned=false;
 	} else {
-		//alert('lock Login tab lock');
 		jQuery('#tpLoginLock').html('<img src="/toolPanel/lockClosed.png" height="10" width="10">');
 		cj.ajax.addon('setUserProperty','n=tpLoginTabIsPinned&v=1');
 		tpLoginTabIsPinned=true;
@@ -288,7 +272,6 @@ function LoginTabClose() {
 	if(!tpAbortLoginTabClose)
 	{
 		jQuery("#tpLoginTab").slideUp("slow");
-		//alert('LoginTabClose');
 	} else {
 		tpAbortLoginTabClose = tpAbortLoginTabClose;
 	}
@@ -307,6 +290,7 @@ function tpLoginFormSubmit(){
 		cj.ajax.addonCallback('toolPanelLoginFormHandler', varString, tpRedirectHome, 'panelFormContainer');
 		//
 		tpSetSpinner('panelFormContainer', 'Authenticating Account....', jQuery('#panelFormContainer').height());
+		return false;
 	}
 }
 function tpLoginFormKeypress(e){
@@ -371,6 +355,27 @@ function validateAccountForm() {
 			return true;
 		};
 };
+function tpAccountSubmit(){
+	if (!validateAccountForm()) {
+		return false;
+	}
+	var varString;
+	varString = 'panelAccountFirstName=' + jQuery('#panelAccountFirstName').val();
+	varString += '&panelAccountLastName=' + jQuery('#panelAccountLastName').val();
+	varString += '&panelAccountEmail=' + jQuery('#panelAccountEmail').val();
+	varString += '&panelAccountUsername=' + jQuery('#panelAccountUsername').val();
+	varString += '&panelAccountPassword=' + jQuery('#panelAccountPassword').val();
+	//
+	cj.ajax.addon('toolPanelAccountFormHandler', varString, '', 'panelFormContainer', '','');
+	tpSetSpinner('panelFormContainer', 'Updating Account....', jQuery('#panelFormContainer').height());
+	return false;
+}
+function tpAccountLogoutClick(){
+	cj.ajax.addonCallback('toolPanelLogoutHandler', '', tpRedirectHome, 'panelFormContainer');
+	tpSetSpinner('panelFormContainer', 'Logging Out....', jQuery('#panelFormContainer').height());
+	return false;
+}
+
 //
 // --------------------------------
 // Login Form
@@ -467,12 +472,20 @@ function validateEmailForm() {
 			return true;
 		};
 };
+function tpEmailFormSubmit() {
+	if (!validateEmailForm()) {
+		return false;
+	} else {
+		cj.ajax.addon('toolPanelLoginFormHandler', '', 'panelLoginForm', 'panelFormContainer', '', '');
+		tpSetSpinner('panelFormContainer', 'Gathering Account Information....', jQuery('#panelFormContainer').height());
+	}
+}
 //
 // --------------------------------
 // Registration Form
 // --------------------------------
 //
-function validateRegistrationForm() {
+function tpValidateRegisterForm() {
 		var errFlag;
 		var errMsg;
 		//
@@ -554,8 +567,29 @@ function validateRegistrationForm() {
 		else
 		{
 			return true;
-		};
-};
+		}
+}
+function tpRegisterSubmit(){
+	if (!tpValidateRegisterForm()) {
+		return false;
+	}
+	var varString;
+	varString = 'panelRegistrationFirstName=' + jQuery('#panelRegistrationFirstName').val();
+	varString += '&panelRegistrationLastName=' + jQuery('#panelRegistrationLastName').val();
+	varString += '&panelRegistrationEmail=' + jQuery('#panelRegistrationEmail').val();
+	varString += '&panelRegistrationUsername=' + jQuery('#panelRegistrationUsername').val();
+	varString += '&panelRegistrationPassword=' + jQuery('#panelRegistrationPassword').val();
+	//
+	cj.ajax.addonCallback('toolPanelRegistrationFormHandler', varString, tpRedirectHome, 'panelFormContainer');
+	//cj.ajax.addon('toolPanelRegistrationFormHandler', varString, '', 'panelFormContainer', '','');
+	tpSetSpinner('panelFormContainer', 'Creating Account...', jQuery('#panelFormContainer').height());
+	return false;
+}
+function tpRequestRegister(){
+	cj.ajax.addon('toolPanelDefaultRegistrationForm','', '', 'panelFormContainer', '', '');
+	tpSetSpinner('panelFormContainer', '', jQuery('#panelFormContainer').height());
+	return false;
+}
 //
 // --------------------------------
 // initialize

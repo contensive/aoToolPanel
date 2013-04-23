@@ -3,26 +3,38 @@
 * toolPanel
 * --------------------------------------------
 */
-#toolPanel {
+#toolPanel 
+{
     background-color: transparent;
+}
+#toolPanel * 
+{
+    font-family: sans-serif,verdana,arial;
+    padding:0;
+    margin:0;
 }
 #toolPanel
 ,#toolPanel p 
 ,#toolPanel div
 ,#toolPanel li
 {
-    font-family: verdana,arial,sans-serif;
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 11px;
+    line-height: 11px;
 }
-
+#toolPanel li
+,#toolPanel ul
+{
+	list-style-type: none;
+	list-style-image: none;
+}
 /*
 * --------------------------------------------
 * Pulldown Tab Zone
 * --------------------------------------------
 */
 
-#toolPanel #tpTabZone {
+#toolPanel #tpTabZone 
+{
 	position: absolute;
 	height: 5px;
 	width: 100%;
@@ -33,16 +45,21 @@
 * --------------------------------------------
 */
 
-#toolPanel .tpPanels {
+#toolPanel .tpPanels 
+{
+	position: relative;
+	z-index: 9999;
 }
-#toolPanel .tpPanels .tpPanelCon {
+#toolPanel .tpPanels .tpPanelCon 
+{
 	background-color: #eee;
 	border-bottom: 2px solid #bbb;
 	margin: 0;
 	padding:0;
 	display:none;
 }
-#toolPanel .tpPanels .tpPanelCon .tpPanelInner {
+#toolPanel .tpPanels .tpPanelCon .tpPanelInner
+{
 	margin: 0;
 	padding:10px;
 }
@@ -53,8 +70,11 @@
 * --------------------------------------------
 */
 
-#toolPanel #tpAccountPanel {
+#toolPanel #tpAccountPanel 
+{
 	/* height: 200px; */
+	position: relative;
+	z-index: 1;
 }
 
 /*
@@ -63,8 +83,11 @@
 * --------------------------------------------
 */
 
-#toolPanel #tpLoginPanel {
+#toolPanel #tpLoginPanel 
+{
 	/* height: 200px; */
+	position: relative;
+	z-index: 1;
 }
 
 /*
@@ -72,13 +95,24 @@
 * hanging tabs
 * --------------------------------------------
 */
-#toolPanel .tpTabs {
-    background-color: transparent;
-    right: 0;
+#toolPanel .tpTabs 
+{
+	background-color: transparent;
+	right: 0;
+	position: absolute;
+	width: 200px;
+	z-index: 9997;
 }
 
-#toolPanel .tpTabs > ul {
-	background-color: #ddd;
+#toolPanel .tpTabs > ul 
+{
+	background-color: #d8d8d8;
+	background: -moz-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -moz-linear-gradient(to bottom, #f7f7f7, #cecfcc);
+	background: -ms-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -o-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -webkit-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: linear-gradient(top, #f7f7f7, #cecfcc);
 	border-radius: 0 0 10px 10px;
 	box-shadow: 1px 1px 3px #666666;
 	float: right;
@@ -87,54 +121,65 @@
 	padding: 0 20px;
 	border-top: 0;
 }
-
-#toolPanel .tpTabs > ul.tpOpen {
+#toolPanel .tpTabs > ul li
+{
+	list-style-type: none;
+}
+#toolPanel .tpTabs > ul.tpOpen 
+{
 	background-color: #eee;
 }
-
-#toolPanel .tpTabs > ul li.tpButton {
+#toolPanel .tpTabs > ul li.tpButton 
+{
 	float: left;
 }
-
-#toolPanel li.tpButton a {
+#toolPanel li.tpButton a 
+{
 	color: #444;
 }
-
-#toolPanel  ul.tpOpen li.tpButton a {
+#toolPanel  ul.tpOpen li.tpButton a 
+{
 	color: #222;
 }
-
-#toolPanel .tpTabs > ul li.tpLock {
+#toolPanel .tpTabs > ul li.tpLock 
+{
     float: left;
     height: 10px;
     margin: 4px 0;
     padding: 4px 0;
     cursor: pointer;
 }
-
-#toolPanel .tpTabs > ul li.tpLock {
+#toolPanel .tpTabs > ul li.tpLock 
+{
     float: left;
     height: 10px;
     margin: 4px 0;
     padding: 4px 0;
     cursor: pointer;
 }
-
 /*
 * --------------------------------------------
 * fixed tabs
 * --------------------------------------------
 */
-#toolPanel .tpFixedTabs {
-    background-color: transparent;
-    left: 50%;
-    margin: 0 0 0 -250px;
-    position: fixed;
-    width: 500px;
+#toolPanel .tpFixedTabs 
+{
+	background-color: transparent;
+	left: 50%;
+	margin: 0 0 0 -205px;
+	position: fixed;
+	width: 410px;
+	top: 0;
+	z-index: 9998;
 }
-
-#toolPanel .tpFixedTabs > ul {
-	background-color: #ddd;
+#toolPanel .tpFixedTabs > ul 
+{
+	background-color: #d8d8d8;
+	background: -moz-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -moz-linear-gradient(to bottom, #f7f7f7, #cecfcc);
+	background: -ms-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -o-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -webkit-linear-gradient(top, #f7f7f7, #cecfcc);
 	border-radius: 0 0 10px 10px;
 	box-shadow: 1px 1px 3px #666666;
 	display: table;
@@ -143,59 +188,76 @@
 	padding: 0 20px;
 	border-top: 0;
 }
-#toolPanel .tpFixedTabs > ul.tpOpen {
+#toolPanel .tpFixedTabs > ul li
+{
+	list-style-type: none;
+}
+#toolPanel .tpFixedTabs > ul.tpOpen 
+{
 	background-color: #eee;
 }
-
-#toolPanel .tpFixedTabs > ul li.tpButton {
+#toolPanel .tpFixedTabs > ul li.tpButton 
+{
 	float: left;
 }
-
-#toolPanel .tpFixedTabs > ul li.tpEditLock {
+#toolPanel .tpFixedTabs > ul li.tpEditLock 
+{
     float: left;
     height: 10px;
     margin: 7px 0;
-    padding: 11px 0;
+    padding: 7px 0 0 6px;
     cursor: pointer;
 }
-
 /*
 * --------------------------------------------
 * Editor Tab
 * --------------------------------------------
 */
-
-#toolPanel ul#tpEditTab li.tpEditButton {
+#toolPanel ul#tpEditTab li.tpEditButton 
+{
 	float: left;
 }
-
 #toolPanel ul#tpEditTab li.tpEditButton a {
 	display: block;
-	margin: 7px 3px;
-	padding: 8px;
+	background-color: #e8e8e8;
+	background: -moz-linear-gradient(top, #f8f8f8, #e0e0e0);
+	background: -moz-linear-gradient(to bottom, #f8f8f8, #e0e0e0);
+	background: -ms-linear-gradient(top, #f8f8f8, #e0e0e0);
+	background: -o-linear-gradient(top, #f8f8f8, #e0e0e0);
+	background: -webkit-linear-gradient(top, #f8f8f8, #e0e0e0);
+	margin: 6px 2px 4px 2px;
+	padding: 6px;
 	border: 1px solid #ddd;
 	border-radius: 3px 3px 3px 3px;
 	text-decoration: none;
-	font-weight: bold;
-	background-color: #888;
-	color: white;
+	color: #555;
+	text-transform: uppercase;
+	/*
+	*/
 }
 #toolPanel ul#tpEditTab li.tpEditButton a.tpButtonDown {
-	border: 1px solid #ddd;
-	background-color: #eee;
-	color: #222;
+	background-color: #e0e0e0;
+	background: -moz-linear-gradient(top, #d8d8d8, #f8f8f8);
+	background: -moz-linear-gradient(to bottom, #d8d8d8, #f8f8f8);
+	background: -ms-linear-gradient(top, #d8d8d8, #f8f8f8);
+	background: -o-linear-gradient(top, #d8d8d8, #f8f8f8);
+	background: -webkit-linear-gradient(top, #d8d8d8, #f8f8f8);
+	color: #333;
 	box-shadow: 1px 1px 3px #888 inset;
+	border: 1px solid #ccc;
+	padding: 7px 6px 5px 6px;
+	/*
+	*/
+}
+#toolPanel ul#tpEditTab li.tpEditButton a {
+	border: 1px solid #b8b8b8;
+}
+#toolPanel ul#tpEditTab li.tpEditButton a:hover {
+	border: 1px solid #444;
 }
 #toolPanel ul#tpEditTab li.tpEditButton a.tpButtonDown:hover {
 	border: 1px solid #444;
 }
-/*
-#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonUp {
-	border: 1px solid #ddd;
-	background-color: #888;
-	color: white;
-}
-*/
 #toolPanel ul#tpEditTab li.tpEditButton a.tpButtonUp:hover {
 	border: 1px solid #444;
 }
@@ -216,7 +278,9 @@
 #toolPanel #tpAccountWait {
 	visibility: hidden;
 }
-
+#toolPanel #tpAccountWait img {
+	visibility: inherit;
+}
 /*
 * --------------------------------------------
 * Login Tab
@@ -234,7 +298,9 @@
 #toolPanel #tpLoginWait {
 	visibility: hidden;
 }
-
+#toolPanel #tpLoginWait img {
+	visibility: inherit;
+}
 /*
 * --------------------------------------------
 * Footer
@@ -271,23 +337,23 @@
 * --------------------------------------------
 */
 
-.fieldRequired { margin: 0 0 0 5px; font-weight: bold; color: #903020; }
+#toolPanel .fieldRequired { margin: 0 0 0 5px; font-weight: bold; color: #903020; }
 
-#panelFormContainer { margin: 0 auto; padding: 5px; width: 400px; }
-#panelFormContainer li  { padding: 5px; text-align: center; }
-#panelFormContainer li.buttonRow { text-align: right; padding: 5px 15px 5px 5px;}
-#panelFormContainer li label { text-align: left; display: inline-block; width: 100px; }
-#panelFormContainer li input[type=text]  { width: 250px; border: 1px solid #888888; padding: 5px; }
-#panelFormContainer li input[type=password]  { width: 250px; border: 1px solid #888888; padding: 5px; }
+#toolPanel #panelFormContainer { margin: 0 auto; padding: 5px; width: 400px; }
+#toolPanel #panelFormContainer li  { padding: 5px; text-align: center; }
+#toolPanel #panelFormContainer li.buttonRow { text-align: right; padding: 5px 15px 5px 5px;}
+#toolPanel #panelFormContainer li label { text-align: left; display: inline-block; width: 100px; }
+#toolPanel #panelFormContainer li input[type=text]  { width: 250px; border: 1px solid #888888; padding: 5px; }
+#toolPanel #panelFormContainer li input[type=password]  { width: 250px; border: 1px solid #888888; padding: 5px; }
 
-#panelFormContainer h3 { margin: 3px 0 5px 0; }
+#toolPanel #panelFormContainer h3 { margin: 3px 0 5px 0; }
 
-.panelInstructionContainer { padding: 10px 0 10px 0; }
-.panelLowerInstructionContainer { padding: 10px 0 10px 0; }
+#toolPanel .panelInstructionContainer { padding: 10px 0 10px 0; }
+#toolPanel .panelLowerInstructionContainer { padding: 10px 0 10px 0; }
 
-#panelFormContainer li input[type='checkbox']  { width: 100px; }
+#toolPanel #panelFormContainer li input[type='checkbox']  { width: 100px; }
 
-#panelFormContainer li label.callout { text-align: right; padding: 0 10px 0 0; }
+#toolPanel #panelFormContainer li label.callout { text-align: right; padding: 0 10px 0 0; }
 
 /*
 * --------------------------------------------
@@ -295,7 +361,7 @@
 * --------------------------------------------
 */
 
-.panelAccountFormList { list-style: none outside none; margin: 0; padding: 0; }
+#toolPanel .panelAccountFormList { list-style: none outside none; margin: 0; padding: 0; }
 
 /*
 * --------------------------------------------
@@ -303,7 +369,7 @@
 * --------------------------------------------
 */
 
-.panelLoginFormList { list-style: none outside none; margin: 0; padding: 0; }
+#toolPanel .panelLoginFormList { list-style: none outside none; margin: 0; padding: 0; }
 
 /*
 * --------------------------------------------
@@ -311,7 +377,7 @@
 * --------------------------------------------
 */
 
-.panelEmailFormList { list-style: none outside none; margin: 0; padding: 0; }
+#toolPanel .panelEmailFormList { list-style: none outside none; margin: 0; padding: 0; }
 
 /*
 * --------------------------------------------
@@ -327,7 +393,8 @@
 * --------------------------------------------
 */
 
-a.panelButton, a.panelButton:visited {
+#toolPanel a.panelButton
+,#toolPanel a.panelButton:visited {
     background-color: #888888;
     border: 1px solid #DDDDDD;
     border-radius: 3px 3px 3px 3px;
@@ -346,7 +413,8 @@ a.panelButton, a.panelButton:visited {
 * --------------------------------------------
 */
 
-div.spinner {margin: auto 0; padding: 10px 0 0 0; text-align:center;}
-div.spinner p{text-align:center;}
-div.spinner img{text-align:center;}
-div.spinner p img{text-align:center;}
+#toolPanel div.spinner {margin: auto 0; padding: 10px 0 0 0; text-align:center;}
+#toolPanel div.spinner p{text-align:center;}
+#toolPanel div.spinner img{text-align:center;}
+#toolPanel div.spinner p img{text-align:center;}
+		
