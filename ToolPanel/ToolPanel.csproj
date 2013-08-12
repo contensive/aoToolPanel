@@ -61,7 +61,7 @@
   <ItemGroup>
     <Reference Include="CPBase, Version=4.1.2.0, Culture=neutral, PublicKeyToken=10b3c53389b845fb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\kma\Contensive\CPBase.dll</HintPath>
+      <HintPath>..\..\Contensive42\bin\CPBase.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -101,7 +101,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetDir)"*.dll" "C:\Program Files\kma\Contensive\Addons"</PostBuildEvent>
+    <PostBuildEvent>copy $(TargetDir)"*.dll" "C:\Program Files (x86)\kma\Contensive\Addons"</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
