@@ -59,6 +59,14 @@ namespace Contensive.Addons.aoToolPanel
                 hiddenString += cp.Html.Hidden("reqEmail", "0", "", "reqEmail");
             }
             //
+            // ALLOWMEMBERJOIN (include the register button)
+            //
+            if (!cp.Utils.EncodeBoolean(cp.Site.GetProperty("ALLOWMEMBERJOIN", "0")))
+            {
+                string loginLink = lO.GetOuter("#tpLoginFormSubmit");
+                lO.SetInner(".panelLoginFormList .buttonRow", loginLink);
+            }
+            //
             //  ALLOWNOPASSWORDLOGIN check
             //
             if (cp.Utils.EncodeBoolean(cp.Site.GetProperty("ALLOWNOPASSWORDLOGIN", "")))

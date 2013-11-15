@@ -10,5 +10,3 @@ C:\Users\jay\Documents\GitHub\aoToolPanel\ToolPanel\obj\Debug\ResolveAssemblyRef
 C:\Users\jay\Documents\GitHub\aoToolPanel\ToolPanel\obj\Debug\ToolPanel.dll
 C:\Users\jay\Documents\GitHub\aoToolPanel\ToolPanel\obj\Debug\ToolPanel.pdb
 C:\Users\jay\Documents\GitHub\aoToolPanel\ToolPanel\bin\Debug\CPBase.dll
-C:\Users\jay\Documents\GitHub\aoToolPanel\ToolPanel\bin\Debug\CPBase.pdb
-C:\Users\jay\Documents\GitHub\aoToolPanel\ToolPanel\bin\Debug\CPBase.xml
