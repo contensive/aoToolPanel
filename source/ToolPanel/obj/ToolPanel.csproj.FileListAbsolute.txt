@@ -1,0 +1,5 @@
+C:\h\aoToolPanel\ToolPanel\obj\Debug\ResolveAssemblyReference.cache
+C:\h\aoToolPanel\ToolPanel\bin\Debug\ToolPanel.dll
+C:\h\aoToolPanel\ToolPanel\bin\Debug\ToolPanel.pdb
+C:\h\aoToolPanel\ToolPanel\obj\Debug\ToolPanel.dll
+C:\h\aoToolPanel\ToolPanel\obj\Debug\ToolPanel.pdb
