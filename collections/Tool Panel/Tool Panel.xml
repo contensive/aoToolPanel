@@ -179,7 +179,7 @@ var coordinates = function(element) {
     var top = element.position().top;
     var left = element.position().left;
      jQuery('#results').text('X: ' + left + ' ' + 'Y: ' + top);
-    var queryString = 'top='+ top+ '&left ='+ left;
+    var queryString = 'top='+ top+ '&left='+ left;
  cj.remote({ 'method':'remoteToolPanelPosition' , 'queryString': queryString });
 //alert(queryString);
 }
