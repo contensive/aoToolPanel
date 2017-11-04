@@ -334,7 +334,10 @@ namespace Contensive.Addons
                 //+ footer
                 + "";
             cp.Doc.Body = doc;
-            cp.Doc.AddBodyEnd(cr + "<script type=\"text/javascript\" language=\"javascript\">jQuery(document).ready(function(){" + jsOnReady + "})</script>");
+            string bodyEnd = ""
+                + cr + "<script type=\"text/javascript\" language=\"javascript\">jQuery(document).ready(function(){" + jsOnReady + "})</script>"
+                + cr + "<style>#toolPanel #tpDraggable {left:" + cp.Visit.GetInteger("toolPanelPositionLeft") + "px;display:block}</style>";
+            cp.Doc.AddBodyEnd(bodyEnd);
             //cp.Doc.AddBodyEnd(cr + "<script type=\"text/javascript\" language=\"javascript\">" + jsOnReady + cr + "</script>");
             return "";
         }

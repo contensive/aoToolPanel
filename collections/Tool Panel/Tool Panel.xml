@@ -151,7 +151,7 @@ end function]]></Code>
 		<HelpLink></HelpLink>
 		<Icon Link="" width="0" height="0" sprites="0" />
 		<InIframe>No</InIframe>
-		<BlockEditTools>yes</BlockEditTools>
+		<BlockEditTools>Yes</BlockEditTools>
 		<FormXML></FormXML>
 		<IncludeAddon name="JQuery UI" guid="{840B9AEF-9470-4599-BD47-7EC0C9298614}"/>
 		<IsInline>No</IsInline>
@@ -975,22 +975,23 @@ jQuery( mouseLeaveLoginTab() );
 */
 #toolPanel #containment-wrapper 
 {
-    margin-left: -254px;
-    width: 100%;
+margin-left: -254px;
+width: 100%;
 }
 #toolPanel #tpDraggable 
 {
-	position: absolute;
+position:fixed;
+z-index: 9999;
+display: none;
 }
 #toolPanel .tpFixedTabs > ul
 {
-	background-color: transparent;
-	left: 50%;
-	margin: 0 0 0 -230px;
-	position: relative;
-	/* width: 460px; */
-	top: 0;
-	z-index: 9998;
+background-color: transparent;
+left: 50%;
+margin: 0 0 0 -230px;
+position: relative;
+top: 0;
+z-index: 9998;
 }
 #toolPanel .tpFixedTabs > ul 
 {
@@ -1623,9 +1624,8 @@ end function]]></Code>
 	</Addon>
 	<data>
 		<record content="Layouts" guid="{9E3751C0-EDE1-42EE-96BD-25291465BF14}" name="Tool Panel - Top">
-			<field name="ACTIVE">True</field>
-			<field name="SORTORDER"></field>
-			<field name="Layout"><![CDATA[<div class="tpPanels">
+			<field name="active">True</field>
+			<field name="layout"><![CDATA[<div class="tpPanels">
 	<div id="tpAccountPanel" class="tpPanelCon">
 		<div style="width:100%; height:200px;">&nbsp;
 			<img src="/cclib/images/ajax-loader-big.gif" width="32" height="32" style="display:block;width:32px;height:32px;margin:auto;">
@@ -1665,12 +1665,12 @@ end function]]></Code>
 	</div>
 </div>
 <!--<div id="results"></div>-->]]></field>
-			<field name="StylesFilename"></field>
+			<field name="sortorder"></field>
+			<field name="stylesfilename"></field>
 		</record>
 		<record content="Layouts" guid="{6DAFED78-A4F2-4DB9-A814-9D29AE0721F9}" name="Default Login Form">
-			<field name="ACTIVE">True</field>
-			<field name="SORTORDER"></field>
-			<field name="Layout"><![CDATA[<form id="panelLoginForm">
+			<field name="active">True</field>
+			<field name="layout"><![CDATA[<form id="panelLoginForm">
 	<h3>Login to your account</h3>
 	<div class="panelInstructionContainer"></div>
 	<ul class="panelLoginFormList">
@@ -1690,12 +1690,12 @@ end function]]></Code>
   		</ul>
   	</div>
 </form>]]></field>
-			<field name="StylesFilename"></field>
+			<field name="sortorder"></field>
+			<field name="stylesfilename"></field>
 		</record>
 		<record content="Layouts" guid="{4CD6DD5B-5423-4DC0-87AE-1337127E4289}" name="Default Account Form">
-			<field name="ACTIVE">True</field>
-			<field name="SORTORDER"></field>
-			<field name="Layout"><![CDATA[<form id="panelAccountForm">
+			<field name="active">True</field>
+			<field name="layout"><![CDATA[<form id="panelAccountForm">
 	<h3>My Account</h3>
 	<div class="panelInstructionContainer"></div>
 	<ul class="panelAccountFormList">
@@ -1708,12 +1708,12 @@ end function]]></Code>
 	<li id="hiddenRow"></li>
 	</ul>
 </form>]]></field>
-			<field name="StylesFilename"></field>
+			<field name="sortorder"></field>
+			<field name="stylesfilename"></field>
 		</record>
 		<record content="Layouts" guid="{07586B80-734C-4029-9F6A-EFD5CDB13FD5}" name="Default Registration Form">
-			<field name="ACTIVE">True</field>
-			<field name="SORTORDER"></field>
-			<field name="Layout"><![CDATA[<form id="panelRegistrationForm">
+			<field name="active">True</field>
+			<field name="layout"><![CDATA[<form id="panelRegistrationForm">
   <h3>My Account</h3>
   <div class="panelInstructionContainer"></div>
   <ul class="panelRegistrationFormList">
@@ -1726,7 +1726,8 @@ end function]]></Code>
   <li id="hiddenRow"></li>
   </ul>
 </form>]]></field>
-			<field name="StylesFilename"></field>
+			<field name="sortorder"></field>
+			<field name="stylesfilename"></field>
 		</record>
 	</data>
 	<Resource name="lockclosed.png" type="www" path="toolpanel" />

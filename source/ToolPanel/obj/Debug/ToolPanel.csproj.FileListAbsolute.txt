@@ -8,3 +8,7 @@ C:\Users\jay\Documents\GitHub\aoToolPanel\ToolPanel\bin\Debug\ToolPanel.dll
 C:\Users\jay\Documents\GitHub\aoToolPanel\ToolPanel\bin\Debug\ToolPanel.pdb
 C:\Users\jay\Documents\GitHub\aoToolPanel\ToolPanel\obj\Debug\ToolPanel.dll
 C:\Users\jay\Documents\GitHub\aoToolPanel\ToolPanel\obj\Debug\ToolPanel.pdb
+C:\Users\jay\OneDrive\Documents\git\aoToolPanel\source\ToolPanel\bin\Debug\ToolPanel.dll
+C:\Users\jay\OneDrive\Documents\git\aoToolPanel\source\ToolPanel\bin\Debug\ToolPanel.pdb
+C:\Users\jay\OneDrive\Documents\git\aoToolPanel\source\ToolPanel\obj\Debug\ToolPanel.dll
+C:\Users\jay\OneDrive\Documents\git\aoToolPanel\source\ToolPanel\obj\Debug\ToolPanel.pdb
