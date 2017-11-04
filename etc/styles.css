@@ -18,8 +18,8 @@
 ,#toolPanel div
 ,#toolPanel li
 {
-    font-size: 11px;
-    line-height: 11px;
+    font-size: 12px;
+    line-height: 12px;
 }
 #toolPanel li
 ,#toolPanel ul
@@ -162,13 +162,22 @@
 * fixed tabs
 * --------------------------------------------
 */
-#toolPanel .tpFixedTabs 
+#toolPanel #containment-wrapper 
+{
+    margin-left: -254px;
+    width: 100%;
+}
+#toolPanel #tpDraggable 
+{
+	position: absolute;
+}
+#toolPanel .tpFixedTabs > ul
 {
 	background-color: transparent;
 	left: 50%;
-	margin: 0 0 0 -205px;
-	position: fixed;
-	width: 410px;
+	margin: 0 0 0 -230px;
+	position: relative;
+	/* width: 460px; */
 	top: 0;
 	z-index: 9998;
 }
@@ -339,7 +348,7 @@
 
 #toolPanel .fieldRequired { margin: 0 0 0 5px; font-weight: bold; color: #903020; }
 
-#toolPanel #panelFormContainer { margin: 0 auto; padding: 5px; width: 400px; }
+#toolPanel #panelFormContainer { margin: 0 auto; padding: 20px 0; width: 400px; }
 #toolPanel #panelFormContainer li  { padding: 5px; text-align: center; }
 #toolPanel #panelFormContainer li.buttonRow { text-align: right; padding: 5px 15px 5px 5px;}
 #toolPanel #panelFormContainer li label { text-align: left; display: inline-block; width: 100px; }
@@ -355,6 +364,7 @@
 
 #toolPanel #panelFormContainer li label.callout { text-align: right; padding: 0 10px 0 0; }
 
+#toolPanel li#hiddenRow { display:none; }
 /*
 * --------------------------------------------
 * Account Form
@@ -362,7 +372,6 @@
 */
 
 #toolPanel .panelAccountFormList { list-style: none outside none; margin: 0; padding: 0; }
-
 /*
 * --------------------------------------------
 * Login Form
@@ -378,7 +387,6 @@
 */
 
 #toolPanel .panelEmailFormList { list-style: none outside none; margin: 0; padding: 0; }
-
 /*
 * --------------------------------------------
 * Registration

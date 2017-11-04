@@ -848,6 +848,7 @@ jQuery( mouseLeaveLoginTab() );
 	position: absolute;
 	height: 5px;
 	width: 100%;
+	z-index: 9999;
 }
 /*
 * --------------------------------------------
@@ -987,7 +988,7 @@ jQuery( mouseLeaveLoginTab() );
 	left: 50%;
 	margin: 0 0 0 -230px;
 	position: relative;
-	width: 460px;
+	/* width: 460px; */
 	top: 0;
 	z-index: 9998;
 }
