@@ -68,12 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="accountFormClass.cs" />
-    <Compile Include="loginFormClass.cs" />
-    <Compile Include="registrationFormClass.cs" />
-    <Compile Include="toolPanelClass.cs" />
+    <Compile Include="Views\accountFormClass.cs" />
+    <Compile Include="Views\loginFormClass.cs" />
+    <Compile Include="Views\registrationFormClass.cs" />
+    <Compile Include="Views\toolPanelClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="utilsClass.cs" />
+    <Compile Include="Controllers\utilsClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

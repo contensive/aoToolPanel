@@ -156,641 +156,605 @@ end function]]></Code>
 		<IncludeAddon name="JQuery UI" guid="{840B9AEF-9470-4599-BD47-7EC0C9298614}"/>
 		<IsInline>No</IsInline>
 		<JavascriptOnLoad></JavascriptOnLoad>
-		<JavascriptInHead><![CDATA[//
-// --------------------------------
-// properties
-// --------------------------------
-//
-var tpLoginTabIsPinned=false;
-var isLockedAccountTab=false;
-var isLoadedLoginPanel=false;
-var isOpenLoginPanel=false;
-var tpAbortLoginTabClose=false;
-var timerIdLoginTab=0;
-// 
-//
-// --------------------------------
-// Bind all events
-//	called from both the page and ajax content updates
-// --------------------------------
-//
-var coordinates = function(element) {
+		<JavascriptInHead><![CDATA[/*
+properties
+*/
+var tpLoginTabIsPinned = false;
+var isLockedAccountTab = false;
+var isLoadedLoginPanel = false;
+var isOpenLoginPanel = false;
+var tpAbortLoginTabClose = false;
+var timerIdLoginTab = 0;
+/*
+set tool panel position
+*/
+var coordinates = function (element) {
     element = $(element);
     var top = element.position().top;
     var left = element.position().left;
-     jQuery('#results').text('X: ' + left + ' ' + 'Y: ' + top);
-    var queryString = 'top='+ top+ '&left='+ left;
- cj.remote({ 'method':'remoteToolPanelPosition' , 'queryString': queryString });
-//alert(queryString);
+    $('#results').text('X: ' + left + ' ' + 'Y: ' + top);
+    var queryString = 'top=' + top + '&left=' + left;
+    cj.remote({ 'method': 'remoteToolPanelPosition', 'queryString': queryString });
 }
-
-
-function tpBindEvents(){
-	//
-	// bind all events from all forms
-	//
-	$(document).ready(function(){
-		//
-		//jQuery("#tpDraggable").draggable();   
-                jQuery('#tpDraggable').draggable({
-                    axis: "x"}, {
-                    //start: function() { coordinates('#tpDraggable') },
-                    stop: function() {
-                    coordinates('#tpDraggable');
-                      }
-                }); 
-                $( "#tpDraggable" ).mouseup(function() {
-                    
-                 });  
-        
-		jQuery('#panelLoginPassword').unbind('keypress').keypress( function(e){ tpLoginFormKeypress(e) });
-		jQuery('#panelLoginEmail').unbind('keypress').keypress( function(e){ tpLoginFormKeypress(e) });
-		jQuery('#panelLoginUsername').unbind('keypress').keypress( function(e){ tpLoginFormKeypress(e) });
-		jQuery('#tpTabZone').unbind('mouseenter').mouseenter( tpMouseEnterTabZone );
-		jQuery('#tpTabZone').unbind('mouseleave').mouseleave( tpMouseLeaveTabZone );
-		jQuery('#tpAccountLock').unbind('click').click( tpClickAccountTabLock );
-		jQuery('#tpAccountTab').unbind('mouseenter').mouseenter( tpMouseEnterAccountTab );
-		jQuery('#tpAccountTab').unbind('mouseleave').mouseleave( tpMouseLeaveAccountTab );
-		jQuery("#tpAccountButton").unbind('click').click( tpToggleAccountPanel );
-		jQuery('#tpLoginLock').unbind('click').click( clickLoginTabLock );
-		jQuery('#tpLoginTab').unbind('mouseenter').mouseenter( mouseEnterLoginTab );
-		jQuery('#tpLoginTab').unbind('mouseleave').mouseleave( mouseLeaveLoginTab );
-		jQuery("#tpLoginButton").unbind('click').click( tpToggleLoginPanel );
-		jQuery('#tpLoginFormSubmit').unbind('click').click( tpLoginFormSubmit );
-		jQuery('#tpEmailFormSubmit').unbind('click').click( tpEmailFormSubmit );
-		jQuery('#tpLoginFormRegister').unbind('click').click( tpRequestRegister );
-		jQuery('#accountSubmit').unbind('click').click( tpAccountSubmit );
-		jQuery('#logoutClick').unbind('click').click( tpAccountLogoutClick );
-		jQuery('#tpRegisterSubmit').unbind('click').click( tpRegisterSubmit );
-	})
+/*
+bind
+*/
+$(document).ready(function() {
+    $('#tpDraggable').draggable({
+        axis: "x"
+    }, {
+        stop: function () {
+            coordinates('#tpDraggable');
+        }
+    });
+    $('body').on('mouseup', '#tpDraggable', function(e){}); // $("#tpDraggable").mouseup(function () { });
+    $('body').on('keypress', '#panelLoginPassword', function (e) { tpLoginFormKeypress(e) }); // $('#panelLoginPassword').unbind('keypress').keypress(function (e) { tpLoginFormKeypress(e) });
+    $('body').on('keypress', '#panelLoginEmail', function (e) { tpLoginFormKeypress(e) }); // $('#panelLoginEmail').unbind('keypress').keypress(function (e) { tpLoginFormKeypress(e) });
+    $('body').on('keypress', '#panelLoginUsername', function (e) { tpLoginFormKeypress(e) }); // $('#panelLoginUsername').unbind('keypress').keypress(function (e) { tpLoginFormKeypress(e) });
+    $('body').on('mouseenter', '#tpTabZone', function (e) { tpMouseEnterTabZone() }); // $('#tpTabZone').unbind('mouseenter').mouseenter(tpMouseEnterTabZone);
+    $('body').on('mouseleave', '#tpTabZone', function (e) { tpMouseLeaveTabZone() }); // $('#tpTabZone').unbind('mouseleave').mouseleave(tpMouseLeaveTabZone);
+    $('body').on('click', '#tpAccountLock', function (e) { tpClickAccountTabLock() }); // $('#tpAccountLock').unbind('click').click(tpClickAccountTabLock);
+    $('body').on('mouseenter', '#tpAccountTab', function (e) { tpMouseEnterAccountTab() }); // $('#tpAccountTab').unbind('mouseenter').mouseenter(tpMouseEnterAccountTab);
+    $('body').on('mouseleave', '#tpAccountTab', function (e) { tpMouseLeaveAccountTab() }); // $('#tpAccountTab').unbind('mouseleave').mouseleave(tpMouseLeaveAccountTab);
+    $('body').on('click', '#tpAccountButton', function (e) { tpToggleAccountPanel() }); // $("#tpAccountButton").unbind('click').click(tpToggleAccountPanel);
+    $('body').on('click', '#tpLoginLock', function (e) { clickLoginTabLock() }); // $('#tpLoginLock').unbind('click').click(clickLoginTabLock);
+    $('body').on('mouseenter', '#tpLoginTab', function (e) { mouseEnterLoginTab() }); // $('#tpLoginTab').unbind('mouseenter').mouseenter(mouseEnterLoginTab);
+    $('body').on('mouseleave', '#tpLoginTab', function (e) { mouseLeaveLoginTab() }); // $('#tpLoginTab').unbind('mouseleave').mouseleave(mouseLeaveLoginTab);
+    $('body').on('click', '#tpLoginButton', function (e) { tpToggleLoginPanel() }); // $("#tpLoginButton").unbind('click').click(tpToggleLoginPanel);
+    $('body').on('click', '#tpLoginFormSubmit', function (e) { tpLoginFormSubmit() }); // $('#tpLoginFormSubmit').unbind('click').click(tpLoginFormSubmit);
+    $('body').on('click', '#tpEmailFormSubmit', function (e) { tpEmailFormSubmit() }); // $('#tpEmailFormSubmit').unbind('click').click(tpEmailFormSubmit);
+    $('body').on('click', '#tpLoginFormRegister', function (e) { tpRequestRegister() }); // $('#tpLoginFormRegister').unbind('click').click(tpRequestRegister);
+    $('body').on('click', '#accountSubmit', function (e) { tpAccountSubmit() }); // $('#accountSubmit').unbind('click').click(tpAccountSubmit);
+    $('body').on('click', '#logoutClick', function (e) { tpAccountLogoutClick() }); // $('#logoutClick').unbind('click').click(tpAccountLogoutClick);
+    $('body').on('click', '#tpRegisterSubmit', function (e) { tpRegisterSubmit() }); // $('#tpRegisterSubmit').unbind('click').click(tpRegisterSubmit);
+})
+/*
+utils
+*/
+function tpSetSpinner(divID, message, containerHeight) {
+    var divContent;
+    divContent = '<div class="spinner"><img src="/images/transpin.gif" /><p>' + message + '</p></div>';
+    $('#' + divID).html(divContent);
+    $('.spinner').height(containerHeight);
 }
-//
-// --------------------------------
-// Utilities
-// --------------------------------
-//
-function tpSetSpinner(divID, message, containerHeight){
-  var divContent;
-  //
-  divContent = '<div class="spinner"><img src="/images/transpin.gif" /><p>' + message + '</p></div>';
-  //
-  jQuery('#'+divID).html(divContent);
-  jQuery('.spinner').height(containerHeight);
+/*
+*/
+function tpGetParameterByName(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regexS = "[\\?&]" + name + "=([^&#]*)";
+    var regex = new RegExp(regexS);
+    var results = regex.exec(window.location.href);
+    if (results == null)
+        return "";
+    else
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-
-function tpGetParameterByName( name )
-{
-  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-  var regexS = "[\\?&]"+name+"=([^&#]*)";
-  var regex = new RegExp( regexS );
-  var results = regex.exec( window.location.href );
-  if( results == null )
-    return "";
-  else
-    return decodeURIComponent(results[1].replace(/\+/g, " "));
+/*
+*/
+function tpRedirectHome(returnVal, container) {
+    var testString = returnVal;
+    //
+    testString = testString.replace(/(\r\n|\n|\r)/gm, ' ').replace(/(\s)/g, '');
+    //
+    if (testString == '') {
+        window.location = document.head.baseURI;
+    } else {
+        $('#' + container).html(returnVal);
+    }
 }
-
-function tpRedirectHome(returnVal, container){
-	var testString = returnVal;
-	//
-	testString = testString.replace(/(\r\n|\n|\r)/gm,' ').replace(/(\s)/g, '');
-	//
- 	if (testString=='') {
-		window.location = document.head.baseURI;
-	} else {
-		jQuery('#'+container).html(returnVal);
-	}
-} 
-//
-// --------------------------------
-// zone to make tabs reappear
-// --------------------------------
-//
-//
+/*
+tab zone
+*/
 function tpMouseEnterTabZone() {
-	tpIsWantedAccountTab=true;
-	jQuery("#tpAccountTab").slideDown("slow");
-	tpAbortLoginTabClose=true;
-	jQuery("#tpLoginTab").slideDown("slow");
+    tpIsWantedAccountTab = true;
+    $("#tpAccountTab").slideDown("slow");
+    tpAbortLoginTabClose = true;
+    $("#tpLoginTab").slideDown("slow");
 }
-//
+/*
+*/
 function tpMouseLeaveTabZone() {
-	tpMouseLeaveAccountTab();
-	mouseLeaveLoginTab();
+    tpMouseLeaveAccountTab();
+    mouseLeaveLoginTab();
 }
-//
-// --------------------------------
-// account tab 
-// --------------------------------
-//
-var tpIsLoadedAccountPanel=false;
-var tpIsOpenAccountPanel=false;
-var tpIsWantedAccountTab=false;
-var tpTimerIdAccountTab=0;
-//
+/*
+account tab
+*/
+var tpIsLoadedAccountPanel = false;
+var tpIsOpenAccountPanel = false;
+var tpIsWantedAccountTab = false;
+var tpTimerIdAccountTab = 0;
+/*
+*/
 function tpToggleAccountPanel() {
-	if(tpIsOpenAccountPanel) {
-		tpCloseAccountPanel();
-	} else {
-		tpOpenAccountPanel();
-	}
-	return false;
+    if (tpIsOpenAccountPanel) {
+        tpCloseAccountPanel();
+    } else {
+        tpOpenAccountPanel();
+    }
+    return false;
 }
+/*
+*/
 function tpOpenAccountPanel() {
-	tpIsOpenAccountPanel = true;
-	if (!tpIsLoadedAccountPanel) {
-		setAccountWait();
-		cj.ajax.addonCallback('toolPanelAccountForm','',function(content,ignore){
-			tpClearAccountWait();
-			jQuery('#tpAccountPanel').html( content );
-			tpOpenAccountPanelReady();
-			tpIsLoadedAccountPanel = true;
-		});
-	} else {
-		tpOpenAccountPanelReady();
-	}
+    tpIsOpenAccountPanel = true;
+    if (!tpIsLoadedAccountPanel) {
+        setAccountWait();
+        cj.ajax.addonCallback('toolPanelAccountForm', '', function (content, ignore) {
+            tpClearAccountWait();
+            $('#tpAccountPanel').html(content);
+            tpOpenAccountPanelReady();
+            tpIsLoadedAccountPanel = true;
+        });
+    } else {
+        tpOpenAccountPanelReady();
+    }
 }
+/*
+*/
 function tpOpenAccountPanelReady() {
-	closeLoginPanel();
-	jQuery("#tpAccountTab").addClass("tpOpen");
-	jQuery("#tpAccountPanel").slideDown("slow");
+    closeLoginPanel();
+    $("#tpAccountTab").addClass("tpOpen");
+    $("#tpAccountPanel").slideDown("slow");
 }
+/*
+*/
 function setAccountWait() {
-	jQuery('#tpAccountWait').css('visibility','visible');
+    $('#tpAccountWait').css('visibility', 'visible');
 }
+/*
+*/
 function tpClearAccountWait() {
-	jQuery('#tpAccountWait').css('visibility','hidden');
+    $('#tpAccountWait').css('visibility', 'hidden');
 }
-function tpCloseAccountPanel () {
-	jQuery("#tpAccountPanel").slideUp("slow");
-	jQuery("#tpAccountTab").removeClass("tpOpen");
-	tpIsOpenAccountPanel=false;
+/*
+*/
+function tpCloseAccountPanel() {
+    $("#tpAccountPanel").slideUp("slow");
+    $("#tpAccountTab").removeClass("tpOpen");
+    tpIsOpenAccountPanel = false;
 }
+/*
+*/
 function tpClickAccountTabLock() {
-	if (isLockedAccountTab) {
-		jQuery('#tpAccountLock').html('<img src="/toolPanel/lockOpen.png" height="10" width="10">');
-		cj.ajax.addon('setUserProperty','n=isLockedAccountTab&v=0');
-		isLockedAccountTab=false;
-	} else {
-		jQuery('#tpAccountLock').html('<img src="/toolPanel/lockClosed.png" height="10" width="10">');
-		cj.ajax.addon('setUserProperty','n=isLockedAccountTab&v=1');
-		isLockedAccountTab=true;
-	}
-	
+    if (isLockedAccountTab) {
+        $('#tpAccountLock').html('<img src="/toolPanel/lockOpen.png" height="10" width="10">');
+        cj.ajax.addon('setUserProperty', 'n=isLockedAccountTab&v=0');
+        isLockedAccountTab = false;
+    } else {
+        $('#tpAccountLock').html('<img src="/toolPanel/lockClosed.png" height="10" width="10">');
+        cj.ajax.addon('setUserProperty', 'n=isLockedAccountTab&v=1');
+        isLockedAccountTab = true;
+    }
+
 }
+/*
+*/
 function tpMouseEnterAccountTab() {
-	if (!isLockedAccountTab)
-	{
-		if(tpTimerIdAccountTab!=0)
-		{
-			clearTimeout( tpTimerIdAccountTab );
-			tpTimerIdAccountTab=0;
-		}
-		tpIsWantedAccountTab=true;
-	}
+    if (!isLockedAccountTab) {
+        if (tpTimerIdAccountTab != 0) {
+            clearTimeout(tpTimerIdAccountTab);
+            tpTimerIdAccountTab = 0;
+        }
+        tpIsWantedAccountTab = true;
+    }
 }
+/*
+*/
 function tpMouseLeaveAccountTab() {
-	if ((!isLockedAccountTab) & (!tpIsOpenAccountPanel))
-	{
-		if(tpTimerIdAccountTab!=0)
-		{
-			clearTimeout( tpTimerIdAccountTab );
-			tpTimerIdAccountTab=0;
-		}
-		tpTimerIdAccountTab = setTimeout("accountTabClose()",2000);
-		tpIsWantedAccountTab=false;
-	}
+    if ((!isLockedAccountTab) & (!tpIsOpenAccountPanel)) {
+        if (tpTimerIdAccountTab != 0) {
+            clearTimeout(tpTimerIdAccountTab);
+            tpTimerIdAccountTab = 0;
+        }
+        tpTimerIdAccountTab = setTimeout("accountTabClose()", 2000);
+        tpIsWantedAccountTab = false;
+    }
 }
+/*
+*/
 function accountTabClose() {
-	if(!tpIsWantedAccountTab)
-	{
-		jQuery("#tpAccountTab").slideUp("slow");
-	} else {
-		tpIsWantedAccountTab = tpIsWantedAccountTab;
-	}
+    if (!tpIsWantedAccountTab) {
+        $("#tpAccountTab").slideUp("slow");
+    } else {
+        tpIsWantedAccountTab = tpIsWantedAccountTab;
+    }
 }
-//
-// --------------------------------
-// login tab
-// --------------------------------
-//
+/*
+login
+*/
 function tpToggleLoginPanel() {
-	if(isOpenLoginPanel) {
-		closeLoginPanel();
-	} else {
-		tpOpenLoginPanel();
-	}
-	return false;
+    if (isOpenLoginPanel) {
+        closeLoginPanel();
+    } else {
+        tpOpenLoginPanel();
+    }
+    return false;
 };
+/*
+*/
 function tpOpenLoginPanel() {
-	isOpenLoginPanel = true;
-	if (!isLoadedLoginPanel) {
-		setLoginWait();
-		cj.ajax.addonCallback('toolPanelLoginForm','',function(content,ignore){ tpStoreAndOpenLoginPanel( content ) });
-	} else {
-		tpOpenLoginPanel_contentReady();
-	}
+    isOpenLoginPanel = true;
+    if (!isLoadedLoginPanel) {
+        setLoginWait();
+        cj.ajax.addonCallback('toolPanelLoginForm', '', function (content, ignore) { tpStoreAndOpenLoginPanel(content) });
+    } else {
+        tpOpenLoginPanel_contentReady();
+    }
 }
-function tpStoreAndOpenLoginPanel( content ) {
-	clearLoginWait();
-	jQuery('#tpLoginPanel').html( content );
-	tpOpenLoginPanel_contentReady();
-	isLoadedLoginPanel = true;
+/*
+*/
+function tpStoreAndOpenLoginPanel(content) {
+    clearLoginWait();
+    $('#tpLoginPanel').html(content);
+    tpOpenLoginPanel_contentReady();
+    isLoadedLoginPanel = true;
 }
+/*
+*/
 function tpOpenLoginPanel_contentReady() {
-	tpCloseAccountPanel();
-	jQuery("#tpLoginTab").addClass("tpOpen");
-	jQuery("#tpLoginPanel").slideDown("slow");
+    tpCloseAccountPanel();
+    $("#tpLoginTab").addClass("tpOpen");
+    $("#tpLoginPanel").slideDown("slow");
 }
+/*
+*/
 function setLoginWait() {
-	jQuery('#tpLoginWait').css('visibility','visible');
+    $('#tpLoginWait').css('visibility', 'visible');
 }
+/*
+*/
 function clearLoginWait() {
-	jQuery('#tpLoginWait').css('visibility','hidden');
+    $('#tpLoginWait').css('visibility', 'hidden');
 }
-function closeLoginPanel () {
-	jQuery("#tpLoginPanel").slideUp("slow");
-	jQuery("#tpLoginTab").removeClass("tpOpen");
-	isOpenLoginPanel=false;
+/*
+*/
+function closeLoginPanel() {
+    $("#tpLoginPanel").slideUp("slow");
+    $("#tpLoginTab").removeClass("tpOpen");
+    isOpenLoginPanel = false;
 }
+/*
+*/
 function clickLoginTabLock() {
-	if (tpLoginTabIsPinned) {
-		jQuery('#tpLoginLock').html('<img src="/toolPanel/lockOpen.png" height="10" width="10">');
-		cj.ajax.addon('setUserProperty','n=tpLoginTabIsPinned&v=0');
-		tpLoginTabIsPinned=false;
-	} else {
-		jQuery('#tpLoginLock').html('<img src="/toolPanel/lockClosed.png" height="10" width="10">');
-		cj.ajax.addon('setUserProperty','n=tpLoginTabIsPinned&v=1');
-		tpLoginTabIsPinned=true;
-	}
-	
+    if (tpLoginTabIsPinned) {
+        $('#tpLoginLock').html('<img src="/toolPanel/lockOpen.png" height="10" width="10">');
+        cj.ajax.addon('setUserProperty', 'n=tpLoginTabIsPinned&v=0');
+        tpLoginTabIsPinned = false;
+    } else {
+        $('#tpLoginLock').html('<img src="/toolPanel/lockClosed.png" height="10" width="10">');
+        cj.ajax.addon('setUserProperty', 'n=tpLoginTabIsPinned&v=1');
+        tpLoginTabIsPinned = true;
+    }
+
 }
+/*
+*/
 function mouseEnterLoginTab() {
-	if (!tpLoginTabIsPinned)
-	{
-		if(timerIdLoginTab!=0)
-		{
-			clearTimeout( timerIdLoginTab );
-			timerIdLoginTab=0;
-		}
-		tpAbortLoginTabClose=true;
-	}
+    if (!tpLoginTabIsPinned) {
+        if (timerIdLoginTab != 0) {
+            clearTimeout(timerIdLoginTab);
+            timerIdLoginTab = 0;
+        }
+        tpAbortLoginTabClose = true;
+    }
 }
+/*
+*/
 function mouseLeaveLoginTab() {
-	if ((!tpLoginTabIsPinned) & (!isOpenLoginPanel))
-	{
-		if(timerIdLoginTab!=0)
-		{
-			clearTimeout( timerIdLoginTab );
-			timerIdLoginTab=0;
-		}
-		timerIdLoginTab = setTimeout("LoginTabClose()",2000);
-		tpAbortLoginTabClose=false;
-	}
+    if ((!tpLoginTabIsPinned) & (!isOpenLoginPanel)) {
+        if (timerIdLoginTab != 0) {
+            clearTimeout(timerIdLoginTab);
+            timerIdLoginTab = 0;
+        }
+        timerIdLoginTab = setTimeout("LoginTabClose()", 2000);
+        tpAbortLoginTabClose = false;
+    }
 }
+/*
+*/
 function LoginTabClose() {
-	if(!tpAbortLoginTabClose)
-	{
-		jQuery("#tpLoginTab").slideUp("slow");
-	} else {
-		tpAbortLoginTabClose = tpAbortLoginTabClose;
-	}
+    if (!tpAbortLoginTabClose) {
+        $("#tpLoginTab").slideUp("slow");
+    } else {
+        tpAbortLoginTabClose = tpAbortLoginTabClose;
+    }
 }
-function tpLoginFormSubmit(){
-	var varString;
-	if (!validateLoginForm()) {
-		return false;
-	} else {
-		//
-		varString = 'panelLoginUsername='+jQuery('#panelLoginUsername').val();
-		varString += '&panelLoginPassword='+jQuery('#panelLoginPassword').val();
-		varString += '&panelLoginEmail='+jQuery('#panelLoginEmail').val();
-		varString += '&panelLoginAuto='+jQuery('#panelLoginAuto').val();
-		//
-		cj.ajax.addonCallback('toolPanelLoginFormHandler', varString, tpRedirectHome, 'panelFormContainer');
-		//
-		tpSetSpinner('panelFormContainer', 'Authenticating Account....', jQuery('#panelFormContainer').height());
-		return false;
-	}
+/*
+*/
+function tpLoginFormSubmit() {
+    var varString;
+    if (!validateLoginForm()) {
+        return false;
+    } else {
+        //
+        varString = 'panelLoginUsername=' + $('#panelLoginUsername').val();
+        varString += '&panelLoginPassword=' + $('#panelLoginPassword').val();
+        varString += '&panelLoginEmail=' + $('#panelLoginEmail').val();
+        varString += '&panelLoginAuto=' + $('#panelLoginAuto').val();
+        //
+        cj.ajax.addonCallback('toolPanelLoginFormHandler', varString, tpRedirectHome, 'panelFormContainer');
+        //
+        tpSetSpinner('panelFormContainer', 'Authenticating Account....', $('#panelFormContainer').height());
+        return false;
+    }
 }
-function tpLoginFormKeypress(e){
-	if(e.which == 13){
-		tpLoginFormSubmit();
-		e.preventDefault();
-		return false;
-	}
+/*
+*/
+function tpLoginFormKeypress(e) {
+    if (e.which == 13) {
+        tpLoginFormSubmit();
+        e.preventDefault();
+        return false;
+    }
 }
-//
-// --------------------------------
-// Account Form
-// --------------------------------
-//
+/*
+account form
+*/
 function validateAccountForm() {
-		var errFlag;
-		var errMsg;
-		//
-		var firstName = jQuery('#panelAccountFirstName').val();
-		var lastName = jQuery('#panelAccountLastName').val();
-		var email = jQuery('#panelAccountEmail').val();
-		//
-		if (firstName==null || firstName=='')
-		{
-			jQuery('#panelAccountFirstName').css('background-color', '#dddddd');
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelAccountFirstName').css('background-color', '#ffffff');
-		};
-		if (lastName==null || lastName=='')
-		{
-			jQuery('#panelAccountLastName').css('background-color', '#dddddd');
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelAccountLastName').css('background-color', '#ffffff');
-		};
-		//
-		if (email==null || email=='')
-		{
-			jQuery('#panelAccountEmail').css('background-color', '#dddddd');
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelAccountEmail').css('background-color', '#ffffff');
-		};
-		//
-		if (errFlag==1) {
-			if (errMsg=='' || errMsg==null || errMsg=='undefined')
-			{
-				errMsg = 'Please complete all required fields in order to continue.';
-			}
-			alert(errMsg);
-			return false;
-		}
-		else
-		{
-			return true;
-		};
+    var errFlag;
+    var errMsg;
+    //
+    var firstName = $('#panelAccountFirstName').val();
+    var lastName = $('#panelAccountLastName').val();
+    var email = $('#panelAccountEmail').val();
+    //
+    if (firstName == null || firstName == '') {
+        $('#panelAccountFirstName').css('background-color', '#dddddd');
+        errFlag = 1;
+    }
+    else {
+        $('#panelAccountFirstName').css('background-color', '#ffffff');
+    };
+    if (lastName == null || lastName == '') {
+        $('#panelAccountLastName').css('background-color', '#dddddd');
+        errFlag = 1;
+    }
+    else {
+        $('#panelAccountLastName').css('background-color', '#ffffff');
+    };
+    //
+    if (email == null || email == '') {
+        $('#panelAccountEmail').css('background-color', '#dddddd');
+        errFlag = 1;
+    }
+    else {
+        $('#panelAccountEmail').css('background-color', '#ffffff');
+    };
+    //
+    if (errFlag == 1) {
+        if (errMsg == '' || errMsg == null || errMsg == 'undefined') {
+            errMsg = 'Please complete all required fields in order to continue.';
+        }
+        alert(errMsg);
+        return false;
+    }
+    else {
+        return true;
+    };
 };
-function tpAccountSubmit(){
-	if (!validateAccountForm()) {
-		return false;
-	}
-	var varString;
-	varString = 'panelAccountFirstName=' + jQuery('#panelAccountFirstName').val();
-	varString += '&panelAccountLastName=' + jQuery('#panelAccountLastName').val();
-	varString += '&panelAccountEmail=' + jQuery('#panelAccountEmail').val();
-	varString += '&panelAccountUsername=' + jQuery('#panelAccountUsername').val();
-	varString += '&panelAccountPassword=' + jQuery('#panelAccountPassword').val();
-	//
-	cj.ajax.addon('toolPanelAccountFormHandler', varString, '', 'panelFormContainer', '','');
-	tpSetSpinner('panelFormContainer', 'Updating Account....', jQuery('#panelFormContainer').height());
-	return false;
+/*
+*/
+function tpAccountSubmit() {
+    if (!validateAccountForm()) {
+        return false;
+    }
+    var varString;
+    varString = 'panelAccountFirstName=' + $('#panelAccountFirstName').val();
+    varString += '&panelAccountLastName=' + $('#panelAccountLastName').val();
+    varString += '&panelAccountEmail=' + $('#panelAccountEmail').val();
+    varString += '&panelAccountUsername=' + $('#panelAccountUsername').val();
+    varString += '&panelAccountPassword=' + $('#panelAccountPassword').val();
+    //
+    cj.ajax.addon('toolPanelAccountFormHandler', varString, '', 'panelFormContainer', '', '');
+    tpSetSpinner('panelFormContainer', 'Updating Account....', $('#panelFormContainer').height());
+    return false;
 }
-function tpAccountLogoutClick(){
-	cj.ajax.addonCallback('toolPanelLogoutHandler', '', tpRedirectHome, 'panelFormContainer');
-	tpSetSpinner('panelFormContainer', 'Logging Out....', jQuery('#panelFormContainer').height());
-	return false;
+/*
+*/
+function tpAccountLogoutClick() {
+    cj.ajax.addonCallback('toolPanelLogoutHandler', '', tpRedirectHome, 'panelFormContainer');
+    tpSetSpinner('panelFormContainer', 'Logging Out....', $('#panelFormContainer').height());
+    return false;
 }
-
-//
-// --------------------------------
-// Login Form
-// --------------------------------
-//
+/*
+login form
+*/
 function validateLoginForm() {
-		var errFlag;
-		var errMsg;
-		//
-		var username = jQuery('#panelLoginUsername').val();
-		var password = jQuery('#panelLoginPassword').val();
-		var email = jQuery('#panelLoginEmail').val();
-		//
-		// fields present
-		//
-		var usernamePresent = jQuery('#reqUsername').val();
-		var passwordPresent = jQuery('#reqPassword').val();
-		var emailPresent = jQuery('#reqEmail').val();
-		//
-		if (passwordPresent==1 && (password==null || password==''))
-		{
-			jQuery('#panelLoginPassword').css('background-color', '#f0f890').focus();
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelLoginPassword').css('background-color', '#ffffff');
-		}
-		//
-		if (usernamePresent==1 && (username==null || username==''))
-		{
-			jQuery('#panelLoginUsername').css('background-color', '#f0f890').focus();
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelLoginUsername').css('background-color', '#ffffff');
-		}
-		//
-		if (emailPresent==1 && (email==null || email==''))
-		{
-			jQuery('#panelLoginEmail').css('background-color', '#f0f890').focus();
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelLoginEmail').css('background-color', '#ffffff');
-		};
-		//
-		if (errFlag==1) {
-			if (errMsg=='' || errMsg==null || errMsg=='undefined')
-			{
-				errMsg = 'Please complete all fields in order to login.';
-			}
-			alert(errMsg);
-			return false;
-		}
-		else
-		{
-			return true;
-		};
+    var errFlag;
+    var errMsg;
+    //
+    var username = $('#panelLoginUsername').val();
+    var password = $('#panelLoginPassword').val();
+    var email = $('#panelLoginEmail').val();
+    //
+    // fields present
+    //
+    var usernamePresent = $('#reqUsername').val();
+    var passwordPresent = $('#reqPassword').val();
+    var emailPresent = $('#reqEmail').val();
+    //
+    if (passwordPresent == 1 && (password == null || password == '')) {
+        $('#panelLoginPassword').css('background-color', '#f0f890').focus();
+        errFlag = 1;
+    }
+    else {
+        $('#panelLoginPassword').css('background-color', '#ffffff');
+    }
+    //
+    if (usernamePresent == 1 && (username == null || username == '')) {
+        $('#panelLoginUsername').css('background-color', '#f0f890').focus();
+        errFlag = 1;
+    }
+    else {
+        $('#panelLoginUsername').css('background-color', '#ffffff');
+    }
+    //
+    if (emailPresent == 1 && (email == null || email == '')) {
+        $('#panelLoginEmail').css('background-color', '#f0f890').focus();
+        errFlag = 1;
+    }
+    else {
+        $('#panelLoginEmail').css('background-color', '#ffffff');
+    };
+    //
+    if (errFlag == 1) {
+        if (errMsg == '' || errMsg == null || errMsg == 'undefined') {
+            errMsg = 'Please complete all fields in order to login.';
+        }
+        alert(errMsg);
+        return false;
+    }
+    else {
+        return true;
+    };
 };
-//
-// --------------------------------
-// Send Password Form
-// --------------------------------
-//
+/*
+send password form
+*/
 function validateEmailForm() {
-		var errFlag;
-		var errMsg;
-		//
-		var email = jQuery('#panelEmailEmail').val();
-		//
-		if (email==null || email=='')
-		{
-			jQuery('#panelEmailEmail').css('background-color', '#f0f890');
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelEmailEmail').css('background-color', '#ffffff');
-		};
-		//
-		if (errFlag==1) {
-			if (errMsg=='' || errMsg==null || errMsg=='undefined')
-			{
-				errMsg = 'Please enter your email address in order to retrieve your login information.';
-			}
-			alert(errMsg);
-			return false;
-		}
-		else
-		{
-			return true;
-		};
+    var errFlag;
+    var errMsg;
+    //
+    var email = $('#panelEmailEmail').val();
+    //
+    if (email == null || email == '') {
+        $('#panelEmailEmail').css('background-color', '#f0f890');
+        errFlag = 1;
+    }
+    else {
+        $('#panelEmailEmail').css('background-color', '#ffffff');
+    };
+    //
+    if (errFlag == 1) {
+        if (errMsg == '' || errMsg == null || errMsg == 'undefined') {
+            errMsg = 'Please enter your email address in order to retrieve your login information.';
+        }
+        alert(errMsg);
+        return false;
+    }
+    else {
+        return true;
+    };
 };
+/*
+*/
 function tpEmailFormSubmit() {
-	if (!validateEmailForm()) {
-		return false;
-	} else {
-		cj.ajax.addon('toolPanelLoginFormHandler', '', 'panelLoginForm', 'panelFormContainer', '', '');
-		tpSetSpinner('panelFormContainer', 'Gathering Account Information....', jQuery('#panelFormContainer').height());
-	}
+    if (!validateEmailForm()) {
+        return false;
+    } else {
+        cj.ajax.addon('toolPanelLoginFormHandler', '', 'panelLoginForm', 'panelFormContainer', '', '');
+        tpSetSpinner('panelFormContainer', 'Gathering Account Information....', $('#panelFormContainer').height());
+    }
 }
-//
-// --------------------------------
-// Registration Form
-// --------------------------------
-//
+/*
+Registration Form
+*/
 function tpValidateRegisterForm() {
-		var errFlag;
-		var errMsg;
-		//
-		var usernamePresent = jQuery('#reqUsername').val();
-		var passwordPresent = jQuery('#reqPassword').val();
-		//
-		var firstName = jQuery('#panelRegistrationFirstName').val();
-		var lastName = jQuery('#panelRegistrationLastName').val();
-		var email = jQuery('#panelRegistrationEmail').val();
-		var username = jQuery('#panelRegistrationUsername').val();
-		var password = jQuery('#panelRegistrationPassword').val();
-		//
-		if (firstName==null || firstName=='')
-		{
-			jQuery('#panelRegistrationFirstName').css('background-color', '#f0f890');
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelRegistrationFirstName').css('background-color', '#ffffff');
-		};
-		if (lastName==null || lastName=='')
-		{
-			jQuery('#panelRegistrationLastName').css('background-color', '#f0f890');
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelRegistrationLastName').css('background-color', '#ffffff');
-		};
-		//
-		if (email==null || email=='')
-		{
-			jQuery('#panelRegistrationEmail').css('background-color', '#f0f890');
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelRegistrationEmail').css('background-color', '#ffffff');
-		};
-		//
-		if (email==null || email=='')
-		{
-			jQuery('#panelRegistrationEmail').css('background-color', '#f0f890');
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelRegistrationEmail').css('background-color', '#ffffff');
-		};
-		//
-		if (usernamePresent==1 && (username==null || username==''))
-		{
-			jQuery('#panelRegistrationUsername').css('background-color', '#f0f890');
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelRegistrationUsername').css('background-color', '#ffffff');
-		};
-		if (passwordPresent==1 && (password==null || password==''))
-		{
-			jQuery('#panelRegistrationPassword').css('background-color', '#f0f890');
-			errFlag = 1;
-		}
-		else
-		{
-			jQuery('#panelRegistrationPassword').css('background-color', '#ffffff');
-		};
-		//
-		if (errFlag==1) {
-			if (errMsg=='' || errMsg==null || errMsg=='undefined')
-			{
-				errMsg = 'Please complete all required fields in order to continue.';
-			}
-			alert(errMsg);
-			return false;
-		}
-		else
-		{
-			return true;
-		}
+    var errFlag;
+    var errMsg;
+    //
+    var usernamePresent = $('#reqUsername').val();
+    var passwordPresent = $('#reqPassword').val();
+    //
+    var firstName = $('#panelRegistrationFirstName').val();
+    var lastName = $('#panelRegistrationLastName').val();
+    var email = $('#panelRegistrationEmail').val();
+    var username = $('#panelRegistrationUsername').val();
+    var password = $('#panelRegistrationPassword').val();
+    //
+    if (firstName == null || firstName == '') {
+        $('#panelRegistrationFirstName').css('background-color', '#f0f890');
+        errFlag = 1;
+    }
+    else {
+        $('#panelRegistrationFirstName').css('background-color', '#ffffff');
+    };
+    if (lastName == null || lastName == '') {
+        $('#panelRegistrationLastName').css('background-color', '#f0f890');
+        errFlag = 1;
+    }
+    else {
+        $('#panelRegistrationLastName').css('background-color', '#ffffff');
+    };
+    //
+    if (email == null || email == '') {
+        $('#panelRegistrationEmail').css('background-color', '#f0f890');
+        errFlag = 1;
+    }
+    else {
+        $('#panelRegistrationEmail').css('background-color', '#ffffff');
+    };
+    //
+    if (email == null || email == '') {
+        $('#panelRegistrationEmail').css('background-color', '#f0f890');
+        errFlag = 1;
+    }
+    else {
+        $('#panelRegistrationEmail').css('background-color', '#ffffff');
+    };
+    //
+    if (usernamePresent == 1 && (username == null || username == '')) {
+        $('#panelRegistrationUsername').css('background-color', '#f0f890');
+        errFlag = 1;
+    }
+    else {
+        $('#panelRegistrationUsername').css('background-color', '#ffffff');
+    };
+    if (passwordPresent == 1 && (password == null || password == '')) {
+        $('#panelRegistrationPassword').css('background-color', '#f0f890');
+        errFlag = 1;
+    }
+    else {
+        $('#panelRegistrationPassword').css('background-color', '#ffffff');
+    };
+    //
+    if (errFlag == 1) {
+        if (errMsg == '' || errMsg == null || errMsg == 'undefined') {
+            errMsg = 'Please complete all required fields in order to continue.';
+        }
+        alert(errMsg);
+        return false;
+    }
+    else {
+        return true;
+    }
 }
-
-
-function tpRegisterSubmit(){
-	if (!tpValidateRegisterForm()) {
-		return false;
-	}
-	var varString;
-	varString = 'panelRegistrationFirstName=' + jQuery('#panelRegistrationFirstName').val();
-	varString += '&panelRegistrationLastName=' + jQuery('#panelRegistrationLastName').val();
-	varString += '&panelRegistrationEmail=' + jQuery('#panelRegistrationEmail').val();
-	varString += '&panelRegistrationUsername=' + jQuery('#panelRegistrationUsername').val();
-	varString += '&panelRegistrationPassword=' + jQuery('#panelRegistrationPassword').val();
-	//
-	cj.ajax.addonCallback('toolPanelRegistrationFormHandler', varString, tpRedirectHome, 'panelFormContainer');
-	//cj.ajax.addon('toolPanelRegistrationFormHandler', varString, '', 'panelFormContainer', '','');
-	tpSetSpinner('panelFormContainer', 'Creating Account...', jQuery('#panelFormContainer').height());
-	return false;
+/*
+*/
+function tpRegisterSubmit() {
+    if (!tpValidateRegisterForm()) {
+        return false;
+    }
+    var varString;
+    varString = 'panelRegistrationFirstName=' + $('#panelRegistrationFirstName').val();
+    varString += '&panelRegistrationLastName=' + $('#panelRegistrationLastName').val();
+    varString += '&panelRegistrationEmail=' + $('#panelRegistrationEmail').val();
+    varString += '&panelRegistrationUsername=' + $('#panelRegistrationUsername').val();
+    varString += '&panelRegistrationPassword=' + $('#panelRegistrationPassword').val();
+    //
+    cj.ajax.addonCallback('toolPanelRegistrationFormHandler', varString, tpRedirectHome, 'panelFormContainer');
+    //cj.ajax.addon('toolPanelRegistrationFormHandler', varString, '', 'panelFormContainer', '','');
+    tpSetSpinner('panelFormContainer', 'Creating Account...', $('#panelFormContainer').height());
+    return false;
 }
-function tpRequestRegister(){
-	cj.ajax.addon('toolPanelDefaultRegistrationForm','', '', 'panelFormContainer', '', '');
-	tpSetSpinner('panelFormContainer', '', jQuery('#panelFormContainer').height());
-	return false;
+/*
+*/
+function tpRequestRegister() {
+    cj.ajax.addon('toolPanelDefaultRegistrationForm', '', '', 'panelFormContainer', '', '');
+    tpSetSpinner('panelFormContainer', '', $('#panelFormContainer').height());
+    return false;
 }
+/*
+*/
+$(function () {
+    $("#tpDraggable").draggable({ axis: "y" });
+    $("#tpDraggable").draggable({ axis: "x" });
 
-  $(function() {
-    $( "#tpDraggable" ).draggable({ axis: "y" });
-    $( "#tpDraggable" ).draggable({ axis: "x" });
- 
-    $( "#tpDraggable" ).draggable({ containment: "#containment-wrapper", scroll: false });
-    $( "#draggable5" ).draggable({ containment: "parent" });
-  });
+    $("#tpDraggable").draggable({ containment: "#containment-wrapper", scroll: false });
+    $("#draggable5").draggable({ containment: "parent" });
+});
 
-
-
-//
-// --------------------------------
-// initialize
-// --------------------------------
-//
-tpBindEvents();
-jQuery( tpMouseLeaveAccountTab() );
-jQuery( mouseLeaveLoginTab() );
 ]]></JavascriptInHead>
 		<JavascriptBodyEnd></JavascriptBodyEnd>
 		<MetaDescription></MetaDescription>
@@ -811,7 +775,6 @@ jQuery( mouseLeaveLoginTab() );
 		<Styles><![CDATA[/*
 * --------------------------------------------
 * toolPanel
-* --------------------------------------------
 */
 #toolPanel 
 {
@@ -840,7 +803,6 @@ jQuery( mouseLeaveLoginTab() );
 /*
 * --------------------------------------------
 * Pulldown Tab Zone
-* --------------------------------------------
 */
 
 #toolPanel #tpTabZone 
@@ -853,9 +815,7 @@ jQuery( mouseLeaveLoginTab() );
 /*
 * --------------------------------------------
 * Pulldown Panels
-* --------------------------------------------
 */
-
 #toolPanel .tpPanels 
 {
 	position: relative;
@@ -874,24 +834,19 @@ jQuery( mouseLeaveLoginTab() );
 	margin: 0;
 	padding:10px;
 }
-
 /*
 * --------------------------------------------
 * Account Pulldown
-* --------------------------------------------
 */
-
 #toolPanel #tpAccountPanel 
 {
 	/* height: 200px; */
 	position: relative;
 	z-index: 1;
 }
-
 /*
 * --------------------------------------------
 * Login Pulldown
-* --------------------------------------------
 */
 
 #toolPanel #tpLoginPanel 
@@ -900,11 +855,9 @@ jQuery( mouseLeaveLoginTab() );
 	position: relative;
 	z-index: 1;
 }
-
 /*
 * --------------------------------------------
 * hanging tabs
-* --------------------------------------------
 */
 #toolPanel .tpTabs 
 {
@@ -971,7 +924,6 @@ jQuery( mouseLeaveLoginTab() );
 /*
 * --------------------------------------------
 * fixed tabs
-* --------------------------------------------
 */
 #toolPanel #containment-wrapper 
 {
@@ -1032,7 +984,6 @@ z-index: 9998;
 /*
 * --------------------------------------------
 * Editor Tab
-* --------------------------------------------
 */
 #toolPanel ul#tpEditTab li.tpEditButton 
 {
@@ -1085,7 +1036,6 @@ z-index: 9998;
 /*
 * --------------------------------------------
 * Account Tab
-* --------------------------------------------
 */
 
 #toolPanel ul#tpAccountTab li.tpButton a {
@@ -1105,9 +1055,7 @@ z-index: 9998;
 /*
 * --------------------------------------------
 * Login Tab
-* --------------------------------------------
 */
-
 #toolPanel ul#tpLoginTab li.tpButton a {
     border-radius: 3px 3px 3px 3px;
     display: block;
@@ -1125,7 +1073,6 @@ z-index: 9998;
 /*
 * --------------------------------------------
 * Footer
-* --------------------------------------------
 */
 #toolPanelFooter
 ,#toolPanelFooter p 
@@ -1151,68 +1098,47 @@ z-index: 9998;
 #toolPanelFooter .tpInner span {
 	padding: 0 10px 0 10px;
 }
-
 /*
 * --------------------------------------------
 * general form
-* --------------------------------------------
 */
-
 #toolPanel .fieldRequired { margin: 0 0 0 5px; font-weight: bold; color: #903020; }
-
 #toolPanel #panelFormContainer { margin: 0 auto; padding: 20px 0; width: 400px; }
 #toolPanel #panelFormContainer li  { padding: 5px; text-align: center; }
 #toolPanel #panelFormContainer li.buttonRow { text-align: right; padding: 5px 15px 5px 5px;}
 #toolPanel #panelFormContainer li label { text-align: left; display: inline-block; width: 100px; }
 #toolPanel #panelFormContainer li input[type=text]  { width: 250px; border: 1px solid #888888; padding: 5px; }
 #toolPanel #panelFormContainer li input[type=password]  { width: 250px; border: 1px solid #888888; padding: 5px; }
-
 #toolPanel #panelFormContainer h3 { margin: 3px 0 5px 0; }
-
 #toolPanel .panelInstructionContainer { padding: 10px 0 10px 0; }
 #toolPanel .panelLowerInstructionContainer { padding: 10px 0 10px 0; }
-
 #toolPanel #panelFormContainer li input[type='checkbox']  { width: 100px; }
-
 #toolPanel #panelFormContainer li label.callout { text-align: right; padding: 0 10px 0 0; }
-
 #toolPanel li#hiddenRow { display:none; }
 /*
 * --------------------------------------------
 * Account Form
-* --------------------------------------------
 */
-
 #toolPanel .panelAccountFormList { list-style: none outside none; margin: 0; padding: 0; }
 /*
 * --------------------------------------------
 * Login Form
-* --------------------------------------------
 */
-
 #toolPanel .panelLoginFormList { list-style: none outside none; margin: 0; padding: 0; }
-
 /*
 * --------------------------------------------
 * email send Form
-* --------------------------------------------
 */
-
 #toolPanel .panelEmailFormList { list-style: none outside none; margin: 0; padding: 0; }
 /*
 * --------------------------------------------
 * Registration
-* --------------------------------------------
 */
-
 .panelRegistrationFormList { list-style: none outside none; margin: 0; padding: 0; }
-
 /*
 * --------------------------------------------
 * buttons
-* --------------------------------------------
 */
-
 #toolPanel a.panelButton
 ,#toolPanel a.panelButton:visited {
     background-color: #888888;
@@ -1226,13 +1152,10 @@ z-index: 9998;
     text-decoration: none;
 	display: inline-block;
 }
-
 /*
 * --------------------------------------------
 * spinner
-* --------------------------------------------
 */
-
 #toolPanel div.spinner {margin: auto 0; padding: 10px 0 0 0; text-align:center;}
 #toolPanel div.spinner p{text-align:center;}
 #toolPanel div.spinner img{text-align:center;}
@@ -1580,7 +1503,7 @@ end function]]></Code>
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<Scripting Language="VBScript" EntryPoint="getContent" Timeout="5000">
+		<Scripting Language="" EntryPoint="getContent" Timeout="5000">
 			<Code><![CDATA[function getContent()
 	call cp.User.Logout()
 end function]]></Code>
@@ -1622,114 +1545,6 @@ end function]]></Code>
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<data>
-		<record content="Layouts" guid="{9E3751C0-EDE1-42EE-96BD-25291465BF14}" name="Tool Panel - Top">
-			<field name="active">True</field>
-			<field name="layout"><![CDATA[<div class="tpPanels">
-	<div id="tpAccountPanel" class="tpPanelCon">
-		<div style="width:100%; height:200px;">&nbsp;
-			<img src="/cclib/images/ajax-loader-big.gif" width="32" height="32" style="display:block;width:32px;height:32px;margin:auto;">
-		</div>
-	</div>
-	<div id="tpLoginPanel" class="tpPanelCon">
-		<div class="tpPanelInner">
-			<p>This is the login panel</p>
-		</div>
-	</div>
-</div>
-<div id="tpTabZone">
-</div>
-<div class="tpTabs">
-	<ul id="tpAccountTab">
-		<li id="tpAccountWait" class="tpLock"><img src="/cclib/images/ajax-loader-small.gif" width="10" height="10"></li>
-		<li id="tpAccount" class="tpButton"><a id="tpAccountButton" href="#">Account</a></li>
-		<li id="tpAccountLock" class="tpLock"><img src="/toolPanel/lockOpen.png" width="10" height="10"></li>
-	</ul>
-	<ul id="tpLoginTab">
-		<li id="tpLoginWait" class="tpLock"><img src="/cclib/images/ajax-loader-small.gif" width="10" height="10"></li>
-		<li id="tpLogin" class="tpButton"><a id="tpLoginButton" href="#">Login/Register</a></li>
-		<li id="tpLoginLock" class="tpLock"><img src="/toolPanel/lockOpen.png" width="10" height="10"></li>
-	</ul>
-</div>
-<div id="containment-wrapper">
-	<div id="tpDraggable" class="tpFixedTabs">
-		<ul id="tpEditTab">
-			<li id="tpEditTabQuick" class="tpEditButton"><a href="#">Quick Edit</a></li>
-			<li id="tpEditTabEdit" class="tpEditButton"><a href="#">Edit</a></li>
-			<li id="tpEditTabAdv" class="tpEditButton"><a href="#">Advanced Edit</a></li>
-			<li id="tpEditTabPreview" class="tpEditButton"><a href="#">Preview</a></li>
-			<li id="tpEditTabDebug" class="tpEditButton"><a href="#">Debug</a></li>
-			<li id="tpEditTabAdmin" class="tpEditButton "><a href="/admin" class="tpButtonUp">Admin</a></li>
-			<li id="tpEditLock" class="tpEditLock"><img src="/toolPanel/lockOpen.png" width="10" height="10"></li>
-		</ul>
-	</div>
-</div>
-<!--<div id="results"></div>-->]]></field>
-			<field name="sortorder"></field>
-			<field name="stylesfilename"></field>
-		</record>
-		<record content="Layouts" guid="{6DAFED78-A4F2-4DB9-A814-9D29AE0721F9}" name="Default Login Form">
-			<field name="active">True</field>
-			<field name="layout"><![CDATA[<form id="panelLoginForm">
-	<h3>Login to your account</h3>
-	<div class="panelInstructionContainer"></div>
-	<ul class="panelLoginFormList">
-		<li id="panelRowUsername"><label for="panelLoginUsername">Username<span class="filedRequired">*</span></label><input type="text" id="panelLoginUsername" name="panelLoginUsername"></li>
-		<li id="panelRowEmail"><label for="panelLoginEmail">E-mail<span class="filedRequired">*</span></label><input type="text" id="panelLoginEmail" name="panelLoginEmail"></li>
-		<li id="panelRowPassword"><label id="tpPasswordLabel" for="panelLoginPassword">Password<span class="filedRequired">*</span></label><input type="password" id="panelLoginPassword" name="panelLoginPassword"></li>
-		<li id="panelRowAuto"><input type="checkbox" name="panelLoginAuto" id="tpAutoLogin"><label for="tpAutoLogin">Login automatically from this computer</label></li>
-		<li class="buttonRow"><a class="panelButton" href="#" id="tpLoginFormRegister">Register</a> or <a class="panelButton" id="tpLoginFormSubmit" href="#">Login</a></li>
-		<li id="hiddenRow" style="display:none;"></li>
-	</ul>
-	<div id="emailSendContainer">
-		<h3>Forget your password?</h3>
-		<div class="panelLowerInstructionContainer"></div>
-  		<ul class="panelEmailFormList">
-    			<li><label for="panelEmailEmail">E-mail<span class="filedRequired">*</span></label><input type="text" name="panelEmailEmail" id="panelEmailEmail"></li>
-    			<li class="buttonRow"><a class="panelButton" id="tpEmailFormSubmit" href="#">Send Password</a></li>
-  		</ul>
-  	</div>
-</form>]]></field>
-			<field name="sortorder"></field>
-			<field name="stylesfilename"></field>
-		</record>
-		<record content="Layouts" guid="{4CD6DD5B-5423-4DC0-87AE-1337127E4289}" name="Default Account Form">
-			<field name="active">True</field>
-			<field name="layout"><![CDATA[<form id="panelAccountForm">
-	<h3>My Account</h3>
-	<div class="panelInstructionContainer"></div>
-	<ul class="panelAccountFormList">
-		<li><label>First Name<span class="fieldRequired">*</span></label><input type="text" id="panelAccountFirstName" name="panelAccountFirstName"></li>
-		<li><label>Last Name<span class="fieldRequired">*</span></label><input type="text" id="panelAccountLastName" name="panelAccountLastName"></li>
-		<li><label>E-mail<span class="fieldRequired">*</span></label><input type="text" id="panelAccountEmail" name="panelAccountEmail"></li>
-		<li id="panelRowUsername"><label>Username<span class="fieldRequired">*</span></label><input type="text" id="panelAccountUsername" name="panelAccountUsername"></li>
-		<li id="panelRowPassword"><label>Password<span class="fieldRequired">*</span></label><input type="password" id="panelAccountPassword" name="panelAccountPassword"></li>
-		<li class="buttonRow"><a href="#" class="panelButton" id="logoutClick">Logout</a> or </label><a class="panelButton" id="accountSubmit" href="#">Update Account</a></li>
-	<li id="hiddenRow"></li>
-	</ul>
-</form>]]></field>
-			<field name="sortorder"></field>
-			<field name="stylesfilename"></field>
-		</record>
-		<record content="Layouts" guid="{07586B80-734C-4029-9F6A-EFD5CDB13FD5}" name="Default Registration Form">
-			<field name="active">True</field>
-			<field name="layout"><![CDATA[<form id="panelRegistrationForm">
-  <h3>My Account</h3>
-  <div class="panelInstructionContainer"></div>
-  <ul class="panelRegistrationFormList">
-    <li><label>First Name<span class="filedRequired">*</span></label><input type="text" id="panelRegistrationFirstName" name="panelRegistrationFirstName"></li>
-    <li><label>Last Name<span class="filedRequired">*</span></label><input type="text" id="panelRegistrationLastName" name="panelRegistrationLastName"></li>
-    <li><label>E-mail<span class="filedRequired">*</span></label><input type="text" id="panelRegistrationEmail" name="panelRegistrationEmail"></li>
-    <li id="panelRowUsername"><label>Username<span class="usernameRequired">*</span></label><input type="text" id="panelRegistrationUsername" name="panelRegistrationUsername"></li>
-    <li id="panelRowPassword"><label>Password<span class="passwordRequired">*</span></label><input type="password" id="panelRegistrationPassword" name="panelRegistrationPassword"></li>
-    <li class="buttonRow"><a class="panelButton" id="tpRegisterSubmit" href="#">Register Account</a></li>
-  <li id="hiddenRow"></li>
-  </ul>
-</form>]]></field>
-			<field name="sortorder"></field>
-			<field name="stylesfilename"></field>
-		</record>
-	</data>
 	<Resource name="lockclosed.png" type="www" path="toolpanel" />
 	<Resource name="lockopen.png" type="www" path="toolpanel" />
 	<Resource name="transpin.gif" type="www" path="images" />
