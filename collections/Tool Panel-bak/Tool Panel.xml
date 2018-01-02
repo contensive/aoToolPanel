@@ -1,0 +1,1736 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<Collection name="Tool Panel" guid="{374E2B8C-B29D-470B-BD1B-41CAA5BCEDCB}" system="No" updatable="Yes" blockNavigatorNode="No">
+	<HelpLink></HelpLink>
+	<Help></Help>
+	<Addon name="_onInstall" guid="{4BDF8B7D-89F5-4D63-AA1C-750998C6920D}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>No</RemoteMethod>
+		<ProcessRunOnce>Yes</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000">
+			<Code><![CDATA[function m
+call cp.site.setProperty("allowLegacyToolsPanel","0")
+end function]]></Code>
+		</Scripting>
+	</Addon>
+	<Addon name="remoteToolPanelPosition" guid="{95481BA1-028C-48B7-91F1-8ECD7B3F9E49}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>Yes</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000">
+			<Code><![CDATA[function f
+f = "top=" & cp.doc.getText( "top" )  & ", left=" & cp.doc.getText( "left" ) 
+call cp.visit.setProperty("toolPanelPositionTop", cp.doc.getText( "top" ))
+call cp.visit.setProperty("toolPanelPositionLeft", cp.doc.getText( "left" ))
+end function]]></Code>
+		</Scripting>
+	</Addon>
+	<Addon name="setUserProperty" guid="{0B5BFA85-9031-456E-A0CF-82AE0F8CF555}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>Yes</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000">
+			<Code><![CDATA[function m
+	dim name
+	dim value
+	'
+	name = cp.doc.getProperty("n")
+	value = cp.doc.getProperty("v")
+	if (name="isLockedAccountTab") Then
+		call cp.user.setProperty("isLockedAccountTab",value)
+	end if
+	if (name="tpLoginTabIsPinned") Then
+		m = m & "<div>hit on tpLoginTabIsPinned</div>"
+		call cp.user.setProperty("tpLoginTabIsPinned",value)
+	end if
+	m = m & "<div>n=[" & name & "]</div>"
+	m = m & "<div>v=[" & value & "]</div>"
+	m = m & "<div>property=[" & cp.user.getProperty("tpLoginTabIsPinned","") & "]</div>"
+	cp.utils.appendLogfile( m )
+end function]]></Code>
+		</Scripting>
+	</Addon>
+	<Addon name="Tool Panel" guid="{32839250-841F-4BE6-A15E-CC7EAAA7C2FF}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.toolPanelClass]]></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>yes</BlockEditTools>
+		<FormXML></FormXML>
+		<IncludeAddon name="JQuery UI" guid="{840B9AEF-9470-4599-BD47-7EC0C9298614}"/>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead><![CDATA[//
+// --------------------------------
+// properties
+// --------------------------------
+//
+var tpLoginTabIsPinned=false;
+var isLockedAccountTab=false;
+var isLoadedLoginPanel=false;
+var isOpenLoginPanel=false;
+var tpAbortLoginTabClose=false;
+var timerIdLoginTab=0;
+// 
+//
+// --------------------------------
+// Bind all events
+//	called from both the page and ajax content updates
+// --------------------------------
+//
+var coordinates = function(element) {
+    element = $(element);
+    var top = element.position().top;
+    var left = element.position().left;
+     jQuery('#results').text('X: ' + left + ' ' + 'Y: ' + top);
+    var queryString = 'top='+ top+ '&left='+ left;
+ cj.remote({ 'method':'remoteToolPanelPosition' , 'queryString': queryString });
+//alert(queryString);
+}
+
+
+function tpBindEvents(){
+	//
+	// bind all events from all forms
+	//
+	$(document).ready(function(){
+		//
+		//jQuery("#tpDraggable").draggable();   
+                jQuery('#tpDraggable').draggable({
+                    axis: "x"}, {
+                    //start: function() { coordinates('#tpDraggable') },
+                    stop: function() {
+                    coordinates('#tpDraggable');
+                      }
+                }); 
+                $( "#tpDraggable" ).mouseup(function() {
+                    
+                 });  
+        
+		jQuery('#panelLoginPassword').unbind('keypress').keypress( function(e){ tpLoginFormKeypress(e) });
+		jQuery('#panelLoginEmail').unbind('keypress').keypress( function(e){ tpLoginFormKeypress(e) });
+		jQuery('#panelLoginUsername').unbind('keypress').keypress( function(e){ tpLoginFormKeypress(e) });
+		jQuery('#tpTabZone').unbind('mouseenter').mouseenter( tpMouseEnterTabZone );
+		jQuery('#tpTabZone').unbind('mouseleave').mouseleave( tpMouseLeaveTabZone );
+		jQuery('#tpAccountLock').unbind('click').click( tpClickAccountTabLock );
+		jQuery('#tpAccountTab').unbind('mouseenter').mouseenter( tpMouseEnterAccountTab );
+		jQuery('#tpAccountTab').unbind('mouseleave').mouseleave( tpMouseLeaveAccountTab );
+		jQuery("#tpAccountButton").unbind('click').click( tpToggleAccountPanel );
+		jQuery('#tpLoginLock').unbind('click').click( clickLoginTabLock );
+		jQuery('#tpLoginTab').unbind('mouseenter').mouseenter( mouseEnterLoginTab );
+		jQuery('#tpLoginTab').unbind('mouseleave').mouseleave( mouseLeaveLoginTab );
+		jQuery("#tpLoginButton").unbind('click').click( tpToggleLoginPanel );
+		jQuery('#tpLoginFormSubmit').unbind('click').click( tpLoginFormSubmit );
+		jQuery('#tpEmailFormSubmit').unbind('click').click( tpEmailFormSubmit );
+		jQuery('#tpLoginFormRegister').unbind('click').click( tpRequestRegister );
+		jQuery('#accountSubmit').unbind('click').click( tpAccountSubmit );
+		jQuery('#logoutClick').unbind('click').click( tpAccountLogoutClick );
+		jQuery('#tpRegisterSubmit').unbind('click').click( tpRegisterSubmit );
+	})
+}
+//
+// --------------------------------
+// Utilities
+// --------------------------------
+//
+function tpSetSpinner(divID, message, containerHeight){
+  var divContent;
+  //
+  divContent = '<div class="spinner"><img src="/images/transpin.gif" /><p>' + message + '</p></div>';
+  //
+  jQuery('#'+divID).html(divContent);
+  jQuery('.spinner').height(containerHeight);
+}
+
+function tpGetParameterByName( name )
+{
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function tpRedirectHome(returnVal, container){
+	var testString = returnVal;
+	//
+	testString = testString.replace(/(\r\n|\n|\r)/gm,' ').replace(/(\s)/g, '');
+	//
+ 	if (testString=='') {
+		window.location = document.head.baseURI;
+	} else {
+		jQuery('#'+container).html(returnVal);
+	}
+} 
+//
+// --------------------------------
+// zone to make tabs reappear
+// --------------------------------
+//
+//
+function tpMouseEnterTabZone() {
+	tpIsWantedAccountTab=true;
+	jQuery("#tpAccountTab").slideDown("slow");
+	tpAbortLoginTabClose=true;
+	jQuery("#tpLoginTab").slideDown("slow");
+}
+//
+function tpMouseLeaveTabZone() {
+	tpMouseLeaveAccountTab();
+	mouseLeaveLoginTab();
+}
+//
+// --------------------------------
+// account tab 
+// --------------------------------
+//
+var tpIsLoadedAccountPanel=false;
+var tpIsOpenAccountPanel=false;
+var tpIsWantedAccountTab=false;
+var tpTimerIdAccountTab=0;
+//
+function tpToggleAccountPanel() {
+	if(tpIsOpenAccountPanel) {
+		tpCloseAccountPanel();
+	} else {
+		tpOpenAccountPanel();
+	}
+	return false;
+}
+function tpOpenAccountPanel() {
+	tpIsOpenAccountPanel = true;
+	if (!tpIsLoadedAccountPanel) {
+		setAccountWait();
+		cj.ajax.addonCallback('toolPanelAccountForm','',function(content,ignore){
+			tpClearAccountWait();
+			jQuery('#tpAccountPanel').html( content );
+			tpOpenAccountPanelReady();
+			tpIsLoadedAccountPanel = true;
+		});
+	} else {
+		tpOpenAccountPanelReady();
+	}
+}
+function tpOpenAccountPanelReady() {
+	closeLoginPanel();
+	jQuery("#tpAccountTab").addClass("tpOpen");
+	jQuery("#tpAccountPanel").slideDown("slow");
+}
+function setAccountWait() {
+	jQuery('#tpAccountWait').css('visibility','visible');
+}
+function tpClearAccountWait() {
+	jQuery('#tpAccountWait').css('visibility','hidden');
+}
+function tpCloseAccountPanel () {
+	jQuery("#tpAccountPanel").slideUp("slow");
+	jQuery("#tpAccountTab").removeClass("tpOpen");
+	tpIsOpenAccountPanel=false;
+}
+function tpClickAccountTabLock() {
+	if (isLockedAccountTab) {
+		jQuery('#tpAccountLock').html('<img src="/toolPanel/lockOpen.png" height="10" width="10">');
+		cj.ajax.addon('setUserProperty','n=isLockedAccountTab&v=0');
+		isLockedAccountTab=false;
+	} else {
+		jQuery('#tpAccountLock').html('<img src="/toolPanel/lockClosed.png" height="10" width="10">');
+		cj.ajax.addon('setUserProperty','n=isLockedAccountTab&v=1');
+		isLockedAccountTab=true;
+	}
+	
+}
+function tpMouseEnterAccountTab() {
+	if (!isLockedAccountTab)
+	{
+		if(tpTimerIdAccountTab!=0)
+		{
+			clearTimeout( tpTimerIdAccountTab );
+			tpTimerIdAccountTab=0;
+		}
+		tpIsWantedAccountTab=true;
+	}
+}
+function tpMouseLeaveAccountTab() {
+	if ((!isLockedAccountTab) & (!tpIsOpenAccountPanel))
+	{
+		if(tpTimerIdAccountTab!=0)
+		{
+			clearTimeout( tpTimerIdAccountTab );
+			tpTimerIdAccountTab=0;
+		}
+		tpTimerIdAccountTab = setTimeout("accountTabClose()",2000);
+		tpIsWantedAccountTab=false;
+	}
+}
+function accountTabClose() {
+	if(!tpIsWantedAccountTab)
+	{
+		jQuery("#tpAccountTab").slideUp("slow");
+	} else {
+		tpIsWantedAccountTab = tpIsWantedAccountTab;
+	}
+}
+//
+// --------------------------------
+// login tab
+// --------------------------------
+//
+function tpToggleLoginPanel() {
+	if(isOpenLoginPanel) {
+		closeLoginPanel();
+	} else {
+		tpOpenLoginPanel();
+	}
+	return false;
+};
+function tpOpenLoginPanel() {
+	isOpenLoginPanel = true;
+	if (!isLoadedLoginPanel) {
+		setLoginWait();
+		cj.ajax.addonCallback('toolPanelLoginForm','',function(content,ignore){ tpStoreAndOpenLoginPanel( content ) });
+	} else {
+		tpOpenLoginPanel_contentReady();
+	}
+}
+function tpStoreAndOpenLoginPanel( content ) {
+	clearLoginWait();
+	jQuery('#tpLoginPanel').html( content );
+	tpOpenLoginPanel_contentReady();
+	isLoadedLoginPanel = true;
+}
+function tpOpenLoginPanel_contentReady() {
+	tpCloseAccountPanel();
+	jQuery("#tpLoginTab").addClass("tpOpen");
+	jQuery("#tpLoginPanel").slideDown("slow");
+}
+function setLoginWait() {
+	jQuery('#tpLoginWait').css('visibility','visible');
+}
+function clearLoginWait() {
+	jQuery('#tpLoginWait').css('visibility','hidden');
+}
+function closeLoginPanel () {
+	jQuery("#tpLoginPanel").slideUp("slow");
+	jQuery("#tpLoginTab").removeClass("tpOpen");
+	isOpenLoginPanel=false;
+}
+function clickLoginTabLock() {
+	if (tpLoginTabIsPinned) {
+		jQuery('#tpLoginLock').html('<img src="/toolPanel/lockOpen.png" height="10" width="10">');
+		cj.ajax.addon('setUserProperty','n=tpLoginTabIsPinned&v=0');
+		tpLoginTabIsPinned=false;
+	} else {
+		jQuery('#tpLoginLock').html('<img src="/toolPanel/lockClosed.png" height="10" width="10">');
+		cj.ajax.addon('setUserProperty','n=tpLoginTabIsPinned&v=1');
+		tpLoginTabIsPinned=true;
+	}
+	
+}
+function mouseEnterLoginTab() {
+	if (!tpLoginTabIsPinned)
+	{
+		if(timerIdLoginTab!=0)
+		{
+			clearTimeout( timerIdLoginTab );
+			timerIdLoginTab=0;
+		}
+		tpAbortLoginTabClose=true;
+	}
+}
+function mouseLeaveLoginTab() {
+	if ((!tpLoginTabIsPinned) & (!isOpenLoginPanel))
+	{
+		if(timerIdLoginTab!=0)
+		{
+			clearTimeout( timerIdLoginTab );
+			timerIdLoginTab=0;
+		}
+		timerIdLoginTab = setTimeout("LoginTabClose()",2000);
+		tpAbortLoginTabClose=false;
+	}
+}
+function LoginTabClose() {
+	if(!tpAbortLoginTabClose)
+	{
+		jQuery("#tpLoginTab").slideUp("slow");
+	} else {
+		tpAbortLoginTabClose = tpAbortLoginTabClose;
+	}
+}
+function tpLoginFormSubmit(){
+	var varString;
+	if (!validateLoginForm()) {
+		return false;
+	} else {
+		//
+		varString = 'panelLoginUsername='+jQuery('#panelLoginUsername').val();
+		varString += '&panelLoginPassword='+jQuery('#panelLoginPassword').val();
+		varString += '&panelLoginEmail='+jQuery('#panelLoginEmail').val();
+		varString += '&panelLoginAuto='+jQuery('#panelLoginAuto').val();
+		//
+		cj.ajax.addonCallback('toolPanelLoginFormHandler', varString, tpRedirectHome, 'panelFormContainer');
+		//
+		tpSetSpinner('panelFormContainer', 'Authenticating Account....', jQuery('#panelFormContainer').height());
+		return false;
+	}
+}
+function tpLoginFormKeypress(e){
+	if(e.which == 13){
+		tpLoginFormSubmit();
+		e.preventDefault();
+		return false;
+	}
+}
+//
+// --------------------------------
+// Account Form
+// --------------------------------
+//
+function validateAccountForm() {
+		var errFlag;
+		var errMsg;
+		//
+		var firstName = jQuery('#panelAccountFirstName').val();
+		var lastName = jQuery('#panelAccountLastName').val();
+		var email = jQuery('#panelAccountEmail').val();
+		//
+		if (firstName==null || firstName=='')
+		{
+			jQuery('#panelAccountFirstName').css('background-color', '#dddddd');
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelAccountFirstName').css('background-color', '#ffffff');
+		};
+		if (lastName==null || lastName=='')
+		{
+			jQuery('#panelAccountLastName').css('background-color', '#dddddd');
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelAccountLastName').css('background-color', '#ffffff');
+		};
+		//
+		if (email==null || email=='')
+		{
+			jQuery('#panelAccountEmail').css('background-color', '#dddddd');
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelAccountEmail').css('background-color', '#ffffff');
+		};
+		//
+		if (errFlag==1) {
+			if (errMsg=='' || errMsg==null || errMsg=='undefined')
+			{
+				errMsg = 'Please complete all required fields in order to continue.';
+			}
+			alert(errMsg);
+			return false;
+		}
+		else
+		{
+			return true;
+		};
+};
+function tpAccountSubmit(){
+	if (!validateAccountForm()) {
+		return false;
+	}
+	var varString;
+	varString = 'panelAccountFirstName=' + jQuery('#panelAccountFirstName').val();
+	varString += '&panelAccountLastName=' + jQuery('#panelAccountLastName').val();
+	varString += '&panelAccountEmail=' + jQuery('#panelAccountEmail').val();
+	varString += '&panelAccountUsername=' + jQuery('#panelAccountUsername').val();
+	varString += '&panelAccountPassword=' + jQuery('#panelAccountPassword').val();
+	//
+	cj.ajax.addon('toolPanelAccountFormHandler', varString, '', 'panelFormContainer', '','');
+	tpSetSpinner('panelFormContainer', 'Updating Account....', jQuery('#panelFormContainer').height());
+	return false;
+}
+function tpAccountLogoutClick(){
+	cj.ajax.addonCallback('toolPanelLogoutHandler', '', tpRedirectHome, 'panelFormContainer');
+	tpSetSpinner('panelFormContainer', 'Logging Out....', jQuery('#panelFormContainer').height());
+	return false;
+}
+
+//
+// --------------------------------
+// Login Form
+// --------------------------------
+//
+function validateLoginForm() {
+		var errFlag;
+		var errMsg;
+		//
+		var username = jQuery('#panelLoginUsername').val();
+		var password = jQuery('#panelLoginPassword').val();
+		var email = jQuery('#panelLoginEmail').val();
+		//
+		// fields present
+		//
+		var usernamePresent = jQuery('#reqUsername').val();
+		var passwordPresent = jQuery('#reqPassword').val();
+		var emailPresent = jQuery('#reqEmail').val();
+		//
+		if (passwordPresent==1 && (password==null || password==''))
+		{
+			jQuery('#panelLoginPassword').css('background-color', '#f0f890').focus();
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelLoginPassword').css('background-color', '#ffffff');
+		}
+		//
+		if (usernamePresent==1 && (username==null || username==''))
+		{
+			jQuery('#panelLoginUsername').css('background-color', '#f0f890').focus();
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelLoginUsername').css('background-color', '#ffffff');
+		}
+		//
+		if (emailPresent==1 && (email==null || email==''))
+		{
+			jQuery('#panelLoginEmail').css('background-color', '#f0f890').focus();
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelLoginEmail').css('background-color', '#ffffff');
+		};
+		//
+		if (errFlag==1) {
+			if (errMsg=='' || errMsg==null || errMsg=='undefined')
+			{
+				errMsg = 'Please complete all fields in order to login.';
+			}
+			alert(errMsg);
+			return false;
+		}
+		else
+		{
+			return true;
+		};
+};
+//
+// --------------------------------
+// Send Password Form
+// --------------------------------
+//
+function validateEmailForm() {
+		var errFlag;
+		var errMsg;
+		//
+		var email = jQuery('#panelEmailEmail').val();
+		//
+		if (email==null || email=='')
+		{
+			jQuery('#panelEmailEmail').css('background-color', '#f0f890');
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelEmailEmail').css('background-color', '#ffffff');
+		};
+		//
+		if (errFlag==1) {
+			if (errMsg=='' || errMsg==null || errMsg=='undefined')
+			{
+				errMsg = 'Please enter your email address in order to retrieve your login information.';
+			}
+			alert(errMsg);
+			return false;
+		}
+		else
+		{
+			return true;
+		};
+};
+function tpEmailFormSubmit() {
+	if (!validateEmailForm()) {
+		return false;
+	} else {
+		cj.ajax.addon('toolPanelLoginFormHandler', '', 'panelLoginForm', 'panelFormContainer', '', '');
+		tpSetSpinner('panelFormContainer', 'Gathering Account Information....', jQuery('#panelFormContainer').height());
+	}
+}
+//
+// --------------------------------
+// Registration Form
+// --------------------------------
+//
+function tpValidateRegisterForm() {
+		var errFlag;
+		var errMsg;
+		//
+		var usernamePresent = jQuery('#reqUsername').val();
+		var passwordPresent = jQuery('#reqPassword').val();
+		//
+		var firstName = jQuery('#panelRegistrationFirstName').val();
+		var lastName = jQuery('#panelRegistrationLastName').val();
+		var email = jQuery('#panelRegistrationEmail').val();
+		var username = jQuery('#panelRegistrationUsername').val();
+		var password = jQuery('#panelRegistrationPassword').val();
+		//
+		if (firstName==null || firstName=='')
+		{
+			jQuery('#panelRegistrationFirstName').css('background-color', '#f0f890');
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelRegistrationFirstName').css('background-color', '#ffffff');
+		};
+		if (lastName==null || lastName=='')
+		{
+			jQuery('#panelRegistrationLastName').css('background-color', '#f0f890');
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelRegistrationLastName').css('background-color', '#ffffff');
+		};
+		//
+		if (email==null || email=='')
+		{
+			jQuery('#panelRegistrationEmail').css('background-color', '#f0f890');
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelRegistrationEmail').css('background-color', '#ffffff');
+		};
+		//
+		if (email==null || email=='')
+		{
+			jQuery('#panelRegistrationEmail').css('background-color', '#f0f890');
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelRegistrationEmail').css('background-color', '#ffffff');
+		};
+		//
+		if (usernamePresent==1 && (username==null || username==''))
+		{
+			jQuery('#panelRegistrationUsername').css('background-color', '#f0f890');
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelRegistrationUsername').css('background-color', '#ffffff');
+		};
+		if (passwordPresent==1 && (password==null || password==''))
+		{
+			jQuery('#panelRegistrationPassword').css('background-color', '#f0f890');
+			errFlag = 1;
+		}
+		else
+		{
+			jQuery('#panelRegistrationPassword').css('background-color', '#ffffff');
+		};
+		//
+		if (errFlag==1) {
+			if (errMsg=='' || errMsg==null || errMsg=='undefined')
+			{
+				errMsg = 'Please complete all required fields in order to continue.';
+			}
+			alert(errMsg);
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+}
+
+
+function tpRegisterSubmit(){
+	if (!tpValidateRegisterForm()) {
+		return false;
+	}
+	var varString;
+	varString = 'panelRegistrationFirstName=' + jQuery('#panelRegistrationFirstName').val();
+	varString += '&panelRegistrationLastName=' + jQuery('#panelRegistrationLastName').val();
+	varString += '&panelRegistrationEmail=' + jQuery('#panelRegistrationEmail').val();
+	varString += '&panelRegistrationUsername=' + jQuery('#panelRegistrationUsername').val();
+	varString += '&panelRegistrationPassword=' + jQuery('#panelRegistrationPassword').val();
+	//
+	cj.ajax.addonCallback('toolPanelRegistrationFormHandler', varString, tpRedirectHome, 'panelFormContainer');
+	//cj.ajax.addon('toolPanelRegistrationFormHandler', varString, '', 'panelFormContainer', '','');
+	tpSetSpinner('panelFormContainer', 'Creating Account...', jQuery('#panelFormContainer').height());
+	return false;
+}
+function tpRequestRegister(){
+	cj.ajax.addon('toolPanelDefaultRegistrationForm','', '', 'panelFormContainer', '', '');
+	tpSetSpinner('panelFormContainer', '', jQuery('#panelFormContainer').height());
+	return false;
+}
+
+  $(function() {
+    $( "#tpDraggable" ).draggable({ axis: "y" });
+    $( "#tpDraggable" ).draggable({ axis: "x" });
+ 
+    $( "#tpDraggable" ).draggable({ containment: "#containment-wrapper", scroll: false });
+    $( "#draggable5" ).draggable({ containment: "parent" });
+  });
+
+
+
+//
+// --------------------------------
+// initialize
+// --------------------------------
+//
+tpBindEvents();
+jQuery( tpMouseLeaveAccountTab() );
+jQuery( mouseLeaveLoginTab() );
+]]></JavascriptInHead>
+		<JavascriptBodyEnd></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>Yes</OnBodyEnd>
+		<RemoteMethod>No</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles><![CDATA[/*
+* --------------------------------------------
+* toolPanel
+* --------------------------------------------
+*/
+#toolPanel 
+{
+    background-color: transparent;
+}
+#toolPanel * 
+{
+    font-family: sans-serif,verdana,arial;
+    padding:0;
+    margin:0;
+}
+#toolPanel
+,#toolPanel p 
+,#toolPanel div
+,#toolPanel li
+{
+    font-size: 12px;
+    line-height: 12px;
+}
+#toolPanel li
+,#toolPanel ul
+{
+	list-style-type: none;
+	list-style-image: none;
+}
+/*
+* --------------------------------------------
+* Pulldown Tab Zone
+* --------------------------------------------
+*/
+
+#toolPanel #tpTabZone 
+{
+	position: absolute;
+	height: 5px;
+	width: 100%;
+	z-index: 9999;
+}
+/*
+* --------------------------------------------
+* Pulldown Panels
+* --------------------------------------------
+*/
+
+#toolPanel .tpPanels 
+{
+	position: relative;
+	z-index: 9999;
+}
+#toolPanel .tpPanels .tpPanelCon 
+{
+	background-color: #eee;
+	border-bottom: 2px solid #bbb;
+	margin: 0;
+	padding:0;
+	display:none;
+}
+#toolPanel .tpPanels .tpPanelCon .tpPanelInner
+{
+	margin: 0;
+	padding:10px;
+}
+
+/*
+* --------------------------------------------
+* Account Pulldown
+* --------------------------------------------
+*/
+
+#toolPanel #tpAccountPanel 
+{
+	/* height: 200px; */
+	position: relative;
+	z-index: 1;
+}
+
+/*
+* --------------------------------------------
+* Login Pulldown
+* --------------------------------------------
+*/
+
+#toolPanel #tpLoginPanel 
+{
+	/* height: 200px; */
+	position: relative;
+	z-index: 1;
+}
+
+/*
+* --------------------------------------------
+* hanging tabs
+* --------------------------------------------
+*/
+#toolPanel .tpTabs 
+{
+	background-color: transparent;
+	right: 0;
+	position: absolute;
+	width: 200px;
+	z-index: 9997;
+}
+
+#toolPanel .tpTabs > ul 
+{
+	background-color: #d8d8d8;
+	background: -moz-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -moz-linear-gradient(to bottom, #f7f7f7, #cecfcc);
+	background: -ms-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -o-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -webkit-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: linear-gradient(top, #f7f7f7, #cecfcc);
+	border-radius: 0 0 10px 10px;
+	box-shadow: 1px 1px 3px #666666;
+	float: right;
+	list-style-type: none;
+	margin: 0 5px 0 0;
+	padding: 0 20px;
+	border-top: 0;
+}
+#toolPanel .tpTabs > ul li
+{
+	list-style-type: none;
+}
+#toolPanel .tpTabs > ul.tpOpen 
+{
+	background-color: #eee;
+}
+#toolPanel .tpTabs > ul li.tpButton 
+{
+	float: left;
+}
+#toolPanel li.tpButton a 
+{
+	color: #444;
+}
+#toolPanel  ul.tpOpen li.tpButton a 
+{
+	color: #222;
+}
+#toolPanel .tpTabs > ul li.tpLock 
+{
+    float: left;
+    height: 10px;
+    margin: 4px 0;
+    padding: 4px 0;
+    cursor: pointer;
+}
+#toolPanel .tpTabs > ul li.tpLock 
+{
+    float: left;
+    height: 10px;
+    margin: 4px 0;
+    padding: 4px 0;
+    cursor: pointer;
+}
+/*
+* --------------------------------------------
+* fixed tabs
+* --------------------------------------------
+*/
+#toolPanel #containment-wrapper 
+{
+    margin-left: -254px;
+    width: 100%;
+}
+#toolPanel #tpDraggable 
+{
+	position: absolute;
+}
+#toolPanel .tpFixedTabs > ul
+{
+	background-color: transparent;
+	left: 50%;
+	margin: 0 0 0 -230px;
+	position: relative;
+	/* width: 460px; */
+	top: 0;
+	z-index: 9998;
+}
+#toolPanel .tpFixedTabs > ul 
+{
+	background-color: #d8d8d8;
+	background: -moz-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -moz-linear-gradient(to bottom, #f7f7f7, #cecfcc);
+	background: -ms-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -o-linear-gradient(top, #f7f7f7, #cecfcc);
+	background: -webkit-linear-gradient(top, #f7f7f7, #cecfcc);
+	border-radius: 0 0 10px 10px;
+	box-shadow: 1px 1px 3px #666666;
+	display: table;
+	list-style-type: none;
+	margin: 0 auto;
+	padding: 0 20px;
+	border-top: 0;
+}
+#toolPanel .tpFixedTabs > ul li
+{
+	list-style-type: none;
+}
+#toolPanel .tpFixedTabs > ul.tpOpen 
+{
+	background-color: #eee;
+}
+#toolPanel .tpFixedTabs > ul li.tpButton 
+{
+	float: left;
+}
+#toolPanel .tpFixedTabs > ul li.tpEditLock 
+{
+    float: left;
+    height: 10px;
+    margin: 7px 0;
+    padding: 7px 0 0 6px;
+    cursor: pointer;
+}
+/*
+* --------------------------------------------
+* Editor Tab
+* --------------------------------------------
+*/
+#toolPanel ul#tpEditTab li.tpEditButton 
+{
+	float: left;
+}
+#toolPanel ul#tpEditTab li.tpEditButton a {
+	display: block;
+	background-color: #e8e8e8;
+	background: -moz-linear-gradient(top, #f8f8f8, #e0e0e0);
+	background: -moz-linear-gradient(to bottom, #f8f8f8, #e0e0e0);
+	background: -ms-linear-gradient(top, #f8f8f8, #e0e0e0);
+	background: -o-linear-gradient(top, #f8f8f8, #e0e0e0);
+	background: -webkit-linear-gradient(top, #f8f8f8, #e0e0e0);
+	margin: 6px 2px 4px 2px;
+	padding: 6px;
+	border: 1px solid #ddd;
+	border-radius: 3px 3px 3px 3px;
+	text-decoration: none;
+	color: #555;
+	text-transform: uppercase;
+	/*
+	*/
+}
+#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonDown {
+	background-color: #e0e0e0;
+	background: -moz-linear-gradient(top, #d8d8d8, #f8f8f8);
+	background: -moz-linear-gradient(to bottom, #d8d8d8, #f8f8f8);
+	background: -ms-linear-gradient(top, #d8d8d8, #f8f8f8);
+	background: -o-linear-gradient(top, #d8d8d8, #f8f8f8);
+	background: -webkit-linear-gradient(top, #d8d8d8, #f8f8f8);
+	color: #333;
+	box-shadow: 1px 1px 3px #888 inset;
+	border: 1px solid #ccc;
+	padding: 7px 6px 5px 6px;
+	/*
+	*/
+}
+#toolPanel ul#tpEditTab li.tpEditButton a {
+	border: 1px solid #b8b8b8;
+}
+#toolPanel ul#tpEditTab li.tpEditButton a:hover {
+	border: 1px solid #444;
+}
+#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonDown:hover {
+	border: 1px solid #444;
+}
+#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonUp:hover {
+	border: 1px solid #444;
+}
+/*
+* --------------------------------------------
+* Account Tab
+* --------------------------------------------
+*/
+
+#toolPanel ul#tpAccountTab li.tpButton a {
+    border-radius: 3px 3px 3px 3px;
+    display: block;
+    margin: 4px;
+    padding: 2px;
+    text-decoration: none;
+	font-weight: bold;
+}
+#toolPanel #tpAccountWait {
+	visibility: hidden;
+}
+#toolPanel #tpAccountWait img {
+	visibility: inherit;
+}
+/*
+* --------------------------------------------
+* Login Tab
+* --------------------------------------------
+*/
+
+#toolPanel ul#tpLoginTab li.tpButton a {
+    border-radius: 3px 3px 3px 3px;
+    display: block;
+    margin: 4px;
+    padding: 2px;
+    text-decoration: none;
+	font-weight: bold;
+}
+#toolPanel #tpLoginWait {
+	visibility: hidden;
+}
+#toolPanel #tpLoginWait img {
+	visibility: inherit;
+}
+/*
+* --------------------------------------------
+* Footer
+* --------------------------------------------
+*/
+#toolPanelFooter
+,#toolPanelFooter p 
+,#toolPanelFooter div
+,#toolPanelFooter li
+{
+    font-family: verdana,arial,sans-serif;
+    font-size: 11px;
+    line-height: 11px;
+}
+
+#toolPanelFooter {
+	background-color: #e0e0e0;
+	border-top: 1px solid #f8f8f8;
+	border-bottom: 1px solid #aaa;
+}
+#toolPanelFooter .tpInner {
+	padding: 5px;
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #f8f8f8;
+}
+
+#toolPanelFooter .tpInner span {
+	padding: 0 10px 0 10px;
+}
+
+/*
+* --------------------------------------------
+* general form
+* --------------------------------------------
+*/
+
+#toolPanel .fieldRequired { margin: 0 0 0 5px; font-weight: bold; color: #903020; }
+
+#toolPanel #panelFormContainer { margin: 0 auto; padding: 20px 0; width: 400px; }
+#toolPanel #panelFormContainer li  { padding: 5px; text-align: center; }
+#toolPanel #panelFormContainer li.buttonRow { text-align: right; padding: 5px 15px 5px 5px;}
+#toolPanel #panelFormContainer li label { text-align: left; display: inline-block; width: 100px; }
+#toolPanel #panelFormContainer li input[type=text]  { width: 250px; border: 1px solid #888888; padding: 5px; }
+#toolPanel #panelFormContainer li input[type=password]  { width: 250px; border: 1px solid #888888; padding: 5px; }
+
+#toolPanel #panelFormContainer h3 { margin: 3px 0 5px 0; }
+
+#toolPanel .panelInstructionContainer { padding: 10px 0 10px 0; }
+#toolPanel .panelLowerInstructionContainer { padding: 10px 0 10px 0; }
+
+#toolPanel #panelFormContainer li input[type='checkbox']  { width: 100px; }
+
+#toolPanel #panelFormContainer li label.callout { text-align: right; padding: 0 10px 0 0; }
+
+#toolPanel li#hiddenRow { display:none; }
+/*
+* --------------------------------------------
+* Account Form
+* --------------------------------------------
+*/
+
+#toolPanel .panelAccountFormList { list-style: none outside none; margin: 0; padding: 0; }
+/*
+* --------------------------------------------
+* Login Form
+* --------------------------------------------
+*/
+
+#toolPanel .panelLoginFormList { list-style: none outside none; margin: 0; padding: 0; }
+
+/*
+* --------------------------------------------
+* email send Form
+* --------------------------------------------
+*/
+
+#toolPanel .panelEmailFormList { list-style: none outside none; margin: 0; padding: 0; }
+/*
+* --------------------------------------------
+* Registration
+* --------------------------------------------
+*/
+
+.panelRegistrationFormList { list-style: none outside none; margin: 0; padding: 0; }
+
+/*
+* --------------------------------------------
+* buttons
+* --------------------------------------------
+*/
+
+#toolPanel a.panelButton
+,#toolPanel a.panelButton:visited {
+    background-color: #888888;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px 3px 3px 3px;
+    color: white;
+    display: block;
+    font-weight: bold;
+    margin: 7px 3px;
+    padding: 8px;
+    text-decoration: none;
+	display: inline-block;
+}
+
+/*
+* --------------------------------------------
+* spinner
+* --------------------------------------------
+*/
+
+#toolPanel div.spinner {margin: auto 0; padding: 10px 0 0 0; text-align:center;}
+#toolPanel div.spinner p{text-align:center;}
+#toolPanel div.spinner img{text-align:center;}
+#toolPanel div.spinner p img{text-align:center;}
+		
+]]></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000">
+			<Code><![CDATA[function f
+dim left
+left =  cp.visit.getinteger("toolPanelPositionLeft")
+left = left & "px"
+f = "<style>#tpDraggable {left: " & left & ";position: fixed;}</style>"
+end function]]></Code>
+		</Scripting>
+	</Addon>
+	<Addon name="Tool Panel Settings" guid="{14FE7079-021C-4D21-8382-376C9C3E68BC}" type="Setting">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>Yes</BlockEditTools>
+		<FormXML><![CDATA[<Form>
+		<Description>Settings that change features/characteristics of the Tool Panel.</Description>
+		<Help></Help>
+		<HelpLink>http://www.contensive.com</HelpLink>
+		<Tab name="Tool Panel Tabs" heading="Login/Account" description="Settings and Features">
+			<SiteProperty caption="Show the Login Tab" name="toolPanelShowLoginTab" ReadOnly="0" Type="Boolean" Description="When checked, displays the Login tab at the top of every page.">False</SiteProperty>
+			<SiteProperty caption="Pin New User Login Tab" name="toolPanelPinLoginTab" ReadOnly="0" Type="Boolean" Description="When checked, the state of the Login tab for new users will not auto-hide when not in use and stay locked in the open position.">True</SiteProperty>
+			<SiteProperty caption="Show the Account Tab" name="toolPanelShowAccountTab" ReadOnly="0" Type="Boolean" Description="When checked, displays the Account tab at the top of every page.">False</SiteProperty>
+			<SiteProperty caption="Pin New User Account Tab" name="toolPanelPinAccountTab" ReadOnly="0" Type="Boolean" Description="When checked, the state of the Account tab will not auto-hide when not in use and stay locked in the open position.">True</SiteProperty>
+		</Tab>
+</Form>]]></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>Yes</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>No</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
+	</Addon>
+	<Addon name="toolPanelAccountForm" guid="{294B5C1C-B172-43F2-B787-DEFF86B16FE2}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.panelAccountFormClass]]></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>Yes</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
+	</Addon>
+	<Addon name="toolPanelAccountFormHandler" guid="{9C09E13E-943B-416F-A7F7-5517160437F4}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultAccountFormHandlerClass]]></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd><![CDATA[tpBindEvents();]]></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>Yes</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
+	</Addon>
+	<Addon name="toolPanelDefaultAccountForm" guid="{7A057715-5CDD-4D9F-A12A-5CCB61F93974}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultAccountFormClass]]></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd><![CDATA[tpBindEvents();]]></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>Yes</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
+	</Addon>
+	<Addon name="toolPanelDefaultLoginForm" guid="{37B7EDB3-7BE0-4E89-8012-16F0CDEED218}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultLoginFormClass]]></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd><![CDATA[tpBindEvents();]]></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>Yes</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
+	</Addon>
+	<Addon name="toolPanelDefaultRegistrationForm" guid="{E31F7A5B-FE69-4CF5-BD16-7F368192D956}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultRegistrationFormClass]]></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd><![CDATA[tpBindEvents();]]></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>Yes</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
+	</Addon>
+	<Addon name="toolPanelLoginForm" guid="{72C78E15-BF5F-47A1-AE0A-879AEFF0C08A}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.panelLoginFormClass]]></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd><![CDATA[tpBindEvents();]]></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>Yes</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
+	</Addon>
+	<Addon name="toolPanelLoginFormHandler" guid="{AD772459-D19B-4C8B-95CE-7E291FDF621C}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultLoginFormHandlerClass]]></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd><![CDATA[tpBindEvents();]]></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>Yes</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
+	</Addon>
+	<Addon name="toolPanelLogoutHandler" guid="{16FE5AA9-2CAE-4AF3-8AE7-D0A3D5EC39FE}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd><![CDATA[tpBindEvents();]]></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>Yes</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="VBScript" EntryPoint="getContent" Timeout="5000">
+			<Code><![CDATA[function getContent()
+	call cp.User.Logout()
+end function]]></Code>
+		</Scripting>
+	</Addon>
+	<Addon name="toolPanelRegistrationFormHandler" guid="{010B48C0-9854-4DD5-8291-1F366CC1F30F}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultRegistrationFormHandlerClass]]></DotNetClass>
+		<ArgumentList></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>No</Content>
+		<Template>No</Template>
+		<Email>No</Email>
+		<Admin>No</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>Yes</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
+	</Addon>
+	<data>
+		<record content="Layouts" guid="{9E3751C0-EDE1-42EE-96BD-25291465BF14}" name="Tool Panel - Top">
+			<field name="ACTIVE">True</field>
+			<field name="SORTORDER"></field>
+			<field name="Layout"><![CDATA[<div class="tpPanels">
+	<div id="tpAccountPanel" class="tpPanelCon">
+		<div style="width:100%; height:200px;">&nbsp;
+			<img src="/cclib/images/ajax-loader-big.gif" width="32" height="32" style="display:block;width:32px;height:32px;margin:auto;">
+		</div>
+	</div>
+	<div id="tpLoginPanel" class="tpPanelCon">
+		<div class="tpPanelInner">
+			<p>This is the login panel</p>
+		</div>
+	</div>
+</div>
+<div id="tpTabZone">
+</div>
+<div class="tpTabs">
+	<ul id="tpAccountTab">
+		<li id="tpAccountWait" class="tpLock"><img src="/cclib/images/ajax-loader-small.gif" width="10" height="10"></li>
+		<li id="tpAccount" class="tpButton"><a id="tpAccountButton" href="#">Account</a></li>
+		<li id="tpAccountLock" class="tpLock"><img src="/toolPanel/lockOpen.png" width="10" height="10"></li>
+	</ul>
+	<ul id="tpLoginTab">
+		<li id="tpLoginWait" class="tpLock"><img src="/cclib/images/ajax-loader-small.gif" width="10" height="10"></li>
+		<li id="tpLogin" class="tpButton"><a id="tpLoginButton" href="#">Login/Register</a></li>
+		<li id="tpLoginLock" class="tpLock"><img src="/toolPanel/lockOpen.png" width="10" height="10"></li>
+	</ul>
+</div>
+<div id="containment-wrapper">
+	<div id="tpDraggable" class="tpFixedTabs">
+		<ul id="tpEditTab">
+			<li id="tpEditTabQuick" class="tpEditButton"><a href="#">Quick Edit</a></li>
+			<li id="tpEditTabEdit" class="tpEditButton"><a href="#">Edit</a></li>
+			<li id="tpEditTabAdv" class="tpEditButton"><a href="#">Advanced Edit</a></li>
+			<li id="tpEditTabPreview" class="tpEditButton"><a href="#">Preview</a></li>
+			<li id="tpEditTabDebug" class="tpEditButton"><a href="#">Debug</a></li>
+			<li id="tpEditTabAdmin" class="tpEditButton "><a href="/admin" class="tpButtonUp">Admin</a></li>
+			<li id="tpEditLock" class="tpEditLock"><img src="/toolPanel/lockOpen.png" width="10" height="10"></li>
+		</ul>
+	</div>
+</div>
+<!--<div id="results"></div>-->]]></field>
+			<field name="StylesFilename"></field>
+		</record>
+		<record content="Layouts" guid="{6DAFED78-A4F2-4DB9-A814-9D29AE0721F9}" name="Default Login Form">
+			<field name="ACTIVE">True</field>
+			<field name="SORTORDER"></field>
+			<field name="Layout"><![CDATA[<form id="panelLoginForm">
+	<h3>Login to your account</h3>
+	<div class="panelInstructionContainer"></div>
+	<ul class="panelLoginFormList">
+		<li id="panelRowUsername"><label for="panelLoginUsername">Username<span class="filedRequired">*</span></label><input type="text" id="panelLoginUsername" name="panelLoginUsername"></li>
+		<li id="panelRowEmail"><label for="panelLoginEmail">E-mail<span class="filedRequired">*</span></label><input type="text" id="panelLoginEmail" name="panelLoginEmail"></li>
+		<li id="panelRowPassword"><label id="tpPasswordLabel" for="panelLoginPassword">Password<span class="filedRequired">*</span></label><input type="password" id="panelLoginPassword" name="panelLoginPassword"></li>
+		<li id="panelRowAuto"><input type="checkbox" name="panelLoginAuto" id="tpAutoLogin"><label for="tpAutoLogin">Login automatically from this computer</label></li>
+		<li class="buttonRow"><a class="panelButton" href="#" id="tpLoginFormRegister">Register</a> or <a class="panelButton" id="tpLoginFormSubmit" href="#">Login</a></li>
+		<li id="hiddenRow" style="display:none;"></li>
+	</ul>
+	<div id="emailSendContainer">
+		<h3>Forget your password?</h3>
+		<div class="panelLowerInstructionContainer"></div>
+  		<ul class="panelEmailFormList">
+    			<li><label for="panelEmailEmail">E-mail<span class="filedRequired">*</span></label><input type="text" name="panelEmailEmail" id="panelEmailEmail"></li>
+    			<li class="buttonRow"><a class="panelButton" id="tpEmailFormSubmit" href="#">Send Password</a></li>
+  		</ul>
+  	</div>
+</form>]]></field>
+			<field name="StylesFilename"></field>
+		</record>
+		<record content="Layouts" guid="{4CD6DD5B-5423-4DC0-87AE-1337127E4289}" name="Default Account Form">
+			<field name="ACTIVE">True</field>
+			<field name="SORTORDER"></field>
+			<field name="Layout"><![CDATA[<form id="panelAccountForm">
+	<h3>My Account</h3>
+	<div class="panelInstructionContainer"></div>
+	<ul class="panelAccountFormList">
+		<li><label>First Name<span class="fieldRequired">*</span></label><input type="text" id="panelAccountFirstName" name="panelAccountFirstName"></li>
+		<li><label>Last Name<span class="fieldRequired">*</span></label><input type="text" id="panelAccountLastName" name="panelAccountLastName"></li>
+		<li><label>E-mail<span class="fieldRequired">*</span></label><input type="text" id="panelAccountEmail" name="panelAccountEmail"></li>
+		<li id="panelRowUsername"><label>Username<span class="fieldRequired">*</span></label><input type="text" id="panelAccountUsername" name="panelAccountUsername"></li>
+		<li id="panelRowPassword"><label>Password<span class="fieldRequired">*</span></label><input type="password" id="panelAccountPassword" name="panelAccountPassword"></li>
+		<li class="buttonRow"><a href="#" class="panelButton" id="logoutClick">Logout</a> or </label><a class="panelButton" id="accountSubmit" href="#">Update Account</a></li>
+	<li id="hiddenRow"></li>
+	</ul>
+</form>]]></field>
+			<field name="StylesFilename"></field>
+		</record>
+		<record content="Layouts" guid="{07586B80-734C-4029-9F6A-EFD5CDB13FD5}" name="Default Registration Form">
+			<field name="ACTIVE">True</field>
+			<field name="SORTORDER"></field>
+			<field name="Layout"><![CDATA[<form id="panelRegistrationForm">
+  <h3>My Account</h3>
+  <div class="panelInstructionContainer"></div>
+  <ul class="panelRegistrationFormList">
+    <li><label>First Name<span class="filedRequired">*</span></label><input type="text" id="panelRegistrationFirstName" name="panelRegistrationFirstName"></li>
+    <li><label>Last Name<span class="filedRequired">*</span></label><input type="text" id="panelRegistrationLastName" name="panelRegistrationLastName"></li>
+    <li><label>E-mail<span class="filedRequired">*</span></label><input type="text" id="panelRegistrationEmail" name="panelRegistrationEmail"></li>
+    <li id="panelRowUsername"><label>Username<span class="usernameRequired">*</span></label><input type="text" id="panelRegistrationUsername" name="panelRegistrationUsername"></li>
+    <li id="panelRowPassword"><label>Password<span class="passwordRequired">*</span></label><input type="password" id="panelRegistrationPassword" name="panelRegistrationPassword"></li>
+    <li class="buttonRow"><a class="panelButton" id="tpRegisterSubmit" href="#">Register Account</a></li>
+  <li id="hiddenRow"></li>
+  </ul>
+</form>]]></field>
+			<field name="StylesFilename"></field>
+		</record>
+	</data>
+	<Resource name="lockclosed.png" type="www" path="toolpanel" />
+	<Resource name="lockopen.png" type="www" path="toolpanel" />
+	<Resource name="transpin.gif" type="www" path="images" />
+	<Resource name="toolpanel.dll" type="executable" path="" />
+</Collection>
