@@ -309,10 +309,22 @@ namespace Contensive.Addons {
                     + cp.Html.div(cp.Doc.Body, "", "", "toolPanelContent")
                     + "";
                 cp.Doc.Body = doc;
-                string bodyEnd = ""
-                    + cr + "<script type=\"text/javascript\" language=\"javascript\">jQuery(document).ready(function(){" + jsOnReady + "})</script>"
-                    + cr + "<style>#toolPanel #tpDraggable {left:" + cp.Visit.GetInteger("toolPanelPositionLeft") + "px;display:block}</style>";
-                cp.Doc.AddBodyEnd(bodyEnd);
+                //string manualJs = "jQuery(document).ready(function(){" + jsOnReady + "})";
+                string manualJs = ""
+                    + "function bindReadyState(callback){"
+                    + " if (document.readyState != 'loading') callback();"
+                    + " else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);"
+                    + " else document.attachEvent('onreadystatechange', function(){ if (document.readyState == 'complete') callback(); });"
+                    + "}"
+                    + " bindReadyState(function(){" + jsOnReady + "});"
+                    + "";
+                string manualStyles = "#toolPanel #tpDraggable {left:" + cp.Visit.GetInteger("toolPanelPositionLeft") + "px;display:block}";
+                //string bodyEnd = ""
+                //    + cr + "<script type=\"text/javascript\" language=\"javascript\">jQuery(document).ready(function(){" + jsOnReady + "})</script>"
+                //    + cr + "<style>#toolPanel #tpDraggable {left:" + cp.Visit.GetInteger("toolPanelPositionLeft") + "px;display:block}</style>";
+                cp.Doc.AddHeadJavascript(manualJs);
+                cp.Doc.AddHeadStyle(manualStyles);
+                //cp.Doc.AddBodyEnd(bodyEnd);
                 //
                 swHints += ",exit  (" + sw.ElapsedMilliseconds.ToString() + ")";
                 //
