@@ -192,7 +192,9 @@ end function]]></Code>
 		<IncludeAddon name="JQuery UI" guid="{840B9AEF-9470-4599-BD47-7EC0C9298614}"/>
 		<IsInline>No</IsInline>
 		<JavascriptOnLoad></JavascriptOnLoad>
-		<JavascriptInHead><![CDATA[/*
+		<JavascriptInHead><![CDATA[
+
+/*
 properties
 */
 var tpLoginTabIsPinned = false;
@@ -223,55 +225,41 @@ $(document).ready(function() {
             coordinates('#tpDraggable');
         }
     });
-    $('body').on('mouseup', '#tpDraggable', function(e){}); // $("#tpDraggable").mouseup(function () { });
-    $('body').on('keypress', '#panelLoginPassword', function (e) { tpLoginFormKeypress(e) }); // $('#panelLoginPassword').unbind('keypress').keypress(function (e) { tpLoginFormKeypress(e) });
-    $('body').on('keypress', '#panelLoginEmail', function (e) { tpLoginFormKeypress(e) }); // $('#panelLoginEmail').unbind('keypress').keypress(function (e) { tpLoginFormKeypress(e) });
-    $('body').on('keypress', '#panelLoginUsername', function (e) { tpLoginFormKeypress(e) }); // $('#panelLoginUsername').unbind('keypress').keypress(function (e) { tpLoginFormKeypress(e) });
-    $('body').on('mouseenter', '#tpTabZone', function (e) { tpMouseEnterTabZone() }); // $('#tpTabZone').unbind('mouseenter').mouseenter(tpMouseEnterTabZone);
-    $('body').on('mouseleave', '#tpTabZone', function (e) { tpMouseLeaveTabZone() }); // $('#tpTabZone').unbind('mouseleave').mouseleave(tpMouseLeaveTabZone);
-    $('body').on('click', '#tpAccountLock', function (e) { tpClickAccountTabLock() }); // $('#tpAccountLock').unbind('click').click(tpClickAccountTabLock);
-    $('body').on('mouseenter', '#tpAccountTab', function (e) { tpMouseEnterAccountTab() }); // $('#tpAccountTab').unbind('mouseenter').mouseenter(tpMouseEnterAccountTab);
-    $('body').on('mouseleave', '#tpAccountTab', function (e) { tpMouseLeaveAccountTab() }); // $('#tpAccountTab').unbind('mouseleave').mouseleave(tpMouseLeaveAccountTab);
-    $('body').on('click', '#tpAccountButton', function (e) { tpToggleAccountPanel() }); // $("#tpAccountButton").unbind('click').click(tpToggleAccountPanel);
-    $('body').on('click', '#tpLoginLock', function (e) { clickLoginTabLock() }); // $('#tpLoginLock').unbind('click').click(clickLoginTabLock);
-    $('body').on('mouseenter', '#tpLoginTab', function (e) { mouseEnterLoginTab() }); // $('#tpLoginTab').unbind('mouseenter').mouseenter(mouseEnterLoginTab);
-    $('body').on('mouseleave', '#tpLoginTab', function (e) { mouseLeaveLoginTab() }); // $('#tpLoginTab').unbind('mouseleave').mouseleave(mouseLeaveLoginTab);
-    $('body').on('click', '#tpLoginButton', function (e) { tpToggleLoginPanel() }); // $("#tpLoginButton").unbind('click').click(tpToggleLoginPanel);
-    $('body').on('click', '#tpLoginFormSubmit', function (e) { tpLoginFormSubmit() }); // $('#tpLoginFormSubmit').unbind('click').click(tpLoginFormSubmit);
-    $('body').on('click', '#tpEmailFormSubmit', function (e) { tpEmailFormSubmit() }); // $('#tpEmailFormSubmit').unbind('click').click(tpEmailFormSubmit);
-    $('body').on('click', '#tpLoginFormRegister', function (e) { tpRequestRegister() }); // $('#tpLoginFormRegister').unbind('click').click(tpRequestRegister);
-    $('body').on('click', '#accountSubmit', function (e) { tpAccountSubmit() }); // $('#accountSubmit').unbind('click').click(tpAccountSubmit);
-    $('body').on('click', '#logoutClick', function (e) { tpAccountLogoutClick() }); // $('#logoutClick').unbind('click').click(tpAccountLogoutClick);
-    $('body').on('click', '#tpRegisterSubmit', function (e) { tpRegisterSubmit() }); // $('#tpRegisterSubmit').unbind('click').click(tpRegisterSubmit);
+    $('body').on('mouseup', '#tpDraggable', function(e){});
+    $('body').on('keypress', '#panelLoginPassword', function (e) { return tpLoginFormKeypress(e) }); 
+    $('body').on('keypress', '#panelLoginEmail', function (e) { return tpLoginFormKeypress(e) }); 
+    $('body').on('keypress', '#panelLoginUsername', function (e) { return tpLoginFormKeypress(e) }); 
+    $('body').on('mouseenter', '#tpTabZone', function (e) { return tpMouseEnterTabZone(e) }); 
+    $('body').on('mouseleave', '#tpTabZone', function (e) { return tpMouseLeaveTabZone(e) }); 
+    $('body').on('click', '#tpAccountLock', function (e) { return tpClickAccountTabLock(e) }); 
+    $('body').on('mouseenter', '#tpAccountTab', function (e) { return tpMouseEnterAccountTab(e) }); 
+    $('body').on('mouseleave', '#tpAccountTab', function (e) { return tpMouseLeaveAccountTab(e) });
+    $('body').on('click', '#tpAccountButton', function (e) { return tpToggleAccountPanel(e) });
+    $('body').on('click', '#tpLoginLock', function (e) { return clickLoginTabLock(e) });
+    $('body').on('mouseenter', '#tpLoginTab', function (e) { return mouseEnterLoginTab(e) });
+    $('body').on('mouseleave', '#tpLoginTab', function (e) { return mouseLeaveLoginTab(e) });
+    $('body').on('click', '#tpLoginButton', function (e) { return tpToggleLoginPanel(e) });
+    $('body').on('click', '#tpLoginFormSubmit', function (e) { return tpLoginFormSubmit(e) });
+    $('body').on('click', '#tpEmailFormSubmit', function (e) { return tpEmailFormSubmit(e) });
+    $('body').on('click', '#tpLoginFormRegister', function (e) { return tpRequestRegister(e) });
+    $('body').on('click', '#accountSubmit', function (e) { return tpAccountSubmit(e) });
+    $('body').on('click', '#logoutClick', function (e) { return tpAccountLogoutClick(e) });
+    $('body').on('click', '#tpRegisterSubmit', function (e) { return tpRegisterSubmit(e) });
 })
 /*
 utils
 */
-function tpSetSpinner(divID, message, containerHeight) {
+function tpSetSpinner(divId, message, containerHeight) {
     var divContent;
     divContent = '<div class="spinner"><img src="/images/transpin.gif" /><p>' + message + '</p></div>';
-    $('#' + divID).html(divContent);
+    $('#' + divId).html(divContent);
     $('.spinner').height(containerHeight);
 }
-/*
-*/
-function tpGetParameterByName(name) {
-    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-    var regexS = "[\\?&]" + name + "=([^&#]*)";
-    var regex = new RegExp(regexS);
-    var results = regex.exec(window.location.href);
-    if (results == null)
-        return "";
-    else
-        return decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+
 /*
 */
 function tpRedirectHome(returnVal, container) {
-    var testString = returnVal;
-    //
-    testString = testString.replace(/(\r\n|\n|\r)/gm, ' ').replace(/(\s)/g, '');
-    //
+    var testString = returnVal.replace(/(\r\n|\n|\r)/gm, ' ').replace(/(\s)/g, '');
     if (testString == '') {
         window.location = document.head.baseURI;
     } else {
@@ -281,7 +269,7 @@ function tpRedirectHome(returnVal, container) {
 /*
 tab zone
 */
-function tpMouseEnterTabZone() {
+function tpMouseEnterTabZone(e) {
     tpIsWantedAccountTab = true;
     $("#tpAccountTab").slideDown("slow");
     tpAbortLoginTabClose = true;
@@ -289,9 +277,9 @@ function tpMouseEnterTabZone() {
 }
 /*
 */
-function tpMouseLeaveTabZone() {
-    tpMouseLeaveAccountTab();
-    mouseLeaveLoginTab();
+function tpMouseLeaveTabZone(e) {
+    tpMouseLeaveAccountTab(e);
+    mouseLeaveLoginTab(e);
 }
 /*
 account tab
@@ -302,7 +290,9 @@ var tpIsWantedAccountTab = false;
 var tpTimerIdAccountTab = 0;
 /*
 */
-function tpToggleAccountPanel() {
+function tpToggleAccountPanel(e) {
+    e.stopPropagation();
+    e.preventDefault();
     if (tpIsOpenAccountPanel) {
         tpCloseAccountPanel();
     } else {
@@ -328,8 +318,8 @@ function tpOpenAccountPanel() {
 }
 /*
 */
-function tpOpenAccountPanelReady() {
-    closeLoginPanel();
+function tpOpenAccountPanelReady(e) {
+    closeLoginPanel(e);
     $("#tpAccountTab").addClass("tpOpen");
     $("#tpAccountPanel").slideDown("slow");
 }
@@ -352,7 +342,9 @@ function tpCloseAccountPanel() {
 }
 /*
 */
-function tpClickAccountTabLock() {
+function tpClickAccountTabLock(e) {
+    e.stopPropagation();
+    e.preventDefault();
     if (isLockedAccountTab) {
         $('#tpAccountLock').html('<img src="/toolPanel/lockOpen.png" height="10" width="10">');
         cj.ajax.addon('setUserProperty', 'n=isLockedAccountTab&v=0');
@@ -366,7 +358,9 @@ function tpClickAccountTabLock() {
 }
 /*
 */
-function tpMouseEnterAccountTab() {
+function tpMouseEnterAccountTab(e) {
+    e.stopPropagation();
+    e.preventDefault();
     if (!isLockedAccountTab) {
         if (tpTimerIdAccountTab != 0) {
             clearTimeout(tpTimerIdAccountTab);
@@ -374,10 +368,13 @@ function tpMouseEnterAccountTab() {
         }
         tpIsWantedAccountTab = true;
     }
+	return false;
 }
 /*
 */
-function tpMouseLeaveAccountTab() {
+function tpMouseLeaveAccountTab(e) {
+    e.stopPropagation();
+    e.preventDefault();
     if ((!isLockedAccountTab) & (!tpIsOpenAccountPanel)) {
         if (tpTimerIdAccountTab != 0) {
             clearTimeout(tpTimerIdAccountTab);
@@ -389,7 +386,7 @@ function tpMouseLeaveAccountTab() {
 }
 /*
 */
-function accountTabClose() {
+function accountTabClose(e) {
     if (!tpIsWantedAccountTab) {
         $("#tpAccountTab").slideUp("slow");
     } else {
@@ -399,60 +396,64 @@ function accountTabClose() {
 /*
 login
 */
-function tpToggleLoginPanel() {
+function tpToggleLoginPanel(e) {
+    e.stopPropagation();
+    e.preventDefault();
     if (isOpenLoginPanel) {
-        closeLoginPanel();
+        closeLoginPanel(e);
     } else {
-        tpOpenLoginPanel();
+        tpOpenLoginPanel(e);
     }
     return false;
 };
 /*
 */
-function tpOpenLoginPanel() {
+function tpOpenLoginPanel(e) {
     isOpenLoginPanel = true;
     if (!isLoadedLoginPanel) {
-        setLoginWait();
-        cj.ajax.addonCallback('toolPanelLoginForm', '', function (content, ignore) { tpStoreAndOpenLoginPanel(content) });
+        setLoginWait(e);
+        cj.ajax.addonCallback('toolPanelLoginForm', '', function (content, ignore) { tpStoreAndOpenLoginPanel(e, content) });
     } else {
-        tpOpenLoginPanel_contentReady();
+        tpOpenLoginPanel_contentReady(e);
     }
 }
 /*
 */
-function tpStoreAndOpenLoginPanel(content) {
-    clearLoginWait();
+function tpStoreAndOpenLoginPanel(e, content) {
+    clearLoginWait(e);
     $('#tpLoginPanel').html(content);
-    tpOpenLoginPanel_contentReady();
+    tpOpenLoginPanel_contentReady(e);
     isLoadedLoginPanel = true;
 }
 /*
 */
-function tpOpenLoginPanel_contentReady() {
-    tpCloseAccountPanel();
+function tpOpenLoginPanel_contentReady(e) {
+    tpCloseAccountPanel(e);
     $("#tpLoginTab").addClass("tpOpen");
     $("#tpLoginPanel").slideDown("slow");
 }
 /*
 */
-function setLoginWait() {
+function setLoginWait(e) {
     $('#tpLoginWait').css('visibility', 'visible');
 }
 /*
 */
-function clearLoginWait() {
+function clearLoginWait(e) {
     $('#tpLoginWait').css('visibility', 'hidden');
 }
 /*
 */
-function closeLoginPanel() {
+function closeLoginPanel(e) {
     $("#tpLoginPanel").slideUp("slow");
     $("#tpLoginTab").removeClass("tpOpen");
     isOpenLoginPanel = false;
 }
 /*
 */
-function clickLoginTabLock() {
+function clickLoginTabLock(e) {
+    e.stopPropagation();
+    e.preventDefault();
     if (tpLoginTabIsPinned) {
         $('#tpLoginLock').html('<img src="/toolPanel/lockOpen.png" height="10" width="10">');
         cj.ajax.addon('setUserProperty', 'n=tpLoginTabIsPinned&v=0');
@@ -466,7 +467,9 @@ function clickLoginTabLock() {
 }
 /*
 */
-function mouseEnterLoginTab() {
+function mouseEnterLoginTab(e) {
+    e.stopPropagation();
+    e.preventDefault();
     if (!tpLoginTabIsPinned) {
         if (timerIdLoginTab != 0) {
             clearTimeout(timerIdLoginTab);
@@ -474,10 +477,13 @@ function mouseEnterLoginTab() {
         }
         tpAbortLoginTabClose = true;
     }
+	return false;
 }
 /*
 */
-function mouseLeaveLoginTab() {
+function mouseLeaveLoginTab(e) {
+    e.stopPropagation();
+    e.preventDefault();
     if ((!tpLoginTabIsPinned) & (!isOpenLoginPanel)) {
         if (timerIdLoginTab != 0) {
             clearTimeout(timerIdLoginTab);
@@ -498,11 +504,11 @@ function LoginTabClose() {
 }
 /*
 */
-function tpLoginFormSubmit() {
+function tpLoginFormSubmit(e) {
+    e.stopPropagation();
+    e.preventDefault();
     var varString;
-    if (!validateLoginForm()) {
-        return false;
-    } else {
+    if (validateLoginForm(e)) {
         //
         varString = 'panelLoginUsername=' + $('#panelLoginUsername').val();
         varString += '&panelLoginPassword=' + $('#panelLoginPassword').val();
@@ -512,22 +518,21 @@ function tpLoginFormSubmit() {
         cj.ajax.addonCallback('toolPanelLoginFormHandler', varString, tpRedirectHome, 'panelFormContainer');
         //
         tpSetSpinner('panelFormContainer', 'Authenticating Account....', $('#panelFormContainer').height());
-        return false;
     }
+    return false;
 }
 /*
 */
 function tpLoginFormKeypress(e) {
     if (e.which == 13) {
-        tpLoginFormSubmit();
-        e.preventDefault();
-        return false;
+        return tpLoginFormSubmit(e);
     }
+	return true;
 }
 /*
 account form
 */
-function validateAccountForm() {
+function validateAccountForm(e) {
     var errFlag;
     var errMsg;
     //
@@ -571,24 +576,28 @@ function validateAccountForm() {
 };
 /*
 */
-function tpAccountSubmit() {
-    if (!validateAccountForm()) {
-        return false;
+function tpAccountSubmit(e) {
+    e.stopPropagation();
+    e.preventDefault();
+	if (validateAccountForm(e)) {
+		var varString;
+		varString = 'panelAccountFirstName=' + $('#panelAccountFirstName').val();
+		varString += '&panelAccountLastName=' + $('#panelAccountLastName').val();
+		varString += '&panelAccountEmail=' + $('#panelAccountEmail').val();
+		varString += '&panelAccountUsername=' + $('#panelAccountUsername').val();
+		varString += '&panelAccountPassword=' + $('#panelAccountPassword').val();
+		//
+		cj.ajax.addon('toolPanelAccountFormHandler', varString, '', 'panelFormContainer', '', '');
+		tpSetSpinner('panelFormContainer', 'Updating Account....', $('#panelFormContainer').height());
+		tpCloseAccountPanel(e);
     }
-    var varString;
-    varString = 'panelAccountFirstName=' + $('#panelAccountFirstName').val();
-    varString += '&panelAccountLastName=' + $('#panelAccountLastName').val();
-    varString += '&panelAccountEmail=' + $('#panelAccountEmail').val();
-    varString += '&panelAccountUsername=' + $('#panelAccountUsername').val();
-    varString += '&panelAccountPassword=' + $('#panelAccountPassword').val();
-    //
-    cj.ajax.addon('toolPanelAccountFormHandler', varString, '', 'panelFormContainer', '', '');
-    tpSetSpinner('panelFormContainer', 'Updating Account....', $('#panelFormContainer').height());
     return false;
 }
 /*
 */
-function tpAccountLogoutClick() {
+function tpAccountLogoutClick(e) {
+    e.stopPropagation();
+    e.preventDefault();
     cj.ajax.addonCallback('toolPanelLogoutHandler', '', tpRedirectHome, 'panelFormContainer');
     tpSetSpinner('panelFormContainer', 'Logging Out....', $('#panelFormContainer').height());
     return false;
@@ -675,13 +684,14 @@ function validateEmailForm() {
 };
 /*
 */
-function tpEmailFormSubmit() {
-    if (!validateEmailForm()) {
-        return false;
-    } else {
+function tpEmailFormSubmit(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (validateEmailForm(e)) {
         cj.ajax.addon('toolPanelLoginFormHandler', '', 'panelLoginForm', 'panelFormContainer', '', '');
         tpSetSpinner('panelFormContainer', 'Gathering Account Information....', $('#panelFormContainer').height());
     }
+    return false;
 }
 /*
 Registration Form
@@ -758,25 +768,28 @@ function tpValidateRegisterForm() {
 }
 /*
 */
-function tpRegisterSubmit() {
-    if (!tpValidateRegisterForm()) {
-        return false;
+function tpRegisterSubmit(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (tpValidateRegisterForm(e)) {
+		var varString;
+		varString = 'panelRegistrationFirstName=' + $('#panelRegistrationFirstName').val();
+		varString += '&panelRegistrationLastName=' + $('#panelRegistrationLastName').val();
+		varString += '&panelRegistrationEmail=' + $('#panelRegistrationEmail').val();
+		varString += '&panelRegistrationUsername=' + $('#panelRegistrationUsername').val();
+		varString += '&panelRegistrationPassword=' + $('#panelRegistrationPassword').val();
+		//
+		cj.ajax.addonCallback('toolPanelRegistrationFormHandler', varString, tpRedirectHome, 'panelFormContainer');
+		//cj.ajax.addon('toolPanelRegistrationFormHandler', varString, '', 'panelFormContainer', '','');
+		tpSetSpinner('panelFormContainer', 'Creating Account...', $('#panelFormContainer').height());
     }
-    var varString;
-    varString = 'panelRegistrationFirstName=' + $('#panelRegistrationFirstName').val();
-    varString += '&panelRegistrationLastName=' + $('#panelRegistrationLastName').val();
-    varString += '&panelRegistrationEmail=' + $('#panelRegistrationEmail').val();
-    varString += '&panelRegistrationUsername=' + $('#panelRegistrationUsername').val();
-    varString += '&panelRegistrationPassword=' + $('#panelRegistrationPassword').val();
-    //
-    cj.ajax.addonCallback('toolPanelRegistrationFormHandler', varString, tpRedirectHome, 'panelFormContainer');
-    //cj.ajax.addon('toolPanelRegistrationFormHandler', varString, '', 'panelFormContainer', '','');
-    tpSetSpinner('panelFormContainer', 'Creating Account...', $('#panelFormContainer').height());
     return false;
 }
 /*
 */
-function tpRequestRegister() {
+function tpRequestRegister(e) {
+    e.stopPropagation();
+    e.preventDefault();
     cj.ajax.addon('toolPanelDefaultRegistrationForm', '', '', 'panelFormContainer', '', '');
     tpSetSpinner('panelFormContainer', '', $('#panelFormContainer').height());
     return false;
@@ -791,6 +804,7 @@ $(function () {
     $("#draggable5").draggable({ containment: "parent" });
 });
 
+		
 ]]></JavascriptInHead>
 		<JavascriptBodyEnd></JavascriptBodyEnd>
 		<MetaDescription></MetaDescription>
