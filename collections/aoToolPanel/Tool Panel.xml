@@ -983,6 +983,7 @@ width: 100%;
 #toolPanel #tpDraggable 
 {
 position:fixed;
+top: 0;
 z-index: 9999;
 display: none;
 }
