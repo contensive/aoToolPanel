@@ -2,3 +2,9 @@ C:\Users\jay\OneDrive\Documents\git\aoToolPanel\source\wwwRoot\bin\wwwRoot.dll
 C:\Users\jay\OneDrive\Documents\git\aoToolPanel\source\wwwRoot\bin\wwwRoot.pdb
 C:\Users\jay\OneDrive\Documents\git\aoToolPanel\source\wwwRoot\obj\Debug\wwwRoot.dll
 C:\Users\jay\OneDrive\Documents\git\aoToolPanel\source\wwwRoot\obj\Debug\wwwRoot.pdb
+C:\Users\jay\Documents\Git\aoToolPanel\source\wwwRoot\bin\wwwRoot.dll
+C:\Users\jay\Documents\Git\aoToolPanel\source\wwwRoot\bin\wwwRoot.pdb
+C:\Users\jay\Documents\Git\aoToolPanel\source\wwwRoot\obj\Debug\wwwRoot.csprojResolveAssemblyReference.cache
+C:\Users\jay\Documents\Git\aoToolPanel\source\wwwRoot\obj\Debug\wwwRoot.csproj.CoreCompileInputs.cache
+C:\Users\jay\Documents\Git\aoToolPanel\source\wwwRoot\obj\Debug\wwwRoot.dll
+C:\Users\jay\Documents\Git\aoToolPanel\source\wwwRoot\obj\Debug\wwwRoot.pdb
