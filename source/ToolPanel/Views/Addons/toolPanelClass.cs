@@ -9,7 +9,10 @@ using System.Diagnostics;
 namespace Contensive.Addons {
     //
     //====================================================================================================
-    //
+    /// <summary>
+    /// Addon that is added after the body tag
+    /// calls other classes for edit tool panel, the profile panel, 
+    /// </summary>
     public class toolPanelClass : Contensive.BaseClasses.AddonBaseClass {
         //
         public override object Execute(CPBaseClass cp) {

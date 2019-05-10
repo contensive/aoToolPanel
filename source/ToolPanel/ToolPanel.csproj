@@ -83,11 +83,11 @@
     <Compile Include="Views\defaultRegistrationFormClass.cs" />
     <Compile Include="Views\panelLoginFormClass.cs" />
     <Compile Include="Views\defaultLoginFormClass.cs" />
-    <Compile Include="Views\toolPanelAccountFormHandlerClass.cs" />
+    <Compile Include="Views\Remotes\toolPanelAccountFormHandlerClass.cs" />
     <Compile Include="Views\defaultLoginFormHandlerClass.cs" />
     <Compile Include="Views\defaultRegistrationFormHandlerClass.cs" />
     <Compile Include="Views\panelRegistrationFormClass.cs" />
-    <Compile Include="Views\toolPanelClass.cs" />
+    <Compile Include="Views\Addons\toolPanelClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\utilsClass.cs" />
   </ItemGroup>

@@ -18,3 +18,4 @@ C:\Users\jay\Documents\Git\aoToolPanel\source\ToolPanel\bin\Debug\ToolPanel.pdb
 C:\Users\jay\Documents\Git\aoToolPanel\source\ToolPanel\obj\Debug\ToolPanel.csproj.CoreCompileInputs.cache
 C:\Users\jay\Documents\Git\aoToolPanel\source\ToolPanel\obj\Debug\ToolPanel.dll
 C:\Users\jay\Documents\Git\aoToolPanel\source\ToolPanel\obj\Debug\ToolPanel.pdb
+C:\Users\jay\Documents\Git\aoToolPanel\source\ToolPanel\obj\Debug\ToolPanel.csprojResolveAssemblyReference.cache

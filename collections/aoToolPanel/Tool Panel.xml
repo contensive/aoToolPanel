@@ -251,7 +251,7 @@ utils
 */
 function tpSetSpinner(divId, message, containerHeight) {
     var divContent;
-    divContent = '<div class="spinner"><img src="/images/transpin.gif" /><p>' + message + '</p></div>';
+    divContent = '<div class="spinner"><img src="/toolpanel/transpin.gif" /><p>' + message + '</p></div>';
     $('#' + divId).html(divContent);
     $('.spinner').height(containerHeight);
 }
@@ -1560,6 +1560,7 @@ end function]]></Code>
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Resource name="toolpanel.zip" type="www" path="" />
-	<Resource name="toolpanel.dll" type="executable" path="" />
+	<Resource name="lockclosed.png" type="www" path="toolpanel" />
+	<Resource name="lockopen.png" type="www" path="toolpanel" />
+	<Resource name="transpin.gif" type="www" path="toolpanel" />
 </Collection>
