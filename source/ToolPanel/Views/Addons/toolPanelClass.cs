@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Contensive.BaseClasses;
-using static Contensive.Addons.aoToolPanel.constants;
+using static Contensive.Addons.aoToolPanel.Constants;
 using System.Diagnostics;
 
 namespace Contensive.Addons {

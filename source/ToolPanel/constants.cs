@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 namespace Contensive.Addons.aoToolPanel {
-    static class constants
+    static class Constants
     {
         //
         // -- 
@@ -13,6 +13,7 @@ namespace Contensive.Addons.aoToolPanel {
         //
         // -- 
         public const string guidToolPanelAccountForm = "{7A057715-5CDD-4D9F-A12A-5CCB61F93974}";
+        public const string guidDefaultLoginForm = "{37B7EDB3-7BE0-4E89-8012-16F0CDEED218}";
         //
         public const string cr = "\r\n\t";
         //

@@ -1563,4 +1563,8 @@ end function]]></Code>
 	<Resource name="lockclosed.png" type="www" path="toolpanel" />
 	<Resource name="lockopen.png" type="www" path="toolpanel" />
 	<Resource name="transpin.gif" type="www" path="toolpanel" />
+	<Resource name="accountform.html" type="www" path="toolpanel" />
+	<Resource name="loginform.html" type="www" path="toolpanel" />
+	<Resource name="registrationform.html" type="www" path="toolpanel" />
+	<Resource name="toolpanel.html" type="www" path="toolpanel" />
 </Collection>

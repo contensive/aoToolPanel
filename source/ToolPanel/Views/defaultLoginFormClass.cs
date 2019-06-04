@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using Contensive.BaseClasses;
 
-namespace Contensive.Addons.aoToolPanel
-{
+namespace Contensive.Addons.aoToolPanel {
 
     //
     //====================================================================================================
     //
-    public class defaultLoginFormHandlerClass : Contensive.BaseClasses.AddonBaseClass
-    {
+    public class defaultLoginFormHandlerClass : Contensive.BaseClasses.AddonBaseClass {
         //
         //====================================================================================================
         //
-        public override object Execute(Contensive.BaseClasses.CPBaseClass cp)
-        {
+        public override object Execute(Contensive.BaseClasses.CPBaseClass cp) {
             string s = "";
             string username = cp.Doc.get_Var("panelLoginUsername");
             string password = cp.Doc.get_Var("panelLoginPassword");
@@ -25,37 +22,27 @@ namespace Contensive.Addons.aoToolPanel
             CPCSBaseClass cs = cp.CSNew();
             string login = "";
             //
-            if (reqEmail != "")
-            {
-                if (cs.Open("People", "email=" + cp.Db.EncodeSQLText(reqEmail), "", false, "", 1, 1))
-                {
+            if (reqEmail != "") {
+                if (cs.Open("People", "email=" + cp.Db.EncodeSQLText(reqEmail), "", false, "", 1, 1)) {
                     cp.Doc.set_Var("Email Flag", "1");
                     cp.Email.sendPassword(reqEmail);
-                }
-                else
-                {
+                } else {
                     cp.Doc.set_Var("Email Error Flag", "1");
                 }
                 cs.Close();
                 //
-                s = cp.Utils.ExecuteAddon("{37B7EDB3-7BE0-4E89-8012-16F0CDEED218}");
-            }
-            else
-            {
+                s = cp.Utils.ExecuteAddon(Constants.guidDefaultLoginForm);
+            } else {
                 //
-                if (!cp.Utils.EncodeBoolean(cp.Site.GetProperty("ALLOWEMAILLOGIN", "")))
-                {
+                if (!cp.Utils.EncodeBoolean(cp.Site.GetProperty("ALLOWEMAILLOGIN", ""))) {
                     login = username;
-                }
-                else
-                {
+                } else {
                     login = email;
                 }
                 //
-                if (!cp.User.Login(login, password, autoLogin))
-                {
+                if (!cp.User.Login(login, password, autoLogin)) {
                     cp.Doc.set_Var("Error Flag", "1");
-                    s = cp.Utils.ExecuteAddon("{37B7EDB3-7BE0-4E89-8012-16F0CDEED218}");
+                    s = cp.Utils.ExecuteAddon(Constants.guidDefaultLoginForm);
                 }
             }
             //
