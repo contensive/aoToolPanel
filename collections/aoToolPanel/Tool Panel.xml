@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="windows-1252"?>
-<Collection name="Tool Panel" guid="{374E2B8C-B29D-470B-BD1B-41CAA5BCEDCB}" system="No" updatable="Yes" blockNavigatorNode="No">
+<Collection name="Tool Panel" guid="{374E2B8C-B29D-470B-BD1B-41CAA5BCEDCB}" system="No" updatable="Yes" blockNavigatorNode="No" onInstallAddonGuid="{4BDF8B7D-89F5-4D63-AA1C-750998C6920D}" >
 	<HelpLink></HelpLink>
 	<Help></Help>
-	<Addon name="_onInstall" guid="{4BDF8B7D-89F5-4D63-AA1C-750998C6920D}" type="Add-on">
+	<Addon name="toolPanelOnInstall" guid="{4BDF8B7D-89F5-4D63-AA1C-750998C6920D}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<ActiveXProgramID></ActiveXProgramID>
