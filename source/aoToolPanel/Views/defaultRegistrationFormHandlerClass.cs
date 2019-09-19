@@ -22,7 +22,7 @@ namespace Contensive.Addons.aoToolPanel
             string email = cp.Doc.GetText("panelRegistrationEmail");
             string username = cp.Doc.GetText("panelRegistrationUsername");
             string password = cp.Doc.GetText("panelRegistrationPassword");
-            bool usernameValid = !cp.Site.GetBoolean("ALLOWEMAILLOGIN", "");
+            bool usernameValid = !cp.Site.GetBoolean("ALLOWEMAILLOGIN", false);
             CPCSBaseClass cs = cp.CSNew();
             //
             //  check for duplicate in username if account requires username
@@ -32,8 +32,8 @@ namespace Contensive.Addons.aoToolPanel
                 if (cs.Open("People", "(ID<>" + cp.User.Id + ") and (username=" + cp.Db.EncodeSQLText(username) + ")", "", false, "", 1, 1))
                 {
                     errFlag = true;
-                    cp.Doc.set_Var("errFlag", "1");
-                    cp.Doc.set_Var("errMessage", "The username requested is not available, please enter an alternate username.");
+                    cp.Doc.SetProperty("errFlag", "1");
+                    cp.Doc.SetProperty("errMessage", "The username requested is not available, please enter an alternate username.");
                 }
                 cs.Close();
             }
@@ -42,8 +42,8 @@ namespace Contensive.Addons.aoToolPanel
                 if (cs.Open("People", "(ID<>" + cp.User.Id + ") and (email=" + cp.Db.EncodeSQLText(email) + ")", "", false, "", 1, 1))
                 {
                     errFlag = true;
-                    cp.Doc.set_Var("errFlag", "1");
-                    cp.Doc.set_Var("errMessage", "The email entered is already registered. Please verify you have not already registered or enter an alternate email address.");
+                    cp.Doc.SetProperty("errFlag", "1");
+                    cp.Doc.SetProperty("errMessage", "The email entered is already registered. Please verify you have not already registered or enter an alternate email address.");
                 }
                 cs.Close();
             }

@@ -47,7 +47,7 @@ rem
 echo build 
 rem
 cd ..\source
-"%msbuildLocation%msbuild.exe" ToolPanel.sln
+"%msbuildLocation%msbuild.exe" %solutionName%
 if errorlevel 1 (
    echo failure building
    pause

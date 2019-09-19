@@ -63,7 +63,7 @@ namespace Contensive.Addons {
                 //
                 //  set default for login tab
                 //
-                jsOnReady += cr + "isLockedAccountTab=" + cp.Site.GetBoolean("toolPanelDisableAutoHideAccountTab", "0").ToString().ToLower() + ";";
+                jsOnReady += cr + "isLockedAccountTab=" + cp.Site.GetBoolean("toolPanelDisableAutoHideAccountTab", false).ToString().ToLower() + ";";
                 //
                 swHints += ",loginconfig-3  (" + sw.ElapsedMilliseconds.ToString() + ")";
                 //
