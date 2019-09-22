@@ -153,23 +153,23 @@
 */
 #toolPanel #containment-wrapper 
 {
-margin-left: -254px;
-width: 100%;
+	margin-left: -254px;
+	width: 100%;
 }
 #toolPanel #tpDraggable 
 {
-position:fixed;
-z-index: 9999;
-display: none;
+	position:fixed;
+	z-index: 9999;
+	display: none;
 }
 #toolPanel .tpFixedTabs > ul
 {
-background-color: transparent;
-left: 50%;
-margin: 0 0 0 -230px;
-position: relative;
-top: 0;
-z-index: 9998;
+	background-color: transparent;
+	/* left: 50%; */
+	margin: 0 0 0 -230px;
+	position: relative;
+	top: 0;
+	z-index: 9998;
 }
 #toolPanel .tpFixedTabs > ul 
 {

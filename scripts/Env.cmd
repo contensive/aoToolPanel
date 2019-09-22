@@ -1,7 +1,7 @@
 
 rem all paths are relative to the git scripts folder
 
-set appName=designblocks
+set appName=meetingmanager
 set majorVersion=5
 set minorVersion=1
 set collectionName=aoToolPanel
