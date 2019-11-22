@@ -9,4 +9,4 @@ set solutionName=aoToolPanel.sln
 set collectionPath=..\collections\aoToolPanel\
 set binPath=..\source\aoToolPanel\bin\debug\
 set msbuildLocation=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\
-set deploymentFolderRoot=C:\Deployments\aoToolPanel\Dev\
+set deploymentFolderRoot=C:\Users\jay\Desktop\deployments\aoToolPanel\Dev\

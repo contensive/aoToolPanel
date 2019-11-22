@@ -154,14 +154,14 @@ namespace Contensive.Addons {
                         //
                         editHidden = "";
                         isDebugging = cp.Utils.EncodeBoolean(cp.Visit.GetProperty("allowDebugging", "0", 0));
-                        isPreviewing = cp.Utils.EncodeBoolean(cp.Visit.GetProperty("AllowWorkflowRendering", "0", 0));
+                        //isPreviewing = cp.Utils.EncodeBoolean(cp.Visit.GetProperty("AllowWorkflowRendering", "0", 0));
                         //
                         if (isDebugging) {
                             debugHidden = cr + "<input type=\"hidden\" name=\"1allowDebugging\" value=\"1\">";
                         }
-                        if (isPreviewing) {
-                            previewHidden = cr + "<input type=\"hidden\" name=\"1allowWorkflowRendering\" value=\"1\">";
-                        }
+                        //if (isPreviewing) {
+                        //    previewHidden = cr + "<input type=\"hidden\" name=\"1allowWorkflowRendering\" value=\"1\">";
+                        //}
                         //
                         // Edit button
                         //
@@ -191,16 +191,17 @@ namespace Contensive.Addons {
                         //
                         buttonState = "1";
                         buttonClass = "tpButtonUp";
-                        if (cp.Utils.EncodeBoolean(cp.Visit.GetProperty("allowQuickEditor", "0", 0))) {
+                        if (cp.Visit.GetBoolean("allowQuickEditor", false)) {
                             buttonState = "0";
                             buttonClass = "tpButtonDown";
                             editHidden = "<input type=\"hidden\" name=\"1AllowQuickEditor\" value=\"1\">";
                         }
+                        string quickCaption = (cp.Site.GetBoolean("ALLOW ADDONLIST EDITOR FOR QUICK EDITOR", false)) ? "Page&nbsp;Builder" : "Quick&nbsp;Edit";
                         copy = ""
                             + debugHidden
                             + previewHidden
                             + cr + "<input type=\"hidden\" name=\"1AllowQuickEditor\" value=\"" + buttonState + "\">"
-                            + cr + "<a id=\"tpButtonQuick\" href=\"#\">Quick&nbsp;Edit</a>";
+                            + cr + "<a id=\"tpButtonQuick\" href=\"#\">" + quickCaption + "</a>";
                         copy = ""
                             + cr + formOpen
                             + cp.Html.Indent(copy, 1)

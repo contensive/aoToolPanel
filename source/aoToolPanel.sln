@@ -20,8 +20,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8543E11A-E914-4F73-B9E0-A71F1C22EDB0}
-		BuildVersion_AssemblyInfoFilename = aoToolPanel\Properties\AssemblyInfo.cs
 		BuildVersion_UseGlobalSettings = True
+		BuildVersion_AssemblyInfoFilename = aoToolPanel\Properties\AssemblyInfo.cs
+		SolutionGuid = {8543E11A-E914-4F73-B9E0-A71F1C22EDB0}
 	EndGlobalSection
 EndGlobal
