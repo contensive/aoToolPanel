@@ -836,6 +836,10 @@ $(function () {
     padding:0;
     margin:0;
 }
+#toolPanelContent
+{
+	height:100%;
+}
 #toolPanel
 ,#toolPanel p 
 ,#toolPanel div
