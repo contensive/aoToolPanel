@@ -23,6 +23,7 @@ namespace Contensive.Addons.aoToolPanel
                     result = "<p>There was a problem locating your user record. Please refresh this page and try again.</p>";
                 } else {
                     CPBlockBaseClass layout = cp.BlockNew();
+                    dim layoutHtml as string = cp.Content.getLayout("Tool Panel Account Form",)
                     layout.OpenFile("toolpanel/accountform.html");
                     //
                     if (updated || errFlag) {
