@@ -88,7 +88,7 @@ namespace Contensive.Addons.aoToolPanel
             }
             else if (emailFlag)
             {
-                layout.SetInner(".panelLowerInstructionContainer", cp.Content.GetCopy("Default Email Form Email Sent", "<p class=\"ccError\">Your login has been sent the email address provided.</p>"));
+                layout.SetInner(".panelLowerInstructionContainer", cp.Content.GetCopy("Default Email Form Email Sent", "<p class=\"ccError\">Your login has been sent to the email address provided.</p>"));
             }
             else
             {
