@@ -12,7 +12,7 @@ namespace Contensive.Addons.aoToolPanel {
         //====================================================================================================
         //
         public override object Execute(Contensive.BaseClasses.CPBaseClass cp) {
-            string s = cp.Utils.ExecuteAddon(Constants.guidDefaultLoginForm);
+            string s = cp.Addon.Execute(Constants.guidDefaultLoginForm);
             //
             s = cp.Html.div(s, "", "", "panelFormContainer");
             //

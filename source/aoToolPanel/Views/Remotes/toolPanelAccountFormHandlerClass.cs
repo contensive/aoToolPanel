@@ -15,15 +15,15 @@ namespace Contensive.Addons.aoToolPanel
         //
         public override object Execute(Contensive.BaseClasses.CPBaseClass cp) {
             bool errFlag = false;
-            string firstName = cp.Doc.get_Var("panelAccountFirstName");
-            string lastName = cp.Doc.get_Var("panelAccountLastName");
-            string email = cp.Doc.get_Var("panelAccountEmail");
-            string username = cp.Doc.get_Var("panelAccountUsername");
-            string password = cp.Doc.get_Var("panelAccountPassword");
+            string firstName = cp.Doc.GetText("panelAccountFirstName");
+            string lastName = cp.Doc.GetText("panelAccountLastName");
+            string email = cp.Doc.GetText("panelAccountEmail");
+            string username = cp.Doc.GetText("panelAccountUsername");
+            string password = cp.Doc.GetText("panelAccountPassword");
             CPCSBaseClass cs = cp.CSNew();
             string sql = "";
             // if allowEmailLogin -- then ignore username input, it is not valid
-            bool allowEmailLogin = cp.Utils.EncodeBoolean(cp.Site.GetProperty("ALLOWEMAILLOGIN", ""));
+            bool allowEmailLogin = cp.Site.GetBoolean("ALLOWEMAILLOGIN", false);
             //
             // check input
             //
@@ -32,8 +32,8 @@ namespace Contensive.Addons.aoToolPanel
                 // missing fields
                 //
                 errFlag = true;
-                cp.Doc.set_Var("errFlag", "1");
-                cp.Doc.set_Var("errMessage", "One or more required fields were empty.");
+                cp.Doc.SetProperty("errFlag", "1");
+                cp.Doc.SetProperty("errMessage", "One or more required fields were empty.");
             } else {
                 //
                 //  check for duplicate in username if account requires username
@@ -63,8 +63,8 @@ namespace Contensive.Addons.aoToolPanel
                 }
                 if (cs.Open("People", sql, "", false, "", 1, 1)) {
                     errFlag = true;
-                    cp.Doc.set_Var("errFlag", "1");
-                    cp.Doc.set_Var("errMessage", "The login requested is not available, please enter an alternate username.");
+                    cp.Doc.SetProperty("errFlag", "1");
+                    cp.Doc.SetProperty("errMessage", "The login requested is not available, please enter an alternate username.");
                 }
                 cs.Close();
             }
@@ -81,11 +81,11 @@ namespace Contensive.Addons.aoToolPanel
                     }
                 }
                 cs.Close();
-                cp.Doc.set_Var("acctUpdated", "1");
+                cp.Doc.SetProperty("acctUpdated", "1");
             }
             //
             // -- return account form
-            return cp.Utils.ExecuteAddon(guidToolPanelAccountForm); ;
+            return cp.Addon.Execute(guidToolPanelAccountForm); ;
         }
     }
 }

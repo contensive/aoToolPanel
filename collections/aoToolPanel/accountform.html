@@ -7,12 +7,25 @@
         <h3>My Account</h3>
         <div class="panelInstructionContainer"></div>
         <ul class="panelAccountFormList">
-            <li><label>First Name<span class="fieldRequired">*</span></label><input type="text" id="panelAccountFirstName" name="panelAccountFirstName"></li>
-            <li><label>Last Name<span class="fieldRequired">*</span></label><input type="text" id="panelAccountLastName" name="panelAccountLastName"></li>
-            <li><label>E-mail<span class="fieldRequired">*</span></label><input type="text" id="panelAccountEmail" name="panelAccountEmail"></li>
-            <li id="panelRowUsername"><label>Username<span class="fieldRequired">*</span></label><input type="text" id="panelAccountUsername" name="panelAccountUsername"></li>
-            <li id="panelRowPassword"><label>Password<span class="fieldRequired">*</span></label><input type="password" id="panelAccountPassword" name="panelAccountPassword"></li>
-            <li class="buttonRow"><a href="#" class="panelButton" id="logoutClick">Logout</a> or <a class="panelButton" id="accountSubmit" href="#">Update Account</a></li>
+            <li>
+                <input type="text" id="panelAccountFirstName" name="panelAccountFirstName" class="form-control" placeholder="First Name">
+            </li>
+            <li>
+                <input type="text" id="panelAccountLastName" name="panelAccountLastName" class="form-control" placeholder="Last Name">
+            </li>
+            <li>
+                <input type="text" id="panelAccountEmail" name="panelAccountEmail" class="form-control" placeholder="Email">
+            </li>
+            <li id="panelRowUsername">
+                <input type="text" id="panelAccountUsername" name="panelAccountUsername" class="form-control" placeholder="Username">
+            </li>
+            <li id="panelRowPassword">
+                <input type="password" id="panelAccountPassword" name="panelAccountPassword" class="form-control" placeholder="Password">
+            </li>
+            <li class="buttonRow">
+                <button class="btn btn-success btn-block" id="accountSubmit">Update Account</button>
+                <button class="btn btn-success btn-block" id="logoutClick">Logout</button>
+            </li>
             <li id="hiddenRow"></li>
         </ul>
     </form>

@@ -17,8 +17,8 @@ namespace Contensive.Addons.aoToolPanel
         {
             string s = "";
             string sS = "";
-            bool updated = cp.Utils.EncodeBoolean(cp.Doc.get_Var("acctUpdated"));
-            bool errFlag = cp.Utils.EncodeBoolean(cp.Doc.get_Var("errFlag"));
+            bool updated = cp.Utils.EncodeBoolean(cp.Doc.GetText("acctUpdated"));
+            bool errFlag = cp.Utils.EncodeBoolean(cp.Doc.GetText("errFlag"));
             CPBlockBaseClass layout = cp.BlockNew();
             string hiddenString = "";
             //
@@ -30,7 +30,7 @@ namespace Contensive.Addons.aoToolPanel
             {
                 if (errFlag)
                 {
-                    layout.SetInner(".panelInstructionContainer", cp.Html.p(cp.Doc.get_Var("errMessage"), "", "ccError", ""));
+                    layout.SetInner(".panelInstructionContainer", cp.Html.p(cp.Doc.GetText("errMessage"), "", "ccError", ""));
                 }
                 else
                 {
@@ -44,7 +44,7 @@ namespace Contensive.Addons.aoToolPanel
             //
             //  ALLOWEMAILLOGIN check
             //
-            if (cp.Utils.EncodeBoolean(cp.Site.GetProperty("ALLOWEMAILLOGIN", "")))
+            if (cp.Site.GetBoolean("ALLOWEMAILLOGIN", false))
             {
                 layout.SetOuter("#panelRowUsername", "");
                 hiddenString += cp.Html.Hidden("reqUsername", "0", "", "reqUsername");
@@ -57,7 +57,7 @@ namespace Contensive.Addons.aoToolPanel
             //
             //  ALLOWNOPASSWORDLOGIN check
             //
-            if (cp.Utils.EncodeBoolean(cp.Site.GetProperty("ALLOWNOPASSWORDLOGIN", "")))
+            if (cp.Site.GetBoolean("ALLOWNOPASSWORDLOGIN", false))
             {
                 layout.SetInner(".passwordRequired", "");
                 hiddenString += cp.Html.Hidden("reqPassword", "0", "", "reqPassword");
@@ -77,11 +77,11 @@ namespace Contensive.Addons.aoToolPanel
             //
             sS += " var containerHeight = $('#panelFormContainer').height();";
             //
-            sS += " $('#panelRegistrationFirstName').val('" + cp.Doc.get_Var("panelRegistrationFirstName") + "');";
-            sS += " $('#panelRegistrationLastName').val('" + cp.Doc.get_Var("panelRegistrationLastName") + "');";
-            sS += " $('#panelRegistrationEmail').val('" + cp.Doc.get_Var("panelRegistrationEmail") + "');";
-            sS += " $('#panelRegistrationUsername').val('" + cp.Doc.get_Var("panelRegistrationUsername") + "');";
-            sS += " $('#panelRegistrationPassword').val('" + cp.Doc.get_Var("panelRegistrationPassword") + "');";
+            sS += " $('#panelRegistrationFirstName').val('" + cp.Doc.GetText("panelRegistrationFirstName") + "');";
+            sS += " $('#panelRegistrationLastName').val('" + cp.Doc.GetText("panelRegistrationLastName") + "');";
+            sS += " $('#panelRegistrationEmail').val('" + cp.Doc.GetText("panelRegistrationEmail") + "');";
+            sS += " $('#panelRegistrationUsername').val('" + cp.Doc.GetText("panelRegistrationUsername") + "');";
+            sS += " $('#panelRegistrationPassword').val('" + cp.Doc.GetText("panelRegistrationPassword") + "');";
             //
             sS += " $('#accountSubmit').click(function(){";
             sS += "     if (!validateRegistrationForm())";
@@ -128,11 +128,11 @@ namespace Contensive.Addons.aoToolPanel
             //
             if (cs.Open("People", "ID=" + cp.User.Id, "", false, "", 1, 1))
             {
-                cp.Doc.set_Var("panelRegistrationFirstName", cs.GetText("firstName"));
-                cp.Doc.set_Var("panelRegistrationLastName", cs.GetText("lastName"));
-                cp.Doc.set_Var("panelRegistrationEmail", cs.GetText("email"));
-                cp.Doc.set_Var("panelRegistrationUsername", cs.GetText("username"));
-                cp.Doc.set_Var("panelRegistrationPassword", cs.GetText("password"));
+                cp.Doc.SetProperty("panelRegistrationFirstName", cs.GetText("firstName"));
+                cp.Doc.SetProperty("panelRegistrationLastName", cs.GetText("lastName"));
+                cp.Doc.SetProperty("panelRegistrationEmail", cs.GetText("email"));
+                cp.Doc.SetProperty("panelRegistrationUsername", cs.GetText("username"));
+                cp.Doc.SetProperty("panelRegistrationPassword", cs.GetText("password"));
             }
             cs.Close();
         }

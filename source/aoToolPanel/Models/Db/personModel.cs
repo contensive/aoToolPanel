@@ -103,10 +103,10 @@ namespace Contensive.Addons.aoToolPanel.Models.Db
         }
         //
         //====================================================================================================
-        public void save(CPBaseClass cp)
-        {
-            base.save(cp);
-        }
+        //public void save(CPBaseClass cp)
+        //{
+        //    base.save(cp);
+        //}
         //
         //====================================================================================================
         public static void delete(CPBaseClass cp, int recordId)

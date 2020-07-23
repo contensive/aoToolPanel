@@ -1,7 +1,5 @@
 
-rem all paths are relative to the git scripts folder
-
-call Env.cmd
+rem build and deliver to deployment folder
 
 call build.cmd
 

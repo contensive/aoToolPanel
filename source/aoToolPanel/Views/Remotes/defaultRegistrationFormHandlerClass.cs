@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 using Contensive.BaseClasses;
 
-namespace Contensive.Addons.aoToolPanel
-{
+namespace Contensive.Addons.aoToolPanel {
     //
     //====================================================================================================
     //
@@ -70,13 +67,13 @@ namespace Contensive.Addons.aoToolPanel
                 //
                 //  authenticate the user
                 //
-                cp.User.LoginByID(cp.User.Id.ToString() );
+                cp.User.LoginByID(cp.User.Id);
                 //
                 s = "";
             }
             else
             {
-                s = cp.Utils.ExecuteAddon("{E31F7A5B-FE69-4CF5-BD16-7F368192D956}");
+                s = cp.Addon.Execute("{E31F7A5B-FE69-4CF5-BD16-7F368192D956}");
             }
             //
             return s;

@@ -10,13 +10,13 @@
 //        public override object Execute(Contensive.BaseClasses.CPBaseClass cp)
 //        {
 //            string s = "";
-//            string username = cp.Doc.get_Var("panelLoginUsername");
-//            string password = cp.Doc.get_Var("panelLoginPassword");
-//            string email = cp.Doc.get_Var("panelLoginEmail");
-//            bool autoLogin = cp.Utils.EncodeBoolean(cp.Doc.get_Var("panelLoginAuto"));
+//            string username = cp.Doc.GetText("panelLoginUsername");
+//            string password = cp.Doc.GetText("panelLoginPassword");
+//            string email = cp.Doc.GetText("panelLoginEmail");
+//            bool autoLogin = cp.Utils.EncodeBoolean(cp.Doc.GetText("panelLoginAuto"));
 //            CPCSBaseClass cs = cp.CSNew();
 //            //
-//            if (cp.Utils.EncodeBoolean(cp.Site.GetProperty("ALLOWEMAILLOGIN", "")))
+//            if (cp.Site.GetBoolean("ALLOWEMAILLOGIN", ""))
 //            {
 //                if (cs.Open("People", "email=" + cp.Db.EncodeSQLText(email), "", false, "", 1, 1))
 //                {

@@ -1,12 +1,7 @@
-C:\Users\jay\Documents\Git\aoToolPanel\source\aoToolPanel\obj\Debug\aoToolPanel.csproj.CoreCompileInputs.cache
-C:\Users\jay\Documents\Git\aoToolPanel\source\aoToolPanel\obj\Debug\ToolPanel.dll
-C:\Users\jay\Documents\Git\aoToolPanel\source\aoToolPanel\obj\Debug\ToolPanel.pdb
-C:\Users\jay\Documents\Git\aoToolPanel\source\aoToolPanel\bin\Debug\ToolPanel.dll
-C:\Users\jay\Documents\Git\aoToolPanel\source\aoToolPanel\bin\Debug\ToolPanel.pdb
-C:\Users\jay\Documents\Git\aoToolPanel\source\aoToolPanel\obj\Debug\aoToolPanel.csprojAssemblyReference.cache
 C:\Git\aoToolPanel\source\aoToolPanel\bin\Debug\ToolPanel.dll
 C:\Git\aoToolPanel\source\aoToolPanel\bin\Debug\ToolPanel.pdb
 C:\Git\aoToolPanel\source\aoToolPanel\bin\Debug\CPBase.dll
+C:\Git\aoToolPanel\source\aoToolPanel\obj\Debug\aoToolPanel.csprojAssemblyReference.cache
 C:\Git\aoToolPanel\source\aoToolPanel\obj\Debug\aoToolPanel.csproj.CoreCompileInputs.cache
 C:\Git\aoToolPanel\source\aoToolPanel\obj\Debug\aoToolPanel.csproj.CopyComplete
 C:\Git\aoToolPanel\source\aoToolPanel\obj\Debug\ToolPanel.dll

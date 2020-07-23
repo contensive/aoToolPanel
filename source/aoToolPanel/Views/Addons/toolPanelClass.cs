@@ -32,30 +32,29 @@ namespace Contensive.Addons {
                 string buttonState = "";
                 string buttonClass = "";
                 string previewHidden = "";
-                bool isPreviewing = false;
                 bool isAccountTabLocked = false;
                 bool isLoginTabPinned = false;
                 bool isLoginTabDefaultPinned = false;
                 bool isAccountTabDefaultPinned = false;
                 //
                 const string layoutCacheName = "toolpanel/toolpanel.html";
-                string layoutHtml = cp.Cache.Read(layoutCacheName);
+                string layoutHtml = cp.Cache.GetText(layoutCacheName);
                 if (string.IsNullOrEmpty(layoutHtml)) {
-                    layoutHtml = cp.File.Read(cp.Site.PhysicalWWWPath + @"toolpanel\toolpanel.html");
-                    cp.Cache.Save(layoutCacheName, layoutHtml);
+                    layoutHtml = cp.WwwFiles.Read( @"toolpanel\toolpanel.html");
+                    cp.Cache.Store(layoutCacheName, layoutHtml);
                 }
                 layout.Load(layoutHtml);
                 //
                 swHints += ", end layout load (" + sw.ElapsedMilliseconds.ToString() + ")";
                 //
-                if (cp.User.GetProperty(upLoginTabIsPinned, "", 0) == "") {
+                if (cp.User.GetText(upLoginTabIsPinned, "") == "") {
                     //
                     swHints += ",loginconfig-1  (" + sw.ElapsedMilliseconds.ToString() + ")";
                     //
                     //
                     // if new user, set the default state of the login tab pin (pinned down or autohide)
                     //
-                    isLoginTabDefaultPinned = cp.Utils.EncodeBoolean(cp.Site.GetProperty(spLoginTabIsPinnedByDefault, "0"));
+                    isLoginTabDefaultPinned = cp.Site.GetBoolean(spLoginTabIsPinnedByDefault, false);
                     cp.User.SetProperty(upLoginTabIsPinned, isLoginTabDefaultPinned.ToString().ToLower(), 0);
                 }
                 //
@@ -67,8 +66,8 @@ namespace Contensive.Addons {
                 //
                 swHints += ",loginconfig-3  (" + sw.ElapsedMilliseconds.ToString() + ")";
                 //
-                isAccountTabDefaultPinned = cp.Utils.EncodeBoolean(cp.Site.GetProperty("toolPanelPinAccountTab", "0"));
-                if (cp.User.GetProperty("isLockedAccountTab", "", 0) == "") {
+                isAccountTabDefaultPinned = cp.Site.GetBoolean("toolPanelPinAccountTab", false);
+                if (cp.User.GetText("isLockedAccountTab") == "") {
                     cp.User.SetProperty("isLockedAccountTab", isAccountTabDefaultPinned.ToString().ToLower(), 0);
                 }
                 //
@@ -84,10 +83,10 @@ namespace Contensive.Addons {
                     //
                     //  check if login tab allowed via settings page
                     //
-                    if (!cp.Utils.EncodeBoolean(cp.Site.GetProperty(spLoginTabAllowed, ""))) {
+                    if (!cp.Site.GetBoolean(spLoginTabAllowed, false)) {
                         layout.SetOuter("#tpLoginTab", "");
                     } else {
-                        isLoginTabPinned = cp.Utils.EncodeBoolean(cp.User.GetProperty(upLoginTabIsPinned, "0", 0));
+                        isLoginTabPinned = cp.User.GetBoolean(upLoginTabIsPinned, false);
                         if (isLoginTabPinned) {
                             jsOnReady += cr + "tpAbortLoginTabClose=true;";
                             jsOnReady += cr + "tpLoginTabIsPinned=true;";
@@ -107,11 +106,11 @@ namespace Contensive.Addons {
                     //
                     //  check if account tab allowed via settings page
                     //
-                    if (cp.Utils.EncodeBoolean(cp.Site.GetProperty("toolPanelShowAccountTab", ""))) {
+                    if (cp.Site.GetBoolean("toolPanelShowAccountTab", false)) {
                         //
                         // Account Tab
                         //
-                        isAccountTabLocked = cp.Utils.EncodeBoolean(cp.User.GetProperty("isLockedAccountTab", "0", 0));
+                        isAccountTabLocked = cp.User.GetBoolean("isLockedAccountTab", false);
                         if (isAccountTabLocked) {
                             copy = "true";
                             jsOnReady += cr + "jQuery('#tpAccountLock').html('<img src=\"/toolPanel/lockClosed.png\" width=\"10\" height=\"10\">');";
@@ -136,7 +135,7 @@ namespace Contensive.Addons {
                             + "<span>Contensive " + cp.Version + "</span>"
                             + "|<span>" + cp.Doc.StartTime + "</span>"
                             + "|<span><a href=\"http://support.Contensive.com/\" target=\"_blank\" class=\"ccAdminLink\">Support</a></span>"
-                            + "|<span><a href=\"" + cp.Site.GetProperty("adminurl", "") + "\" class=\"ccAdminLink\">Admin Home</a></span>"
+                            + "|<span><a href=\"" + cp.Site.GetText("adminurl", "") + "\" class=\"ccAdminLink\">Admin Home</a></span>"
                             + "|<span><a href=\"/\" class=\"ccAdminLink\">Public Home</a></span>"
                             + "</div>"
                             + "";
@@ -153,21 +152,17 @@ namespace Contensive.Addons {
                         swHints += ",end form  (" + sw.ElapsedMilliseconds.ToString() + ")";
                         //
                         editHidden = "";
-                        isDebugging = cp.Utils.EncodeBoolean(cp.Visit.GetProperty("allowDebugging", "0", 0));
-                        //isPreviewing = cp.Utils.EncodeBoolean(cp.Visit.GetProperty("AllowWorkflowRendering", "0", 0));
+                        isDebugging = cp.Visit.GetBoolean("allowDebugging", false);
                         //
                         if (isDebugging) {
                             debugHidden = cr + "<input type=\"hidden\" name=\"1allowDebugging\" value=\"1\">";
                         }
-                        //if (isPreviewing) {
-                        //    previewHidden = cr + "<input type=\"hidden\" name=\"1allowWorkflowRendering\" value=\"1\">";
-                        //}
                         //
                         // Edit button
                         //
                         buttonState = "1";
                         buttonClass = "tpButtonUp";
-                        if (cp.Utils.EncodeBoolean(cp.Visit.GetProperty("allowEditing", "0", 0))) {
+                        if (cp.Visit.GetBoolean("allowEditing", false)) {
                             buttonState = "0";
                             buttonClass = "tpButtonDown";
                             editHidden = "<input type=\"hidden\" name=\"1allowEditing\" value=\"1\">";
@@ -216,7 +211,7 @@ namespace Contensive.Addons {
                         //
                         buttonState = "1";
                         buttonClass = "tpButtonUp";
-                        if (cp.Utils.EncodeBoolean(cp.Visit.GetProperty("AllowAdvancedEditor", "0", 0))) {
+                        if (cp.Visit.GetBoolean("AllowAdvancedEditor", false)) {
                             buttonState = "0";
                             buttonClass = "tpButtonDown";
                             editHidden = "<input type=\"hidden\" name=\"1AllowAdvancedEditor\" value=\"1\">";
@@ -235,32 +230,6 @@ namespace Contensive.Addons {
                         jsOnReady += cr + "jQuery('#tpButtonAdvanced').addClass('" + buttonClass + "');";
                         //
                         swHints += ",end advancedbutton (" + sw.ElapsedMilliseconds.ToString() + ")";
-                        //
-                        //// Preview button
-                        ////
-                        //if (!cp.Utils.EncodeBoolean(cp.Site.GetProperty("allowWorkflowAuthoring", "0"))) {
-                        //    layout.SetOuter("#tpEditTabPreview", "");
-                        //} else {
-                        //    buttonState = "1";
-                        //    buttonClass = "tpButtonUp";
-                        //    if (isPreviewing) {
-                        //        buttonState = "0";
-                        //        buttonClass = "tpButtonDown";
-                        //        previewHidden = "<input type=\"hidden\" name=\"1AllowWorkflowRendering\" value=\"1\">";
-                        //    }
-                        //    copy = ""
-                        //        + cr + editHidden
-                        //        + cr + debugHidden
-                        //        + cr + "<input type=\"hidden\" name=\"1AllowWorkflowRendering\" value=\"" + buttonState + "\">"
-                        //        + cr + "<a id=\"tpButtonPreview\" href=\"#\">Preview</a>";
-                        //    copy = ""
-                        //        + cr + formOpen
-                        //        + cp.Html.Indent(copy, 1)
-                        //        + cr + formClose;
-                        //    layout.SetInner("#tpEditTabPreview", copy);
-                        //    jsOnReady += cr + "jQuery('#tpButtonPreview').click( function () { jQuery(this).parents('form:first').submit(); return false });";
-                        //    jsOnReady += cr + "jQuery('#tpButtonPreview').addClass('" + buttonClass + "');";
-                        //}
                         //
                         // Debug Button
                         //
@@ -304,7 +273,7 @@ namespace Contensive.Addons {
                         //
                         // Admin button
                         //
-                        copy = "<a href=\"" + cp.Site.GetProperty("adminUrl", "/admin") + "\">Admin</a>";
+                        copy = "<a href=\"" + cp.Site.GetText("adminUrl", "/admin") + "\">Admin</a>";
                         layout.SetInner("#tpEditTabAdmin", copy);
                     }
                 }

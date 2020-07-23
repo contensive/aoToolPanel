@@ -16,7 +16,7 @@ namespace Contensive.Addons.aoToolPanel
             try {
                 bool updated = cp.Doc.GetBoolean("acctUpdated");
                 bool errFlag = cp.Doc.GetBoolean("errFlag");
-                bool allowEmailLogin = cp.Doc.GetBoolean("ALLOWEMAILLOGIN", "0");
+                bool allowEmailLogin = cp.Doc.GetBoolean("ALLOWEMAILLOGIN", false);
                 var person = Models.Db.personModel.create(cp, cp.User.Id);
                 if (person == null) {
                     cp.Site.ErrorReport("Person failed to open from user.id");
@@ -28,7 +28,7 @@ namespace Contensive.Addons.aoToolPanel
                     //
                     if (updated || errFlag) {
                         if (errFlag) {
-                            layout.SetInner(".panelInstructionContainer", cp.Html.p(cp.Doc.get_Var("errMessage"), "", "ccError", ""));
+                            layout.SetInner(".panelInstructionContainer", cp.Html.p(cp.Doc.GetText("errMessage"), "", "ccError", ""));
                         } else {
                             layout.SetInner(".panelInstructionContainer", cp.Content.GetCopy("Default Profile Form Updated", "Your profile has been updated."));
                         }
