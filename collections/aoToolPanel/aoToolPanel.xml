@@ -916,6 +916,11 @@ $(function () {
 * --------------------------------------------
 * hanging tabs
 */
+#toolPanel .tpTabs:hover
+{
+	opacity:1.0
+}
+
 #toolPanel .tpTabs 
 {
 	background-color: transparent;
@@ -923,6 +928,7 @@ $(function () {
 	position: absolute;
 	width: 200px;
 	z-index: 9997;
+	opacity: 0.75
 }
 
 #toolPanel .tpTabs > ul 
