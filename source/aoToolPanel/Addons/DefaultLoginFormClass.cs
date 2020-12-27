@@ -5,21 +5,17 @@ namespace Contensive.Addons.aoToolPanel {
     //
     //====================================================================================================
     //
-    public class defaultLoginFormClass : Contensive.BaseClasses.AddonBaseClass
-    {
+    public class DefaultLoginFormClass : AddonBaseClass {
         //
         //====================================================================================================
         //
-        public override object Execute(Contensive.BaseClasses.CPBaseClass cp)
+        public override object Execute(CPBaseClass cp)
         {
             string s = "";
-            //string js = "";
             bool errFlag = cp.Utils.EncodeBoolean(cp.Doc.GetText("Error Flag"));    //   problem with login
             bool emailFlag = cp.Utils.EncodeBoolean(cp.Doc.GetText("Email Flag"));  //  email password sent
             bool errEmailFlag = cp.Utils.EncodeBoolean(cp.Doc.GetText("Email Error Flag")); //  problem with email password
             CPBlockBaseClass layout = cp.BlockNew();
-            //string defaultLoginInstructions = "You are attempting to enter an access controlled area. Continue only if you have authority to enter this area. Information about your visit will be recorded for security purposes.";
-            //string defaultEmailInstructions = "If you are a member of the system and can not remember your password, enter your email address below and we will email your matching username and password.";
             string hiddenString = "";
             //
             layout.OpenFile(@"toolpanel\loginform.html");

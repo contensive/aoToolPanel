@@ -1,10 +1,9 @@
 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Contensive.Addons.aoToolPanel;
 using Contensive.BaseClasses;
-using static Contensive.Addons.aoToolPanel.Constants;
+using System;
 using System.Diagnostics;
+using static Contensive.Addons.aoToolPanel.Constants;
 
 namespace Contensive.Addons {
     //
@@ -13,7 +12,7 @@ namespace Contensive.Addons {
     /// Addon that is added after the body tag
     /// calls other classes for edit tool panel, the profile panel, 
     /// </summary>
-    public class toolPanelClass : Contensive.BaseClasses.AddonBaseClass {
+    public class ToolPanelClass : Contensive.BaseClasses.AddonBaseClass {
         //
         public override object Execute(CPBaseClass cp) {
             var sw = Stopwatch.StartNew();
@@ -43,6 +42,9 @@ namespace Contensive.Addons {
                     layoutHtml = cp.WwwFiles.Read( @"toolpanel\toolpanel.html");
                     cp.Cache.Store(layoutCacheName, layoutHtml);
                 }
+                //
+                // -- add login form
+                layoutHtml = layoutHtml.Replace("{{loginForm}}", cp.Addon.Execute(Constants.guidContensiveLoginForm));
                 layout.Load(layoutHtml);
                 //
                 swHints += ", end layout load (" + sw.ElapsedMilliseconds.ToString() + ")";

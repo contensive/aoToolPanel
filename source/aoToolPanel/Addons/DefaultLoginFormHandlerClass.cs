@@ -1,6 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 using Contensive.BaseClasses;
 
 namespace Contensive.Addons.aoToolPanel {
@@ -8,7 +6,7 @@ namespace Contensive.Addons.aoToolPanel {
     //
     //====================================================================================================
     //
-    public class defaultLoginFormHandlerClass : Contensive.BaseClasses.AddonBaseClass {
+    public class DefaultLoginFormHandlerClass : Contensive.BaseClasses.AddonBaseClass {
         //
         //====================================================================================================
         //
@@ -31,7 +29,7 @@ namespace Contensive.Addons.aoToolPanel {
                 }
                 cs.Close();
                 //
-                s = cp.Addon.Execute(Constants.guidDefaultLoginForm);
+                s = cp.Addon.Execute(Constants.guidLoginForm);
             } else {
                 //
                 if (!cp.Site.GetBoolean("ALLOWEMAILLOGIN", false)) {
@@ -42,7 +40,7 @@ namespace Contensive.Addons.aoToolPanel {
                 //
                 if (!cp.User.Login(login, password, autoLogin)) {
                     cp.Doc.SetProperty("Error Flag", "1");
-                    s = cp.Addon.Execute(Constants.guidDefaultLoginForm);
+                    s = cp.Addon.Execute(Constants.guidLoginForm);
                 }
             }
             //

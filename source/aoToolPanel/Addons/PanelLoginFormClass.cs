@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Contensive.BaseClasses;
 
 namespace Contensive.Addons.aoToolPanel {
     //
@@ -12,7 +8,8 @@ namespace Contensive.Addons.aoToolPanel {
         //====================================================================================================
         //
         public override object Execute(Contensive.BaseClasses.CPBaseClass cp) {
-            string s = cp.Addon.Execute(Constants.guidDefaultLoginForm);
+            string s = cp.Addon.Execute(Constants.guidContensiveLoginForm);
+            //string s = cp.Addon.Execute(Constants.guidLoginForm);
             //
             s = cp.Html.div(s, "", "", "panelFormContainer");
             //

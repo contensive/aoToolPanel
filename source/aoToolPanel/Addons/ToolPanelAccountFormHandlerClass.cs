@@ -1,19 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 using Contensive.BaseClasses;
 using static Contensive.Addons.aoToolPanel.Constants;
 
-namespace Contensive.Addons.aoToolPanel
-{
+namespace Contensive.Addons.aoToolPanel {
     //
     //====================================================================================================
     //
-    public class toolPanelAccountFormHandlerClass : Contensive.BaseClasses.AddonBaseClass {
+    public class ToolPanelAccountFormHandlerClass : AddonBaseClass {
         //
         //====================================================================================================
         //
-        public override object Execute(Contensive.BaseClasses.CPBaseClass cp) {
+        public override object Execute(CPBaseClass cp) {
             bool errFlag = false;
             string firstName = cp.Doc.GetText("panelAccountFirstName");
             string lastName = cp.Doc.GetText("panelAccountLastName");
@@ -21,7 +18,6 @@ namespace Contensive.Addons.aoToolPanel
             string username = cp.Doc.GetText("panelAccountUsername");
             string password = cp.Doc.GetText("panelAccountPassword");
             CPCSBaseClass cs = cp.CSNew();
-            string sql = "";
             // if allowEmailLogin -- then ignore username input, it is not valid
             bool allowEmailLogin = cp.Site.GetBoolean("ALLOWEMAILLOGIN", false);
             //
@@ -35,6 +31,7 @@ namespace Contensive.Addons.aoToolPanel
                 cp.Doc.SetProperty("errFlag", "1");
                 cp.Doc.SetProperty("errMessage", "One or more required fields were empty.");
             } else {
+                string sql = "";
                 //
                 //  check for duplicate in username if account requires username
                 //

@@ -5,7 +5,7 @@ namespace Contensive.Addons.aoToolPanel {
     //
     //====================================================================================================
     //
-    public class defaultRegistrationFormHandlerClass : Contensive.BaseClasses.AddonBaseClass
+    public class DefaultRegistrationFormHandlerClass : Contensive.BaseClasses.AddonBaseClass
     {
         //
         //====================================================================================================

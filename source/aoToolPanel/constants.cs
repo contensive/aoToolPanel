@@ -13,7 +13,12 @@ namespace Contensive.Addons.aoToolPanel {
         //
         // -- 
         public const string guidToolPanelAccountForm = "{7A057715-5CDD-4D9F-A12A-5CCB61F93974}";
-        public const string guidDefaultLoginForm = "{37B7EDB3-7BE0-4E89-8012-16F0CDEED218}";
+        //
+        // -- built in login form
+        public const string guidLoginForm = "{37B7EDB3-7BE0-4E89-8012-16F0CDEED218}";
+        //
+        // -- contensive login form
+        public const string guidContensiveLoginForm = "{E23C5941-19C2-4164-BCFD-83D6DD42F651}";
         //
         public const string cr = "\r\n\t";
         //

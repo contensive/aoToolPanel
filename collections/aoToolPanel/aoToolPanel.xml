@@ -195,7 +195,7 @@ end function]]></Code>
 		<JavascriptInHead><![CDATA[
 
 /*
-properties
+properties2
 */
 var tpLoginTabIsPinned = false;
 var isLockedAccountTab = false;
@@ -409,6 +409,8 @@ function tpToggleLoginPanel(e) {
 /*
 */
 function tpOpenLoginPanel(e) {
+	// load form server-side
+	isLoadedLoginPanel=true;
     isOpenLoginPanel = true;
     if (!isLoadedLoginPanel) {
         setLoginWait(e);

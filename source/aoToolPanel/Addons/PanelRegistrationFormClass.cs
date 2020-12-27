@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Contensive.BaseClasses;
 
-namespace Contensive.Addons.aoToolPanel
-{
+namespace Contensive.Addons.aoToolPanel {
     //
     //====================================================================================================
     //
-    public class panelRegistrationFormClass : Contensive.BaseClasses.AddonBaseClass
+    public class PanelRegistrationFormClass : Contensive.BaseClasses.AddonBaseClass
     {
         //
         //====================================================================================================

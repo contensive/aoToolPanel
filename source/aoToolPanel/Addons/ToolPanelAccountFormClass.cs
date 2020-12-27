@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Contensive.BaseClasses;
 
-namespace Contensive.Addons.aoToolPanel
-{
+using Contensive.BaseClasses;
+using System;
+
+namespace Contensive.Addons.aoToolPanel {
     //
     //====================================================================================================
     //
-    public class toolPanelAccountFormClass : Contensive.BaseClasses.AddonBaseClass
+    public class ToolPanelAccountFormClass : Contensive.BaseClasses.AddonBaseClass
     {
         public override object Execute(Contensive.BaseClasses.CPBaseClass cp)
         {
