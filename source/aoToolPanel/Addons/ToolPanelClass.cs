@@ -39,12 +39,18 @@ namespace Contensive.Addons {
                 const string layoutCacheName = "toolpanel/toolpanel.html";
                 string layoutHtml = cp.Cache.GetText(layoutCacheName);
                 if (string.IsNullOrEmpty(layoutHtml)) {
-                    layoutHtml = cp.WwwFiles.Read( @"toolpanel\toolpanel.html");
+                    layoutHtml = cp.WwwFiles.Read(@"toolpanel\toolpanel.html");
                     cp.Cache.Store(layoutCacheName, layoutHtml);
                 }
                 //
                 // -- add login form
-                layoutHtml = layoutHtml.Replace("{{loginForm}}", cp.Addon.Execute(Constants.guidContensiveLoginForm));
+                string loginForm = cp.Addon.Execute(Constants.guidContensiveLoginForm);
+                if (string.IsNullOrEmpty(loginForm)) {
+                    cp.Response.Redirect(cp.Request.PathPage + "?" + cp.Request.QueryString);
+                    return "";
+                }
+
+                layoutHtml = layoutHtml.Replace("{{loginForm}}", loginForm);
                 layout.Load(layoutHtml);
                 //
                 swHints += ", end layout load (" + sw.ElapsedMilliseconds.ToString() + ")";
