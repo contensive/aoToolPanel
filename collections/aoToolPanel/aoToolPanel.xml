@@ -929,7 +929,7 @@ $(function () {
 	right: 0;
 	position: absolute;
 	width: 200px;
-	z-index: 9997;
+	z-index: 9999;
 	top:0;
 }
 

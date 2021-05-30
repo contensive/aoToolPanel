@@ -9,7 +9,7 @@ rem
 c:
 cd \Git\aoToolPanel\scripts
 
-set appName=app200509
+set appName=app210521
 set collectionName=aoToolPanel
 set solutionName=aoToolPanel.sln
 set collectionPath=..\collections\aoToolPanel\
