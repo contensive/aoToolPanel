@@ -18,6 +18,10 @@ namespace Contensive.Addons {
             var sw = Stopwatch.StartNew();
             try {
                 //
+                // -- if in admin site, do not display
+                string adminRoute = cp.GetAppConfig().adminRoute;
+                if (cp.Request.PathPage.Equals("/" + adminRoute)) { return ""; }
+                //
                 // -- execute login form if not authenticated to execute authentication
                 string loginForm = "";
                 if (!cp.User.IsAuthenticated) {
