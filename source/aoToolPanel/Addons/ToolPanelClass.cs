@@ -18,9 +18,22 @@ namespace Contensive.Addons {
             var sw = Stopwatch.StartNew();
             try {
                 //
-                // -- if in admin site, do not display
-                string adminRoute = cp.GetAppConfig().adminRoute;
-                if (cp.Request.PathPage.Equals("/" + adminRoute)) { return ""; }
+                // -- if contensive version < 21.11.19.1 or siteProperty(allowToolPanel) is not true return
+                bool allowToolPanel = cp.Doc.IsProperty("allowToolPanel") && cp.Doc.GetBoolean("allowToolPanel");
+                if ( !allowToolPanel ) {
+                    //
+                    // -- allow-flag false or missing, if legacy c5 code, allow, else block
+                    string[] versionSplit = cp.Version.Split('.');
+                    if (versionSplit.Length < 4) { return ""; }
+                    bool legacyVersion = (cp.Utils.EncodeInteger(versionSplit[0]) < 21) || (cp.Utils.EncodeInteger(versionSplit[1]) < 11) || (cp.Utils.EncodeInteger(versionSplit[2]) < 19) || (cp.Utils.EncodeInteger(versionSplit[2]) < 1);
+                    if (!legacyVersion) { return ""; }
+                    //
+                    // -- legacy version, block admin site only
+                    string adminRoute = cp.GetAppConfig().adminRoute;
+                    string pathpage = cp.Request.PathPage;
+                    if (pathpage.Equals("/" + adminRoute)) { return ""; }
+                    if ((pathpage.Length>10) &&  (pathpage.ToLowerInvariant().Substring(0,11).Equals("/backoffice"))) { return ""; }
+                }
                 //
                 // -- execute login form if not authenticated to execute authentication
                 string loginForm = "";
