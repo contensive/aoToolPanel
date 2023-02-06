@@ -148,6 +148,7 @@ namespace Contensive.Addons {
                             layout.SetOuter("#tpEditTab", "");
                         } else {
                             //
+                            // -- footer
                             string footer = ""
                                 + cr + "<div class=\"tpInner\">"
                                 + "<span>Contensive " + cp.Version + "</span>"
@@ -159,6 +160,7 @@ namespace Contensive.Addons {
                                 + "";
                             footer = cp.Html.div(footer, "", "", "toolPanelFooter");
                             //
+                            // -- common form open and clowe
                             string formOpen = ""
                                 + "<form method=\"post\" action=\"?" + cp.Doc.RefreshQueryString + "\" style=\"display:inline;\">"
                                 + "<input type=\"hidden\" name=\"ccFormSN\" value=\"1\">"
@@ -176,133 +178,130 @@ namespace Contensive.Addons {
                             if (isDebugging) {
                                 debugHidden = cr + "<input type=\"hidden\" name=\"1allowDebugging\" value=\"1\">";
                             }
-                            //
-                            // Edit button
-                            //
-                            string buttonState = "1";
-                            string buttonClass = "tpButtonUp";
-                            if (cp.Visit.GetBoolean("allowEditing", false)) {
-                                buttonState = "0";
-                                buttonClass = "tpButtonDown";
-                                editHidden = "<input type=\"hidden\" name=\"1allowEditing\" value=\"1\">";
-                            }
-                            string previewHidden = "";
-                            copy = ""
-                                + debugHidden
-                                + previewHidden
-                                + cr + "<input type=\"hidden\" name=\"1allowEditing\" value=\"" + buttonState + "\">"
-                                + cr + "<a id=\"tpButtonEdit\" href=\"#\">Edit</a>";
-                            copy = ""
-                                + cr + formOpen
-                                + cp.Html.Indent(copy, 1)
-                                + cr + formClose;
-                            layout.SetInner("#tpEditTabEdit", copy);
-                            jsOnReady += cr + "jQuery('#tpButtonEdit').click( function () { jQuery(this).parents('form:first').submit(); return false });";
-                            jsOnReady += cr + "jQuery('#tpButtonEdit').addClass('" + buttonClass + "');";
-                            //
-                            swHints += ",end editbutton  (" + sw.ElapsedMilliseconds.ToString() + ")";
-                            //
-                            // Quick Edit button
-                            //
-                            buttonState = "1";
-                            buttonClass = "tpButtonUp";
-                            if (cp.Visit.GetBoolean("allowQuickEditor", false)) {
-                                buttonState = "0";
-                                buttonClass = "tpButtonDown";
-                                editHidden = "<input type=\"hidden\" name=\"1AllowQuickEditor\" value=\"1\">";
-                            }
-                            string quickCaption = (cp.Site.GetBoolean("ALLOW ADDONLIST EDITOR FOR QUICK EDITOR", false)) ? "Page&nbsp;Builder" : "Quick&nbsp;Edit";
-                            copy = ""
-                                + debugHidden
-                                + previewHidden
-                                + cr + "<input type=\"hidden\" name=\"1AllowQuickEditor\" value=\"" + buttonState + "\">"
-                                + cr + "<a id=\"tpButtonQuick\" href=\"#\">" + quickCaption + "</a>";
-                            copy = ""
-                                + cr + formOpen
-                                + cp.Html.Indent(copy, 1)
-                                + cr + formClose;
-                            layout.SetInner("#tpEditTabQuick", copy);
-                            jsOnReady += cr + "jQuery('#tpButtonQuick').click( function () { jQuery(this).parents('form:first').submit(); return false });";
-                            jsOnReady += cr + "jQuery('#tpButtonQuick').addClass('" + buttonClass + "');";
-                            //
-                            swHints += ",end quickeditbutton (" + sw.ElapsedMilliseconds.ToString() + ")";
-                            //
-                            // Advanced button
-                            //
-                            buttonState = "1";
-                            buttonClass = "tpButtonUp";
-                            if (cp.Visit.GetBoolean("AllowAdvancedEditor", false)) {
-                                buttonState = "0";
-                                buttonClass = "tpButtonDown";
-                                editHidden = "<input type=\"hidden\" name=\"1AllowAdvancedEditor\" value=\"1\">";
-                            }
-                            copy = ""
-                                + debugHidden
-                                + previewHidden
-                                + cr + "<input type=\"hidden\" name=\"1AllowAdvancedEditor\" value=\"" + buttonState + "\">"
-                                + cr + "<a id=\"tpButtonAdvanced\" href=\"#\">Advanced</a>";
-                            copy = ""
-                                + cr + formOpen
-                                + cp.Html.Indent(copy, 1)
-                                + cr + formClose;
-                            layout.SetInner("#tpEditTabAdv", copy);
-                            jsOnReady += cr + "jQuery('#tpButtonAdvanced').click( function () { jQuery(this).parents('form:first').submit(); return false });";
-                            jsOnReady += cr + "jQuery('#tpButtonAdvanced').addClass('" + buttonClass + "');";
-                            //
-                            swHints += ",end advancedbutton (" + sw.ElapsedMilliseconds.ToString() + ")";
-                            //
-                            // Debug Button
-                            //
-                            if (cp.User.IsDeveloper) {
-                                buttonState = "1";
-                                buttonClass = "tpButtonUp";
-                                if (isDebugging) {
+                            {
+                                //
+                                // -- Content
+                                string buttonState = "1";
+                                string buttonClass = "tpButtonUp";
+                                if (cp.Visit.GetBoolean("allowEditing", false)) {
                                     buttonState = "0";
                                     buttonClass = "tpButtonDown";
-                                    //editHidden = "<input type=\"hidden\" name=\"1AllowAdvancedEditor\" value=\"1\">";
+                                    editHidden = "<input type=\"hidden\" name=\"1allowEditing\" value=\"1\">";
                                 }
                                 copy = ""
-                                    + editHidden
-                                    + previewHidden
-                                    + cr + "<input type=\"hidden\" name=\"1allowDebugging\" value=\"" + buttonState + "\">"
-                                    + cr + "<a id=\"tpButtonDebug\" href=\"#\">Debug</a>";
+                                    + debugHidden
+                                    + cr + "<input type=\"hidden\" name=\"1allowEditing\" value=\"" + buttonState + "\">"
+                                    + cr + "<button type=submit id=\"tpButtonContent\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit content on this page.\">Content</a>";
                                 copy = ""
                                     + cr + formOpen
                                     + cp.Html.Indent(copy, 1)
                                     + cr + formClose;
-                                layout.SetInner("#tpEditTabDebug", copy);
-                                jsOnReady += cr + "jQuery('#tpButtonDebug').click( function () { jQuery(this).parents('form:first').submit(); return false });";
-                                jsOnReady += cr + "jQuery('#tpButtonDebug').addClass('" + buttonClass + "');";
-                                //copy = "0";
-                                //if (allowDebugging)
-                                //{
-                                //    copy = "1";
-                                //}
-                                //copy = ""
-                                //    + formOpen
-                                //    + "<a href=\"#\" class=\"tpButtonUp\">Debug</a>"
-                                //    + editHidden
-                                //    + "<input type=\"hidden\" name=\"1allowDebugging\" value=\"" + copy + "\">"
-                                //    + formClose;
-                                //block.SetInner("#tpEditTabDebug", copy);
-                            } else {
-                                layout.SetOuter("#tpEditTabDebug", "");
+                                layout.SetInner("#tpEditTabContent", copy);
+                                //jsOnReady += cr + "jQuery('#tpButtonContent').click( function () { jQuery(this).parents('form:first').submit(); return false });";
+                                jsOnReady += cr + "jQuery('#tpButtonContent').addClass('" + buttonClass + "');";
+                            }
+                            {
+                                //
+                                // -- blocks
+                                string buttonState = "1";
+                                string buttonClass = "tpButtonUp";
+                                if (cp.Visit.GetBoolean("allowQuickEditor", false)) {
+                                    buttonState = "0";
+                                    buttonClass = "tpButtonDown";
+                                    editHidden = "<input type=\"hidden\" name=\"1AllowQuickEditor\" value=\"1\">";
+                                }
+                                copy = ""
+                                    + debugHidden
+                                    + cr + "<input type=\"hidden\" name=\"1AllowQuickEditor\" value=\"" + buttonState + "\">"
+                                    + cr + "<button type=submit id=\"tpButtonQuick\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Add and manage design blocks on this page.\">Blocks</a>";
+                                copy = ""
+                                    + cr + formOpen
+                                    + cp.Html.Indent(copy, 1)
+                                    + cr + formClose;
+                                layout.SetInner("#tpEditTabBlocks", copy);
+                                //jsOnReady += cr + "jQuery('#tpButtonQuick').click( function () { jQuery(this).parents('form:first').submit(); return false });";
+                                jsOnReady += cr + "jQuery('#tpButtonQuick').addClass('" + buttonClass + "');";
+                                //
+                                swHints += ",end quickeditbutton (" + sw.ElapsedMilliseconds.ToString() + ")";
+                            }
+                            {
+                                //
+                                // -- page
+                                layout.SetInner("#tpEditTabPage", "<a href=\"" + cp.Site.GetText("adminUrl") + "?af=4&aa=2&ad=1&cid=" + cp.Content.GetID("page content") + "&id=" + cp.Doc.PageId + "\"  data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit page settings.\" >Page</a>");
+                            }
+                            {
+                                //
+                                // -- Template
+                                layout.SetInner("#tpEditTabTemplate", "<a href=\"" + cp.Site.GetText("adminUrl") + "?af=4&aa=2&ad=1&cid=" + cp.Content.GetID("page templates") + "&id=" + cp.Doc.TemplateId + "\"  data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit this template.\">Template</a>");
+                            }
+                            //
+                            swHints += ",end editbutton  (" + sw.ElapsedMilliseconds.ToString() + ")";
+                            //
+                            // Advanced button
+                            //
+                            //{
+                            //    string buttonState = "1";
+                            //    string buttonClass = "tpButtonUp";
+                            //    if (cp.Visit.GetBoolean("AllowAdvancedEditor", false)) {
+                            //        buttonState = "0";
+                            //        buttonClass = "tpButtonDown";
+                            //        editHidden = "<input type=\"hidden\" name=\"1AllowAdvancedEditor\" value=\"1\">";
+                            //    }
+                            //    copy = ""
+                            //        + debugHidden
+                            //        + cr + "<input type=\"hidden\" name=\"1AllowAdvancedEditor\" value=\"" + buttonState + "\">"
+                            //        + cr + "<a id=\"tpButtonAdvanced\" href=\"#\">Advanced</a>";
+                            //    copy = ""
+                            //        + cr + formOpen
+                            //        + cp.Html.Indent(copy, 1)
+                            //        + cr + formClose;
+                            //    layout.SetInner("#tpEditTabAdv", copy);
+                            //    jsOnReady += cr + "jQuery('#tpButtonAdvanced').click( function () { jQuery(this).parents('form:first').submit(); return false });";
+                            //    jsOnReady += cr + "jQuery('#tpButtonAdvanced').addClass('" + buttonClass + "');";
+                            //    //
+                            //    swHints += ",end advancedbutton (" + sw.ElapsedMilliseconds.ToString() + ")";
+                            //}
+                            //
+                            // Debug Button
+                            //
+                            {
+                                if (cp.User.IsDeveloper) {
+                                    string buttonState = "1";
+                                    string buttonClass = "tpButtonUp";
+                                    if (isDebugging) {
+                                        buttonState = "0";
+                                        buttonClass = "tpButtonDown";
+                                        //editHidden = "<input type=\"hidden\" name=\"1AllowAdvancedEditor\" value=\"1\">";
+                                    }
+                                    copy = ""
+                                        + editHidden
+                                        + cr + "<input type=\"hidden\" name=\"1allowDebugging\" value=\"" + buttonState + "\">"
+                                        + cr + "<a id=\"tpButtonDebug\" href=\"#\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Toggle debug mode to view html hints for debugging.\">Debug</a>";
+                                    copy = ""
+                                        + cr + formOpen
+                                        + cp.Html.Indent(copy, 1)
+                                        + cr + formClose;
+                                    layout.SetInner("#tpEditTabDebug", copy);
+                                    jsOnReady += cr + "jQuery('#tpButtonDebug').click( function () { jQuery(this).parents('form:first').submit(); return false });";
+                                    jsOnReady += cr + "jQuery('#tpButtonDebug').addClass('" + buttonClass + "');";
+                                } else {
+                                    layout.SetOuter("#tpEditTabDebug", "");
+                                }
                             }
                             //
                             swHints += ",end debugbutton  (" + sw.ElapsedMilliseconds.ToString() + ")";
                             //
                             // Admin button
                             //
-                            copy = "<a href=\"" + cp.Site.GetText("adminUrl", "/admin") + "\">Admin</a>";
+                            copy = "<a href=\"" + cp.Site.GetText("adminUrl", "/admin") + "\"  data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Link to the admin site.\">Admin</a>";
                             layout.SetInner("#tpEditTabAdmin", copy);
                         }
                     }
                     string doc = ""
-        + cp.Html.div("<!-- start -->" + layout.GetHtml() + "<!-- end -->", "", "", "toolPanel")
-        + cp.Html.div(cp.Doc.Body, "", "", "toolPanelContent")
-        + "";
+                        + cp.Html.div("<!-- start -->" + layout.GetHtml() + "<!-- end -->", "", "", "toolPanel")
+                        + cp.Html.div(cp.Doc.Body, "", "", "toolPanelContent")
+                        + "";
                     cp.Doc.Body = doc;
-                    //string manualJs = "jQuery(document).ready(function(){" + jsOnReady + "})";
                     string manualJs = ""
                         + "function bindReadyState(callback){"
                         + " if (document.readyState != 'loading') callback();"
@@ -312,12 +311,8 @@ namespace Contensive.Addons {
                         + " bindReadyState(function(){" + jsOnReady + "});"
                         + "";
                     string manualStyles = "#toolPanel #tpDraggable {left:" + cp.Visit.GetInteger("toolPanelPositionLeft") + "px;display:block}";
-                    //string bodyEnd = ""
-                    //    + cr + "<script type=\"text/javascript\" language=\"javascript\">jQuery(document).ready(function(){" + jsOnReady + "})</script>"
-                    //    + cr + "<style>#toolPanel #tpDraggable {left:" + cp.Visit.GetInteger("toolPanelPositionLeft") + "px;display:block}</style>";
                     cp.Doc.AddHeadJavascript(manualJs);
                     cp.Doc.AddHeadStyle(manualStyles);
-                    //cp.Doc.AddBodyEnd(bodyEnd);
                     //
                     swHints += ",exit  (" + sw.ElapsedMilliseconds.ToString() + ")";
                     //
