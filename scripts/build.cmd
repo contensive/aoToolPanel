@@ -9,7 +9,6 @@ rem
 c:
 cd \Git\aoToolPanel\scripts
 
-set appName=menucrm0210
 set collectionName=aoToolPanel
 set solutionName=aoToolPanel.sln
 set collectionPath=..\collections\aoToolPanel\
@@ -89,9 +88,23 @@ rem
 echo Build addon collection
 rem
 
+rem remove old ui files
+del "%collectionPath%"\*.html
+del "%collectionPath%"\*.jpg
+del "%collectionPath%"\*.png
+del "%collectionPath%"\*.css
+del "%collectionPath%"\*.js
+
 rem remove old DLL files from the collection folder
 del "%collectionPath%"\*.DLL
 del "%collectionPath%"\*.dll.config
+
+rem copy new  ui files
+copy ..\ui\*.html  "%collectionPath%"
+copy ..\ui\*.jpg  "%collectionPath%"
+copy ..\ui\*.png  "%collectionPath%"
+copy ..\ui\*.css  "%collectionPath%"
+copy ..\ui\*.js  "%collectionPath%"
 
 rem copy bin folder assemblies to collection folder
 copy "%binPath%*.dll" "%collectionPath%"
@@ -104,4 +117,23 @@ del "%collectionName%.zip" /Q
 "c:\program files\7-zip\7z.exe" a "%collectionName%.zip"
 xcopy "%collectionName%.zip" "%deploymentFolderRoot%%versionNumber%" /Y
 cd ..\..\scripts
+
+rem ==============================================================
+rem
+echo clean collection folder
+rem
+
+del "%collectionPath%"\*.html
+del "%collectionPath%"\*.jpg
+del "%collectionPath%"\*.png
+del "%collectionPath%"\*.css
+del "%collectionPath%"\*.js
+del "%collectionPath%"\*.dll
+del "%collectionPath%"\*.dll.config
+
+pause
+
+
+
+
 

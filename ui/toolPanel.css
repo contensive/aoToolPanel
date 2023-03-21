@@ -5,6 +5,13 @@
 .tpFixedTabs,.tpTabs {opacity:0.8}
 .tpFixedTabs:hover,.tpTabs:hover {opacity:1.0}
 
+#toolPanel .tpPanels,
+#toolPanel .tpTabs,
+#toolPanel #containment-wrapper
+{
+    font-family: 'Open Sans', sans-serif !important
+}
+
 #toolPanel 
 {
     background-color: transparent;
@@ -238,13 +245,13 @@ background-color: transparent;
 	background: -ms-linear-gradient(top, #f8f8f8, #e0e0e0);
 	background: -o-linear-gradient(top, #f8f8f8, #e0e0e0);
 	background: -webkit-linear-gradient(top, #f8f8f8, #e0e0e0);
-	margin: 6px 2px 4px 2px;
-	padding: 6px;
-	border: 1px solid #ddd;
-	border-radius: 3px 3px 3px 3px;
-	text-decoration: none;
-	color: #555;
-	text-transform: uppercase;
+	margin: 6px 2px 4px 2px !important;
+	padding: 6px !important;
+	border: 1px solid #ddd !important;
+	border-radius: 3px 3px 3px 3px !important;
+	text-decoration: none !important;
+	color: #555 !important;
+	text-transform: uppercase !important;
 	/*
 	*/
 }
