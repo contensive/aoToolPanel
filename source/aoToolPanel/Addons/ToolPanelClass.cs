@@ -180,7 +180,7 @@ namespace Contensive.Addons {
                             }
                             {
                                 //
-                                // -- Content
+                                // -- Edit
                                 string buttonState = "1";
                                 string buttonClass = "tpButtonUp";
                                 if (cp.Visit.GetBoolean("allowEditing", false)) {
@@ -191,7 +191,7 @@ namespace Contensive.Addons {
                                 copy = ""
                                     + debugHidden
                                     + cr + "<input type=\"hidden\" name=\"1allowEditing\" value=\"" + buttonState + "\">"
-                                    + cr + "<button type=submit id=\"tpButtonContent\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit content on this page.\">Content</a>";
+                                    + cr + "<button type=submit id=\"tpButtonContent\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit content on this page.\">Edit</a>";
                                 copy = ""
                                     + cr + formOpen
                                     + cp.Html.Indent(copy, 1)
@@ -202,7 +202,7 @@ namespace Contensive.Addons {
                             }
                             {
                                 //
-                                // -- blocks
+                                // -- widgets
                                 string buttonState = "1";
                                 string buttonClass = "tpButtonUp";
                                 if (cp.Visit.GetBoolean("allowQuickEditor", false)) {
@@ -213,7 +213,7 @@ namespace Contensive.Addons {
                                 copy = ""
                                     + debugHidden
                                     + cr + "<input type=\"hidden\" name=\"1AllowQuickEditor\" value=\"" + buttonState + "\">"
-                                    + cr + "<button type=submit id=\"tpButtonQuick\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Add and manage design blocks on this page.\">Blocks</a>";
+                                    + cr + "<button type=submit id=\"tpButtonQuick\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Manage widgets on this page.\">Widgets</a>";
                                 copy = ""
                                     + cr + formOpen
                                     + cp.Html.Indent(copy, 1)

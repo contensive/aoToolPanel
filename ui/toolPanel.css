@@ -5,16 +5,11 @@
 .tpFixedTabs,.tpTabs {opacity:0.8}
 .tpFixedTabs:hover,.tpTabs:hover {opacity:1.0}
 
-#toolPanel .tpPanels,
-#toolPanel .tpTabs,
-#toolPanel #containment-wrapper
-{
-    font-family: 'Open Sans', sans-serif !important
-}
-
 #toolPanel 
 {
-    background-color: transparent;
+    background-color: transparent;	
+    font-family: 'Open Sans', sans-serif;
+	
 }
 #toolPanel * 
 {
@@ -130,13 +125,17 @@
 	padding: 0 20px;
 	border-top: 0;
 }
+#toolPanel .tpTabs > ul.tpOpen 
+{
+	background-color: #eee;
+}
 #toolPanel .tpTabs > ul li
 {
 	list-style-type: none;
 }
-#toolPanel .tpTabs > ul.tpOpen 
+#toolPanel .tpTabs > ul li Button
 {
-	background-color: #eee;
+	padding: 5px !important;
 }
 #toolPanel .tpTabs > ul li.tpButton 
 {
@@ -193,12 +192,12 @@ background-color: transparent;
 }
 #toolPanel .tpFixedTabs > ul 
 {
-	background-color: #d8d8d8;
-	background: -moz-linear-gradient(top, #f7f7f7, #cecfcc);
-	background: -moz-linear-gradient(to bottom, #f7f7f7, #cecfcc);
-	background: -ms-linear-gradient(top, #f7f7f7, #cecfcc);
-	background: -o-linear-gradient(top, #f7f7f7, #cecfcc);
-	background: -webkit-linear-gradient(top, #f7f7f7, #cecfcc);
+	background-color: #576c7f;
+	background: -moz-linear-gradient(top, #89abc9, #576c7f);
+	background: -moz-linear-gradient(to bottom, #89abc9, #576c7f);
+	background: -ms-linear-gradient(top, #89abc9, #576c7f);
+	background: -o-linear-gradient(top, #89abc9, #576c7f);
+	background: -webkit-linear-gradient(top, #89abc9, #576c7f);
 	border-radius: 0 0 10px 10px;
 	box-shadow: 1px 1px 3px #666666;
 	display: table;
@@ -234,6 +233,8 @@ background-color: transparent;
 #toolPanel ul#tpEditTab li.tpEditButton 
 {
 	float: left;
+    min-width: 4rem;
+    margin: 0 4px;
 }
 #toolPanel ul#tpEditTab li.tpEditButton a,
 #toolPanel ul#tpEditTab li.tpEditButton button
@@ -245,15 +246,14 @@ background-color: transparent;
 	background: -ms-linear-gradient(top, #f8f8f8, #e0e0e0);
 	background: -o-linear-gradient(top, #f8f8f8, #e0e0e0);
 	background: -webkit-linear-gradient(top, #f8f8f8, #e0e0e0);
-	margin: 6px 2px 4px 2px !important;
-	padding: 6px !important;
-	border: 1px solid #ddd !important;
-	border-radius: 3px 3px 3px 3px !important;
-	text-decoration: none !important;
-	color: #555 !important;
-	text-transform: uppercase !important;
-	/*
-	*/
+	margin: 6px 2px 4px 2px;
+	padding: 6px;
+	border: 1px solid #ddd;
+	border-radius: 3px 3px 3px 3px;
+	text-decoration: none;
+	color: #555;
+	text-transform: uppercase;
+    text-align: center;
 }
 #toolPanel ul#tpEditTab li.tpEditButton a.tpButtonDown ,
 #toolPanel ul#tpEditTab li.tpEditButton button.tpButtonDown 
@@ -275,6 +275,7 @@ background-color: transparent;
 #toolPanel ul#tpEditTab li.tpEditButton button 
 {
 	border: 1px solid #b8b8b8;
+    width: 100%;
 }
 #toolPanel ul#tpEditTab li.tpEditButton a:hover,
 #toolPanel ul#tpEditTab li.tpEditButton button:hover 

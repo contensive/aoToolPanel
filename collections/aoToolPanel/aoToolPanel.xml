@@ -5,7 +5,6 @@
 	<Addon name="toolPanelOnInstall" guid="{4BDF8B7D-89F5-4D63-AA1C-750998C6920D}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -45,7 +44,6 @@ end function]]></Code>
 	<Addon name="deprecated-toolPanelAccountForm" guid="{294B5C1C-B172-43F2-B787-DEFF86B16FE2}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -81,7 +79,6 @@ end function]]></Code>
 	<Addon name="remoteToolPanelPosition" guid="{95481BA1-028C-48B7-91F1-8ECD7B3F9E49}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -123,7 +120,6 @@ end function]]></Code>
 	<Addon name="setUserProperty" guid="{0B5BFA85-9031-456E-A0CF-82AE0F8CF555}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -178,7 +174,6 @@ end function]]></Code>
 	<Addon name="Tool Panel" guid="{32839250-841F-4BE6-A15E-CC7EAAA7C2FF}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.Addons.toolPanelClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -226,7 +221,6 @@ end function]]></Code>
 	<Addon name="Tool Panel Settings" guid="{14FE7079-021C-4D21-8382-376C9C3E68BC}" type="Setting">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -272,7 +266,6 @@ end function]]></Code>
 	<Addon name="toolPanelAccountForm" guid="{7A057715-5CDD-4D9F-A12A-5CCB61F93974}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.toolPanelAccountFormClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -308,7 +301,6 @@ end function]]></Code>
 	<Addon name="toolPanelAccountFormHandler" guid="{9C09E13E-943B-416F-A7F7-5517160437F4}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.toolPanelAccountFormHandlerClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -344,7 +336,6 @@ end function]]></Code>
 	<Addon name="toolPanelDefaultLoginForm" guid="{37B7EDB3-7BE0-4E89-8012-16F0CDEED218}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultLoginFormClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -380,7 +371,6 @@ end function]]></Code>
 	<Addon name="toolPanelDefaultRegistrationForm" guid="{E31F7A5B-FE69-4CF5-BD16-7F368192D956}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultRegistrationFormClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -416,7 +406,6 @@ end function]]></Code>
 	<Addon name="toolPanelLoginForm" guid="{72C78E15-BF5F-47A1-AE0A-879AEFF0C08A}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.panelLoginFormClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -452,7 +441,6 @@ end function]]></Code>
 	<Addon name="toolPanelLoginFormHandler" guid="{AD772459-D19B-4C8B-95CE-7E291FDF621C}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultLoginFormHandlerClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -488,7 +476,6 @@ end function]]></Code>
 	<Addon name="toolPanelLogoutHandler" guid="{16FE5AA9-2CAE-4AF3-8AE7-D0A3D5EC39FE}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
@@ -528,7 +515,6 @@ end function]]></Code>
 	<Addon name="toolPanelRegistrationFormHandler" guid="{010B48C0-9854-4DD5-8291-1F366CC1F30F}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultRegistrationFormHandlerClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
