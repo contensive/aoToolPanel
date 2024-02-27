@@ -1,7 +1,7 @@
 
 rem build and deliver to deployment folder
 
-set appName=menucrm0210
+set appName=ecommercetest
 
 call build.cmd
 

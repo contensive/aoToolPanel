@@ -185,6 +185,7 @@ end function]]></Code>
 		<BlockEditTools>Yes</BlockEditTools>
 		<FormXML></FormXML>
 		<IncludeAddon name="JQuery UI" guid="{840B9AEF-9470-4599-BD47-7EC0C9298614}"/>
+		<IncludeAddon name="Font Awesome" guid="{1e2f82ae-6722-4564-a461-5b2e7c5e32b3}"/>
 		<IsInline>No</IsInline>
 		<JSHeadScriptSrc>/toolpanel/toolPanel.js</JSHeadScriptSrc>
 		<JavascriptOnLoad></JavascriptOnLoad>
@@ -547,6 +548,7 @@ end function]]></Code>
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
+	<ImportCollection name="Font Awesome">{3db6a433-59ca-43d1-9fb6-a539b6b947f2}</ImportCollection>
 	<Resource name="lockclosed.png" type="www" path="toolpanel" />
 	<Resource name="lockopen.png" type="www" path="toolpanel" />
 	<Resource name="transpin.gif" type="www" path="toolpanel" />
@@ -556,4 +558,5 @@ end function]]></Code>
 	<Resource name="toolpanel.html" type="www" path="toolpanel" />
 	<Resource name="toolpanel.js" type="www" path="toolpanel" />
 	<Resource name="toolpanel.css" type="www" path="toolpanel" />
+	<Resource name="HelpFiles.zip" type="privatefiles" path="helpfiles/Tool Panel" />
 </Collection>

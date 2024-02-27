@@ -19,20 +19,23 @@ namespace Contensive.Addons {
             try {
                 //
                 // -- if contensive version < 21.11.19.1 or siteProperty(allowToolPanel) is not true return
-                bool allowToolPanel = cp.Doc.IsProperty("allowToolPanel") && cp.Doc.GetBoolean("allowToolPanel");
-                if ( !allowToolPanel ) {
-                    //
-                    // -- allow-flag false or missing, if legacy c5 code, allow, else block
-                    string[] versionSplit = cp.Version.Split('.');
-                    if (versionSplit.Length < 4) { return ""; }
-                    bool legacyVersion = (cp.Utils.EncodeInteger(versionSplit[0]) < 21) || (cp.Utils.EncodeInteger(versionSplit[1]) < 11) || (cp.Utils.EncodeInteger(versionSplit[2]) < 19) || (cp.Utils.EncodeInteger(versionSplit[2]) < 1);
-                    if (!legacyVersion) { return ""; }
-                    //
-                    // -- legacy version, block admin site only
-                    string adminRoute = cp.GetAppConfig().adminRoute;
-                    string pathpage = cp.Request.PathPage;
-                    if (pathpage.Equals("/" + adminRoute)) { return ""; }
-                    if ((pathpage.Length>10) &&  (pathpage.ToLowerInvariant().Substring(0,11).Equals("/backoffice"))) { return ""; }
+                bool isProperty = cp.Doc.IsProperty("allowToolPanel");
+                if (isProperty) {
+                    bool allowToolPanel = cp.Doc.GetBoolean("allowToolPanel");
+                    if (!allowToolPanel) {
+                        //
+                        // -- allow-flag false or missing, if legacy c5 code, allow, else block
+                        string[] versionSplit = cp.Version.Split('.');
+                        if (versionSplit.Length < 4) { return ""; }
+                        bool legacyVersion = (cp.Utils.EncodeInteger(versionSplit[0]) < 21) || (cp.Utils.EncodeInteger(versionSplit[1]) < 11) || (cp.Utils.EncodeInteger(versionSplit[2]) < 19) || (cp.Utils.EncodeInteger(versionSplit[2]) < 1);
+                        if (!legacyVersion) { return ""; }
+                        //
+                        // -- legacy version, block admin site only
+                        string adminRoute = cp.GetAppConfig().adminRoute;
+                        string pathpage = cp.Request.PathPage;
+                        if (pathpage.Equals("/" + adminRoute)) { return ""; }
+                        if ((pathpage.Length > 10) && (pathpage.ToLowerInvariant().Substring(0, 11).Equals("/backoffice"))) { return ""; }
+                    }
                 }
                 //
                 // -- execute login form if not authenticated to execute authentication
@@ -186,18 +189,14 @@ namespace Contensive.Addons {
                                 if (cp.Visit.GetBoolean("allowEditing", false)) {
                                     buttonState = "0";
                                     buttonClass = "tpButtonDown";
-                                    editHidden = "<input type=\"hidden\" name=\"1allowEditing\" value=\"1\">";
                                 }
-                                copy = ""
-                                    + debugHidden
-                                    + cr + "<input type=\"hidden\" name=\"1allowEditing\" value=\"" + buttonState + "\">"
-                                    + cr + "<button type=submit id=\"tpButtonContent\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit content on this page.\">Edit</a>";
-                                copy = ""
-                                    + cr + formOpen
-                                    + cp.Html.Indent(copy, 1)
-                                    + cr + formClose;
-                                layout.SetInner("#tpEditTabContent", copy);
-                                //jsOnReady += cr + "jQuery('#tpButtonContent').click( function () { jQuery(this).parents('form:first').submit(); return false });";
+                                string editUrl = cp.Doc.RefreshQueryString;
+                                editUrl = cp.Utils.ModifyQueryString(editUrl, "ccFormSN", "1");
+                                editUrl = cp.Utils.ModifyQueryString(editUrl, "1type", "do30a8vl29");
+                                editUrl = cp.Utils.ModifyQueryString(editUrl, "1mb", "  Apply ");
+                                editUrl = cp.Utils.ModifyQueryString(editUrl, "1allowEditing", buttonState);
+                                
+                                layout.SetInner("#tpEditTabContent", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonContent\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit content on this page.\" >Edit</a>");
                                 jsOnReady += cr + "jQuery('#tpButtonContent').addClass('" + buttonClass + "');";
                             }
                             {
@@ -208,26 +207,20 @@ namespace Contensive.Addons {
                                 if (cp.Visit.GetBoolean("allowQuickEditor", false)) {
                                     buttonState = "0";
                                     buttonClass = "tpButtonDown";
-                                    editHidden = "<input type=\"hidden\" name=\"1AllowQuickEditor\" value=\"1\">";
                                 }
-                                copy = ""
-                                    + debugHidden
-                                    + cr + "<input type=\"hidden\" name=\"1AllowQuickEditor\" value=\"" + buttonState + "\">"
-                                    + cr + "<button type=submit id=\"tpButtonQuick\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Manage widgets on this page.\">Widgets</a>";
-                                copy = ""
-                                    + cr + formOpen
-                                    + cp.Html.Indent(copy, 1)
-                                    + cr + formClose;
-                                layout.SetInner("#tpEditTabBlocks", copy);
-                                //jsOnReady += cr + "jQuery('#tpButtonQuick').click( function () { jQuery(this).parents('form:first').submit(); return false });";
-                                jsOnReady += cr + "jQuery('#tpButtonQuick').addClass('" + buttonClass + "');";
-                                //
-                                swHints += ",end quickeditbutton (" + sw.ElapsedMilliseconds.ToString() + ")";
+                                string editUrl = cp.Doc.RefreshQueryString;
+                                editUrl = cp.Utils.ModifyQueryString(editUrl, "ccFormSN", "1");
+                                editUrl = cp.Utils.ModifyQueryString(editUrl, "1type", "do30a8vl29");
+                                editUrl = cp.Utils.ModifyQueryString(editUrl, "1mb", "  Apply ");
+                                editUrl = cp.Utils.ModifyQueryString(editUrl, "1AllowQuickEditor", buttonState);
+
+                                layout.SetInner("#tpEditTabBlocks", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonWidget\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Manage widgets on this page\" >Widgets</a>");
+                                jsOnReady += cr + "jQuery('#tpButtonWidget').addClass('" + buttonClass + "');";
                             }
                             {
                                 //
                                 // -- page
-                                layout.SetInner("#tpEditTabPage", "<a href=\"" + cp.Site.GetText("adminUrl") + "?af=4&aa=2&ad=1&cid=" + cp.Content.GetID("page content") + "&id=" + cp.Doc.PageId + "\"  data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit page settings.\" >Page</a>");
+                                layout.SetInner("#tpEditTabPage", $"<a href=\"{cp.Site.GetText("adminUrl")}?af=4&aa=2&ad=1&cid={cp.Content.GetID("page content")}&id={cp.Doc.PageId}\"  data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit page settings.\" >Page</a>");
                             }
                             {
                                 //
