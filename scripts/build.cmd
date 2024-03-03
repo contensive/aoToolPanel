@@ -9,10 +9,13 @@ rem
 c:
 cd \Git\aoToolPanel\scripts
 
+rem -- Release or Debug
+set DebugRelease=Debug
+
 set collectionName=aoToolPanel
 set solutionName=aoToolPanel.sln
 set collectionPath=..\collections\aoToolPanel\
-set binPath=..\source\aoToolPanel\bin\debug\
+set binPath=..\source\aoToolPanel\bin\%DebugRelease%\\
 set msbuildLocation=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\
 set deploymentFolderRoot=C:\Deployments\aoToolPanel\Dev\
 set msbuildLocation=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\
@@ -80,13 +83,15 @@ rem
 echo build solution 
 rem
 cd ..\source
-"%msbuildLocation%msbuild.exe" %solutionName%
+"%msbuildLocation%msbuild.exe" %solutionName% /property:Configuration=%DebugRelease%
 if errorlevel 1 (
    echo failure building solution
    pause
    exit /b %errorlevel%
 )
 cd ..\scripts
+
+pause
 
 rem ==============================================================
 rem
