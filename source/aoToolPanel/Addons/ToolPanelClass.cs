@@ -27,7 +27,7 @@ namespace Contensive.Addons {
                         // -- allow-flag false or missing, if legacy c5 code, allow, else block
                         string[] versionSplit = cp.Version.Split('.');
                         if (versionSplit.Length < 4) { return ""; }
-                        bool legacyVersion = (cp.Utils.EncodeInteger(versionSplit[0]) < 21) || (cp.Utils.EncodeInteger(versionSplit[1]) < 11) || (cp.Utils.EncodeInteger(versionSplit[2]) < 19) || (cp.Utils.EncodeInteger(versionSplit[2]) < 1);
+                        bool legacyVersion = (cp.Utils.EncodeInteger(versionSplit[0]) < 21) && (cp.Utils.EncodeInteger(versionSplit[1]) < 11) && (cp.Utils.EncodeInteger(versionSplit[2]) < 19) && (cp.Utils.EncodeInteger(versionSplit[2]) < 1);
                         if (!legacyVersion) { return ""; }
                         //
                         // -- legacy version, block admin site only

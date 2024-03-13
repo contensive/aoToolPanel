@@ -91,7 +91,7 @@ if errorlevel 1 (
 )
 cd ..\scripts
 
-pause
+rem pause
 
 rem ==============================================================
 rem
@@ -163,7 +163,7 @@ del %collectionPath%*.dll
 del %collectionPath%*.dll.config
 del %collectionPath%HelpFiles.zip
 
-pause
+rem pause
 
 
 
