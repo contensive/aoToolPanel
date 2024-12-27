@@ -40,16 +40,19 @@ namespace Contensive.Addons {
                 //
                 // -- execute login form if not authenticated to execute authentication
                 string loginForm = "";
-                if (!cp.User.IsAuthenticated) {
-                    loginForm = cp.Addon.Execute(Constants.guidContensiveLoginForm);
-                    if (string.IsNullOrEmpty(loginForm)) {
-                        //
-                        // -- authentication successful, redraw
-                        cp.Response.Redirect(cp.Request.PathPage + "?" + cp.Request.QueryString);
-                        return "";
+                if(false) {
+                    // -- block because this screws up password recovery process
+                    if (!cp.User.IsAuthenticated) {
+                        loginForm = cp.Addon.Execute(Constants.guidContensiveLoginForm);
+                        if (string.IsNullOrEmpty(loginForm)) {
+                            //
+                            // -- authentication successful, redraw
+                            cp.Response.Redirect(cp.Request.PathPage + "?" + cp.Request.QueryString);
+                            return "";
+                        }
+                        // -- hack - change forget your password to recover your password
+                        loginForm = loginForm.Replace("Forget Your Password", "Recover Your Password");
                     }
-                    // -- hack - change forget your password to recover your password
-                    loginForm = loginForm.Replace("Forget Your Password", "Recover Your Password");
                 }
                 //
                 const string layoutCacheName = "toolpanel/toolpanel.html";
@@ -196,7 +199,7 @@ namespace Contensive.Addons {
                                 editUrl = cp.Utils.ModifyQueryString(editUrl, "1mb", "  Apply ");
                                 editUrl = cp.Utils.ModifyQueryString(editUrl, "1allowEditing", buttonState);
                                 
-                                layout.SetInner("#tpEditTabContent", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonContent\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit content on this page.\" >Edit</a>");
+                                layout.SetInner("#tpEditTabContent", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonContent\" data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Edit content\" >Edit</a>");
                                 jsOnReady += cr + "jQuery('#tpButtonContent').addClass('" + buttonClass + "');";
                             }
                             {
@@ -214,18 +217,18 @@ namespace Contensive.Addons {
                                 editUrl = cp.Utils.ModifyQueryString(editUrl, "1mb", "  Apply ");
                                 editUrl = cp.Utils.ModifyQueryString(editUrl, "1AllowQuickEditor", buttonState);
 
-                                layout.SetInner("#tpEditTabBlocks", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonWidget\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Manage widgets on this page\" >Widgets</a>");
+                                layout.SetInner("#tpEditTabBlocks", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonWidget\" data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Add/remove widgets\" >Widgets</a>");
                                 jsOnReady += cr + "jQuery('#tpButtonWidget').addClass('" + buttonClass + "');";
                             }
                             {
                                 //
                                 // -- page
-                                layout.SetInner("#tpEditTabPage", $"<a href=\"{cp.Site.GetText("adminUrl")}?af=4&aa=2&ad=1&cid={cp.Content.GetID("page content")}&id={cp.Doc.PageId}\"  data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit page settings.\" >Page</a>");
+                                layout.SetInner("#tpEditTabPage", $"<a href=\"{cp.Site.GetText("adminUrl")}?af=4&aa=2&ad=1&cid={cp.Content.GetID("page content")}&id={cp.Doc.PageId}\"  data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Edit page settings\" >Page</a>");
                             }
                             {
                                 //
                                 // -- Template
-                                layout.SetInner("#tpEditTabTemplate", "<a href=\"" + cp.Site.GetText("adminUrl") + "?af=4&aa=2&ad=1&cid=" + cp.Content.GetID("page templates") + "&id=" + cp.Doc.TemplateId + "\"  data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Edit this template.\">Template</a>");
+                                layout.SetInner("#tpEditTabTemplate", "<a href=\"" + cp.Site.GetText("adminUrl") + "?af=4&aa=2&ad=1&cid=" + cp.Content.GetID("page templates") + "&id=" + cp.Doc.TemplateId + "\"  data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Edit the template used for this page\">Template</a>");
                             }
                             //
                             swHints += ",end editbutton  (" + sw.ElapsedMilliseconds.ToString() + ")";
@@ -269,7 +272,7 @@ namespace Contensive.Addons {
                                     copy = ""
                                         + editHidden
                                         + cr + "<input type=\"hidden\" name=\"1allowDebugging\" value=\"" + buttonState + "\">"
-                                        + cr + "<a id=\"tpButtonDebug\" href=\"#\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Toggle debug mode to view html hints for debugging.\">Debug</a>";
+                                        + cr + "<a id=\"tpButtonDebug\" href=\"#\" data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Toggle debug mode to view html hints for debugging.\">Debug</a>";
                                     copy = ""
                                         + cr + formOpen
                                         + cp.Html.Indent(copy, 1)
@@ -286,7 +289,7 @@ namespace Contensive.Addons {
                             //
                             // Admin button
                             //
-                            copy = "<a href=\"" + cp.Site.GetText("adminUrl", "/admin") + "\"  data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Link to the admin site.\">Admin</a>";
+                            copy = "<a href=\"" + cp.Site.GetText("adminUrl", "/admin") + "\"  data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Link to the admin site.\">Admin</a>";
                             layout.SetInner("#tpEditTabAdmin", copy);
                         }
                     }
