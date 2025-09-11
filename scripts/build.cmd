@@ -16,9 +16,8 @@ set collectionName=aoToolPanel
 set solutionName=aoToolPanel.sln
 set collectionPath=..\collections\aoToolPanel\
 set binPath=..\source\aoToolPanel\bin\%DebugRelease%\\
-set msbuildLocation=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\
 set deploymentFolderRoot=C:\Deployments\aoToolPanel\Dev\
-set msbuildLocation=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\
+set msbuildLocation=C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\
 set NuGetLocalPackagesFolder=C:\NuGetLocalPackages\
 
 rem @echo off

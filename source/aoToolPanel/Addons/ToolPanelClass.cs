@@ -33,6 +33,7 @@ namespace Contensive.Addons {
                         // -- legacy version, block admin site only
                         string adminRoute = cp.GetAppConfig().adminRoute;
                         string pathpage = cp.Request.PathPage;
+                        if (pathpage.Equals(adminRoute)) { return ""; }
                         if (pathpage.Equals("/" + adminRoute)) { return ""; }
                         if ((pathpage.Length > 10) && (pathpage.ToLowerInvariant().Substring(0, 11).Equals("/backoffice"))) { return ""; }
                     }
@@ -40,7 +41,7 @@ namespace Contensive.Addons {
                 //
                 // -- execute login form if not authenticated to execute authentication
                 string loginForm = "";
-                if(false) {
+                if(true) {
                     // -- block because this screws up password recovery process
                     if (!cp.User.IsAuthenticated) {
                         loginForm = cp.Addon.Execute(Constants.guidContensiveLoginForm);
@@ -289,7 +290,7 @@ namespace Contensive.Addons {
                             //
                             // Admin button
                             //
-                            copy = "<a href=\"" + cp.Site.GetText("adminUrl", "/admin") + "\"  data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Link to the admin site.\">Admin</a>";
+                            copy = "<a href=\"" + cp.Site.GetText("adminUrl", "/admin") + "\"  data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Link to the control panel.\">Control Panel</a>";
                             layout.SetInner("#tpEditTabAdmin", copy);
                         }
                     }
