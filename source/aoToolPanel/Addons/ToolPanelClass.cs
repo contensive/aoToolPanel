@@ -155,6 +155,15 @@ namespace Contensive.Addons {
                             layout.SetOuter("#tpEditTab", "");
                         } else {
                             //
+                            // -- persist and restore edit tab lock state (matches account/login tab pattern)
+                            bool isEditTabLocked = cp.User.GetBoolean("isLockedEditTab", false);
+                            if (isEditTabLocked) {
+                                jsOnReady += $"{cr}isLockedEditTab=true;";
+                                jsOnReady += $"{cr}jQuery('#tpEditLock').html('<img src=\"/toolPanel/lockClosed.png\" width=\"10\" height=\"10\">');";
+                            } else {
+                                jsOnReady += $"{cr}isLockedEditTab=false;";
+                            }
+                            //
                             // -- footer
                             string footer = ""
                                 + cr + "<div class=\"tpInner\">"

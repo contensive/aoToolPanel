@@ -4,10 +4,13 @@ properties2
 */
 var tpLoginTabIsPinned = false;
 var isLockedAccountTab = false;
+var isLockedEditTab = false;
 var isLoadedLoginPanel = false;
 var isOpenLoginPanel = false;
 var tpAbortLoginTabClose = false;
 var timerIdLoginTab = 0;
+var tpIsWantedEditTab = false;
+var tpTimerIdEditTab = 0;
 /*
 set tool panel position
 */
@@ -31,6 +34,9 @@ $(document).ready(function() {
         }
     });
     $('body').on('mouseup', '#tpDraggable', function(e){});
+    $('body').on('click', '#tpEditLock', function (e) { return tpClickEditTabLock(e) });
+    $('body').on('mouseenter', '#tpEditTab', function (e) { return tpMouseEnterEditTab(e) });
+    $('body').on('mouseleave', '#tpEditTab', function (e) { return tpMouseLeaveEditTab(e) });
     $('body').on('keypress', '#panelLoginPassword', function (e) { return tpLoginFormKeypress(e) }); 
     $('body').on('keypress', '#panelLoginEmail', function (e) { return tpLoginFormKeypress(e) }); 
     $('body').on('keypress', '#panelLoginUsername', function (e) { return tpLoginFormKeypress(e) }); 
@@ -50,6 +56,19 @@ $(document).ready(function() {
     $('body').on('click', '#accountSubmit', function (e) { return tpAccountSubmit(e) });
     $('body').on('click', '#logoutClick', function (e) { return tpAccountLogoutClick(e) });
     $('body').on('click', '#tpRegisterSubmit', function (e) { return tpRegisterSubmit(e) });
+    // -- show edit tab initially, then auto-hide after 2 seconds if not locked
+    $('#tpDraggable').show();
+    if (!isLockedEditTab) {
+        tpTimerIdEditTab = setTimeout("editTabClose()", 2000);
+    }
+    // -- auto-hide account tab after 2 seconds if not locked
+    if (!isLockedAccountTab) {
+        tpTimerIdAccountTab = setTimeout("accountTabClose()", 2000);
+    }
+    // -- auto-hide login tab after 2 seconds if not pinned
+    if (!tpLoginTabIsPinned) {
+        timerIdLoginTab = setTimeout("LoginTabClose()", 2000);
+    }
     // -- enable bootstrap tooltips
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
@@ -83,12 +102,15 @@ function tpMouseEnterTabZone(e) {
     $("#tpAccountTab").slideDown("slow");
     tpAbortLoginTabClose = true;
     $("#tpLoginTab").slideDown("slow");
+    tpIsWantedEditTab = true;
+    $("#tpDraggable").slideDown("slow");
 }
 /*
 */
 function tpMouseLeaveTabZone(e) {
     tpMouseLeaveAccountTab(e);
     mouseLeaveLoginTab(e);
+    tpMouseLeaveEditTab(e);
 }
 /*
 account tab
@@ -200,6 +222,57 @@ function accountTabClose(e) {
         $("#tpAccountTab").slideUp("slow");
     } else {
         tpIsWantedAccountTab = tpIsWantedAccountTab;
+    }
+}
+/*
+edit tab
+*/
+function tpClickEditTabLock(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (isLockedEditTab) {
+        $('#tpEditLock').html('<img src="/toolPanel/lockOpen.png" height="10" width="10">');
+        cj.ajax.addon('setUserProperty', 'n=isLockedEditTab&v=0');
+        isLockedEditTab = false;
+    } else {
+        $('#tpEditLock').html('<img src="/toolPanel/lockClosed.png" height="10" width="10">');
+        cj.ajax.addon('setUserProperty', 'n=isLockedEditTab&v=1');
+        isLockedEditTab = true;
+    }
+}
+/*
+*/
+function tpMouseEnterEditTab(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (!isLockedEditTab) {
+        if (tpTimerIdEditTab != 0) {
+            clearTimeout(tpTimerIdEditTab);
+            tpTimerIdEditTab = 0;
+        }
+        tpIsWantedEditTab = true;
+    }
+    return false;
+}
+/*
+*/
+function tpMouseLeaveEditTab(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (!isLockedEditTab) {
+        if (tpTimerIdEditTab != 0) {
+            clearTimeout(tpTimerIdEditTab);
+            tpTimerIdEditTab = 0;
+        }
+        tpTimerIdEditTab = setTimeout("editTabClose()", 2000);
+        tpIsWantedEditTab = false;
+    }
+}
+/*
+*/
+function editTabClose() {
+    if (!tpIsWantedEditTab) {
+        $("#tpDraggable").slideUp("slow");
     }
 }
 /*
