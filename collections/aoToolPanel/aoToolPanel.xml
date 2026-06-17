@@ -555,14 +555,6 @@ end function]]></Code>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<ImportCollection name="Font Awesome">{3db6a433-59ca-43d1-9fb6-a539b6b947f2}</ImportCollection>
-	<Resource name="lockclosed.png" type="www" path="toolpanel" />
-	<Resource name="lockopen.png" type="www" path="toolpanel" />
-	<Resource name="transpin.gif" type="www" path="toolpanel" />
-	<Resource name="accountform.html" type="www" path="toolpanel" />
-	<Resource name="loginform.html" type="www" path="toolpanel" />
-	<Resource name="registrationform.html" type="www" path="toolpanel" />
-	<Resource name="toolpanel.html" type="www" path="toolpanel" />
-	<Resource name="toolpanel.js" type="www" path="toolpanel" />
-	<Resource name="toolpanel.css" type="www" path="toolpanel" />
+	<Resource name="wwwFiles.zip" type="wwwFiles" />
 	<Resource name="HelpFiles.zip" type="privatefiles" path="helpfiles/Tool Panel" />
 </Collection>

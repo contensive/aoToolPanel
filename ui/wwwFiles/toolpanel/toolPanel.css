@@ -1,17 +1,28 @@
-﻿/*
+/*
 * --------------------------------------------
 * toolPanel
 */
+.tpFixedTabs,.tpTabs {opacity:0.8}
+.tpFixedTabs:hover,.tpTabs:hover {opacity:1.0}
+
 #toolPanel 
 {
-    background-color: transparent;
+    background-color: transparent;	
+    font-family: 'Open Sans', sans-serif;
+	
 }
 #toolPanel * 
 {
-    font-family: sans-serif,verdana,arial;
+    /* font-family: sans-serif,verdana,arial;
     padding:0;
-    margin:0;
+    margin:0; */
 }
+#toolPanelContent
+{
+	height:100%;
+	/* overflow: auto; */
+}
+/*
 #toolPanel
 ,#toolPanel p 
 ,#toolPanel div
@@ -20,6 +31,7 @@
     font-size: 12px;
     line-height: 12px;
 }
+*/
 #toolPanel li
 ,#toolPanel ul
 {
@@ -33,10 +45,11 @@
 
 #toolPanel #tpTabZone 
 {
-	position: absolute;
+	position: fixed;
 	height: 5px;
 	width: 100%;
-	z-index: 9999;
+	z-index: 99999;
+	top:0;
 }
 /*
 * --------------------------------------------
@@ -45,7 +58,7 @@
 #toolPanel .tpPanels 
 {
 	position: relative;
-	z-index: 9999;
+	z-index: 99999;
 }
 #toolPanel .tpPanels .tpPanelCon 
 {
@@ -89,9 +102,10 @@
 {
 	background-color: transparent;
 	right: 0;
-	position: absolute;
+	position: fixed;
 	width: 200px;
-	z-index: 9997;
+	z-index: 99999;
+	top:0;
 }
 
 #toolPanel .tpTabs > ul 
@@ -111,13 +125,17 @@
 	padding: 0 20px;
 	border-top: 0;
 }
+#toolPanel .tpTabs > ul.tpOpen 
+{
+	background-color: #eee;
+}
 #toolPanel .tpTabs > ul li
 {
 	list-style-type: none;
 }
-#toolPanel .tpTabs > ul.tpOpen 
+#toolPanel .tpTabs > ul li Button
 {
-	background-color: #eee;
+	padding: 5px !important;
 }
 #toolPanel .tpTabs > ul li.tpButton 
 {
@@ -153,32 +171,33 @@
 */
 #toolPanel #containment-wrapper 
 {
-margin-left: -254px;
-width: 100%;
+	/*margin-left: -254px;*/
+	width: 100%;
 }
 #toolPanel #tpDraggable 
 {
-position:fixed;
-z-index: 9999;
-display: none;
+	position:fixed;
+	top: 0;
+	z-index: 99999;
+	display: none;
 }
 #toolPanel .tpFixedTabs > ul
 {
 background-color: transparent;
-left: 50%;
-margin: 0 0 0 -230px;
-position: relative;
-top: 0;
-z-index: 9998;
+	/* left: 50%; */
+	margin: 0 0 0 -230px;
+	position: relative;
+	top: 0;
+	z-index: 9998;
 }
 #toolPanel .tpFixedTabs > ul 
 {
-	background-color: #d8d8d8;
-	background: -moz-linear-gradient(top, #f7f7f7, #cecfcc);
-	background: -moz-linear-gradient(to bottom, #f7f7f7, #cecfcc);
-	background: -ms-linear-gradient(top, #f7f7f7, #cecfcc);
-	background: -o-linear-gradient(top, #f7f7f7, #cecfcc);
-	background: -webkit-linear-gradient(top, #f7f7f7, #cecfcc);
+	background-color: #576c7f;
+	background: -moz-linear-gradient(top, #89abc9, #576c7f);
+	background: -moz-linear-gradient(to bottom, #89abc9, #576c7f);
+	background: -ms-linear-gradient(top, #89abc9, #576c7f);
+	background: -o-linear-gradient(top, #89abc9, #576c7f);
+	background: -webkit-linear-gradient(top, #89abc9, #576c7f);
 	border-radius: 0 0 10px 10px;
 	box-shadow: 1px 1px 3px #666666;
 	display: table;
@@ -214,8 +233,12 @@ z-index: 9998;
 #toolPanel ul#tpEditTab li.tpEditButton 
 {
 	float: left;
+    min-width: 4rem;
+    margin: 0 4px;
 }
-#toolPanel ul#tpEditTab li.tpEditButton a {
+#toolPanel ul#tpEditTab li.tpEditButton a,
+#toolPanel ul#tpEditTab li.tpEditButton button
+{
 	display: block;
 	background-color: #e8e8e8;
 	background: -moz-linear-gradient(top, #f8f8f8, #e0e0e0);
@@ -230,10 +253,11 @@ z-index: 9998;
 	text-decoration: none;
 	color: #555;
 	text-transform: uppercase;
-	/*
-	*/
+    text-align: center;
 }
-#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonDown {
+#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonDown ,
+#toolPanel ul#tpEditTab li.tpEditButton button.tpButtonDown 
+{
 	background-color: #e0e0e0;
 	background: -moz-linear-gradient(top, #d8d8d8, #f8f8f8);
 	background: -moz-linear-gradient(to bottom, #d8d8d8, #f8f8f8);
@@ -247,16 +271,25 @@ z-index: 9998;
 	/*
 	*/
 }
-#toolPanel ul#tpEditTab li.tpEditButton a {
+#toolPanel ul#tpEditTab li.tpEditButton a ,
+#toolPanel ul#tpEditTab li.tpEditButton button 
+{
 	border: 1px solid #b8b8b8;
+    width: 100%;
 }
-#toolPanel ul#tpEditTab li.tpEditButton a:hover {
+#toolPanel ul#tpEditTab li.tpEditButton a:hover,
+#toolPanel ul#tpEditTab li.tpEditButton button:hover 
+{
 	border: 1px solid #444;
 }
-#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonDown:hover {
+#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonDown:hover,
+#toolPanel ul#tpEditTab li.tpEditButton button.tpButtonDown:hover 
+{
 	border: 1px solid #444;
 }
-#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonUp:hover {
+#toolPanel ul#tpEditTab li.tpEditButton a.tpButtonUp:hover,
+#toolPanel ul#tpEditTab li.tpEditButton button.tpButtonUp:hover
+{
 	border: 1px solid #444;
 }
 /*
@@ -269,8 +302,10 @@ z-index: 9998;
     display: block;
     margin: 4px;
     padding: 2px;
+	/*
     text-decoration: none;
 	font-weight: bold;
+	*/
 }
 #toolPanel #tpAccountWait {
 	visibility: hidden;
@@ -287,8 +322,10 @@ z-index: 9998;
     display: block;
     margin: 4px;
     padding: 2px;
+	/*
     text-decoration: none;
 	font-weight: bold;
+	*/
 }
 #toolPanel #tpLoginWait {
 	visibility: hidden;
@@ -300,14 +337,27 @@ z-index: 9998;
 * --------------------------------------------
 * Footer
 */
+/*
 #toolPanelFooter
 ,#toolPanelFooter p 
 ,#toolPanelFooter div
 ,#toolPanelFooter li
 {
     font-family: verdana,arial,sans-serif;
-    font-size: 11px;
-    line-height: 11px;
+    font-size: 12px;
+    line-height: 12px;
+}
+*/
+
+#tpEditTab *,
+#tpAccountTab *,
+#tpLoginTab *
+{
+    font-size: 12px;
+    line-height: 12px;
+    text-decoration: none;
+    color: #555;
+    text-transform: uppercase;
 }
 
 #toolPanelFooter {
@@ -329,16 +379,16 @@ z-index: 9998;
 * general form
 */
 #toolPanel .fieldRequired { margin: 0 0 0 5px; font-weight: bold; color: #903020; }
-#toolPanel #panelFormContainer { margin: 0 auto; padding: 20px 0; width: 400px; }
-#toolPanel #panelFormContainer li  { padding: 5px; text-align: center; }
-#toolPanel #panelFormContainer li.buttonRow { text-align: right; padding: 5px 15px 5px 5px;}
-#toolPanel #panelFormContainer li label { text-align: left; display: inline-block; width: 100px; }
-#toolPanel #panelFormContainer li input[type=text]  { width: 250px; border: 1px solid #888888; padding: 5px; }
-#toolPanel #panelFormContainer li input[type=password]  { width: 250px; border: 1px solid #888888; padding: 5px; }
+#toolPanel #panelFormContainer { margin: 0 auto; padding: 20px 0; width: 320px; }
+#toolPanel #panelFormContainer li  { padding: 5px 0; text-align: center; }
+#toolPanel #panelFormContainer li.buttonRow { /* text-align: right; padding: 5px 15px 5px 5px; */}
+#toolPanel #panelFormContainer li label { /* text-align: left; display: inline-block; width: 100px; */ }
+#toolPanel #panelFormContainer li input[type=text]  { /* width: 250px; border: 1px solid #888888; padding: 5px; */}
+#toolPanel #panelFormContainer li input[type=password]  { /* width: 250px; border: 1px solid #888888; padding: 5px; */}
 #toolPanel #panelFormContainer h3 { margin: 3px 0 5px 0; }
 #toolPanel .panelInstructionContainer { padding: 10px 0 10px 0; }
 #toolPanel .panelLowerInstructionContainer { padding: 10px 0 10px 0; }
-#toolPanel #panelFormContainer li input[type='checkbox']  { width: 100px; }
+#toolPanel #panelFormContainer li input[type='checkbox']  { /* width: 100px; */ }
 #toolPanel #panelFormContainer li label.callout { text-align: right; padding: 0 10px 0 0; }
 #toolPanel li#hiddenRow { display:none; }
 /*
@@ -372,10 +422,8 @@ z-index: 9998;
     border-radius: 3px 3px 3px 3px;
     color: white;
     display: block;
-    font-weight: bold;
     margin: 7px 3px;
     padding: 8px;
-    text-decoration: none;
 	display: inline-block;
 }
 /*
@@ -386,4 +434,12 @@ z-index: 9998;
 #toolPanel div.spinner p{text-align:center;}
 #toolPanel div.spinner img{text-align:center;}
 #toolPanel div.spinner p img{text-align:center;}
-		
+
+]]></Styles>
+		<Scripting Language="" EntryPoint="setPosition" Timeout="5000">
+			<Code><![CDATA[function setPosition
+    dim left
+    left =  cp.visit.getinteger("toolPanelPositionLeft")
+    left = left & "px"
+    setPosition = "<style>#tpDraggable {left: " & left & ";position: fixed;}</style>"
+end function

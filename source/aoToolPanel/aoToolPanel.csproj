@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>ToolPanel</RootNamespace>
     <AssemblyName>ToolPanel</AssemblyName>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>aoToolPanelKey.snk</AssemblyOriginatorKeyFile>
     <AssemblyTitle>ToolPanel Addon</AssemblyTitle>
@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Contensive.CPBaseClass" Version="5.2004.14.6" />
+    <PackageReference Include="Contensive.CPBaseClass" Version="26.6.7.40522" />
   </ItemGroup>
 
   <ItemGroup>
