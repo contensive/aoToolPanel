@@ -12,7 +12,6 @@ namespace Contensive.Addons.aoToolPanel {
         //
         public override object Execute(Contensive.BaseClasses.CPBaseClass cp)
         {
-            string s = "";
             string sS = "";
             bool updated = cp.Utils.EncodeBoolean(cp.Doc.GetText("acctUpdated"));
             bool errFlag = cp.Utils.EncodeBoolean(cp.Doc.GetText("errFlag"));
@@ -68,7 +67,7 @@ namespace Contensive.Addons.aoToolPanel {
             //
             layout.SetInner("#hiddenRow", hiddenString);
             //
-            s = layout.GetHtml();
+            string s = layout.GetHtml();
             //
             sS += "$(document).ready(function(){";
             //
@@ -112,7 +111,7 @@ namespace Contensive.Addons.aoToolPanel {
             sS += " return false;";
             sS += "});";
             //
-            cp.Doc.AddHeadJavascript(sS);
+            cp.Doc.AddBodyJavascript(sS);
             //
             return s;
         }

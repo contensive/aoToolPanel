@@ -317,7 +317,7 @@ namespace Contensive.Addons {
                         + " bindReadyState(function(){" + jsOnReady + "});"
                         + "";
                     string manualStyles = "#toolPanel #tpDraggable {left:" + cp.Visit.GetInteger("toolPanelPositionLeft") + "px;display:block}";
-                    cp.Doc.AddHeadJavascript(manualJs);
+                    cp.Doc.AddBodyJavascript(manualJs);
                     cp.Doc.AddHeadStyle(manualStyles);
                     //
                     swHints += ",exit  (" + sw.ElapsedMilliseconds.ToString() + ")";
