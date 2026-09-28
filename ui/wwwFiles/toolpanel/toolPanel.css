@@ -393,6 +393,12 @@ background-color: transparent;
 #toolPanel li#hiddenRow { display:none; }
 /*
 * --------------------------------------------
+* Floating Labels
+*/
+#toolPanel .form-floating { text-align: left; }
+#toolPanel .form-floating > label { text-transform: none; color: #777; }
+/*
+* --------------------------------------------
 * Account Form
 */
 #toolPanel .panelAccountFormList { list-style: none outside none; margin: 0; padding: 0; }

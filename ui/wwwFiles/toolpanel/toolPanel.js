@@ -71,7 +71,7 @@ $(document).ready(function() {
     }
     // -- enable bootstrap tooltips
     $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-bs-toggle="tooltip"]').tooltip()
     })
 })
 /*
@@ -394,10 +394,10 @@ function tpLoginFormSubmit(e) {
     var varString;
     if (validateLoginForm(e)) {
         //
-        varString = 'panelLoginUsername=' + $('#panelLoginUsername').val();
-        varString += '&panelLoginPassword=' + $('#panelLoginPassword').val();
-        varString += '&panelLoginEmail=' + $('#panelLoginEmail').val();
-        varString += '&panelLoginAuto=' + $('#panelLoginAuto').val();
+        varString = 'panelLoginUsername=' + encodeURIComponent($('#panelLoginUsername').val());
+        varString += '&panelLoginPassword=' + encodeURIComponent($('#panelLoginPassword').val());
+        varString += '&panelLoginEmail=' + encodeURIComponent($('#panelLoginEmail').val());
+        varString += '&panelLoginAuto=' + encodeURIComponent($('#panelLoginAuto').val());
         //
         cj.ajax.addonCallback('toolPanelLoginFormHandler', varString, tpRedirectHome, 'panelFormContainer');
         //
@@ -465,11 +465,11 @@ function tpAccountSubmit(e) {
     e.preventDefault();
 	if (validateAccountForm(e)) {
 		var varString;
-		varString = 'panelAccountFirstName=' + $('#panelAccountFirstName').val();
-		varString += '&panelAccountLastName=' + $('#panelAccountLastName').val();
-		varString += '&panelAccountEmail=' + $('#panelAccountEmail').val();
-		varString += '&panelAccountUsername=' + $('#panelAccountUsername').val();
-		varString += '&panelAccountPassword=' + $('#panelAccountPassword').val();
+		varString = 'panelAccountFirstName=' + encodeURIComponent($('#panelAccountFirstName').val());
+		varString += '&panelAccountLastName=' + encodeURIComponent($('#panelAccountLastName').val());
+		varString += '&panelAccountEmail=' + encodeURIComponent($('#panelAccountEmail').val());
+		varString += '&panelAccountUsername=' + encodeURIComponent($('#panelAccountUsername').val());
+		varString += '&panelAccountPassword=' + encodeURIComponent($('#panelAccountPassword').val());
 		//
 		cj.ajax.addon('toolPanelAccountFormHandler', varString, '', 'panelFormContainer', '', '');
 		tpSetSpinner('panelFormContainer', 'Updating Account....', $('#panelFormContainer').height());
@@ -657,11 +657,11 @@ function tpRegisterSubmit(e) {
     e.preventDefault();
     if (tpValidateRegisterForm(e)) {
 		var varString;
-		varString = 'panelRegistrationFirstName=' + $('#panelRegistrationFirstName').val();
-		varString += '&panelRegistrationLastName=' + $('#panelRegistrationLastName').val();
-		varString += '&panelRegistrationEmail=' + $('#panelRegistrationEmail').val();
-		varString += '&panelRegistrationUsername=' + $('#panelRegistrationUsername').val();
-		varString += '&panelRegistrationPassword=' + $('#panelRegistrationPassword').val();
+		varString = 'panelRegistrationFirstName=' + encodeURIComponent($('#panelRegistrationFirstName').val());
+		varString += '&panelRegistrationLastName=' + encodeURIComponent($('#panelRegistrationLastName').val());
+		varString += '&panelRegistrationEmail=' + encodeURIComponent($('#panelRegistrationEmail').val());
+		varString += '&panelRegistrationUsername=' + encodeURIComponent($('#panelRegistrationUsername').val());
+		varString += '&panelRegistrationPassword=' + encodeURIComponent($('#panelRegistrationPassword').val());
 		//
 		cj.ajax.addonCallback('toolPanelRegistrationFormHandler', varString, tpRedirectHome, 'panelFormContainer');
 		//cj.ajax.addon('toolPanelRegistrationFormHandler', varString, '', 'panelFormContainer', '','');

@@ -40,12 +40,11 @@ namespace Contensive.Addons.aoToolPanel {
                     layout.SetOuter("#panelAccountLastName", layout.GetOuter("#panelAccountLastName").Replace(">", " value=\"" + person.LastName + "\">"));
                     layout.SetOuter("#panelAccountEmail", layout.GetOuter("#panelAccountEmail").Replace(">", " value=\"" + person.Email + "\">"));
                     layout.SetOuter("#panelAccountUsername", layout.GetOuter("#panelAccountUsername").Replace(">", " value=\"" + person.Username + "\">"));
-                    layout.SetOuter("#panelAccountPassword", layout.GetOuter("#panelAccountPassword").Replace(">", " value=\"" + person.Password + "\">"));
+                    // -- do not send stored password to client; leave field empty for user to re-enter
                     result = layout.GetHtml();
                 }
             } catch (Exception ex) {
-                cp.Site.ErrorReport(ex);
-                throw;
+                cp.Site.ErrorReport(ex, "ToolPanelAccountFormClass.Execute");
             }
             return result;
         }

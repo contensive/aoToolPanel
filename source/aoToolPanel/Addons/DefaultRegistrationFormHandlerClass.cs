@@ -1,82 +1,78 @@
 
+using System;
 using Contensive.BaseClasses;
 
 namespace Contensive.Addons.aoToolPanel {
     //
     //====================================================================================================
     //
-    public class DefaultRegistrationFormHandlerClass : Contensive.BaseClasses.AddonBaseClass
-    {
+    public class DefaultRegistrationFormHandlerClass : Contensive.BaseClasses.AddonBaseClass {
         //
         //====================================================================================================
         //
-        public override object Execute(Contensive.BaseClasses.CPBaseClass cp)
-        {
-            bool errFlag = false;
-            string s = "";
-            string firstName = cp.Doc.GetText("panelRegistrationFirstName");
-            string lastName = cp.Doc.GetText("panelRegistrationLastName");
-            string email = cp.Doc.GetText("panelRegistrationEmail");
-            string username = cp.Doc.GetText("panelRegistrationUsername");
-            string password = cp.Doc.GetText("panelRegistrationPassword");
-            bool usernameValid = !cp.Site.GetBoolean("ALLOWEMAILLOGIN", false);
-            CPCSBaseClass cs = cp.CSNew();
-            //
-            //  check for duplicate in username if account requires username
-            //
-            if (usernameValid)
-            {
-                if (cs.Open("People", "(ID<>" + cp.User.Id + ") and (username=" + cp.Db.EncodeSQLText(username) + ")", "", false, "", 1, 1))
-                {
-                    errFlag = true;
-                    cp.Doc.SetProperty("errFlag", "1");
-                    cp.Doc.SetProperty("errMessage", "The username requested is not available, please enter an alternate username.");
-                }
-                cs.Close();
-            }
-            if (!errFlag)
-            {
-                if (cs.Open("People", "(ID<>" + cp.User.Id + ") and (email=" + cp.Db.EncodeSQLText(email) + ")", "", false, "", 1, 1))
-                {
-                    errFlag = true;
-                    cp.Doc.SetProperty("errFlag", "1");
-                    cp.Doc.SetProperty("errMessage", "The email entered is already registered. Please verify you have not already registered or enter an alternate email address.");
-                }
-                cs.Close();
-            }
-            //
-            if (!errFlag)
-            {
-                if ((cp.User.IsRecognized )&&( !cp.User.IsAuthenticated ))
-                {
-                    cp.User.Logout();
-                }
-                if (cs.Open("People", "ID=" + cp.User.Id, "", false, "", 1, 1))
-                {
-                    cs.SetField("name", firstName + " " + lastName);
-                    cs.SetField("firstName", firstName);
-                    cs.SetField("lastName", lastName);
-                    cs.SetField("email", email);
-                    cs.SetField("password", password);
-                    if (usernameValid)
-                    {
-                        cs.SetField("username", username);
+        public override object Execute(Contensive.BaseClasses.CPBaseClass cp) {
+            try {
+                bool errFlag = false;
+                string s = "";
+                string firstName = cp.Doc.GetText("panelRegistrationFirstName");
+                string lastName = cp.Doc.GetText("panelRegistrationLastName");
+                string email = cp.Doc.GetText("panelRegistrationEmail");
+                string username = cp.Doc.GetText("panelRegistrationUsername");
+                string password = cp.Doc.GetText("panelRegistrationPassword");
+                bool usernameValid = !cp.Site.GetBoolean("ALLOWEMAILLOGIN", false);
+                //
+                //  check for duplicate in username if account requires username
+                //
+                if (usernameValid) {
+                    using (CPCSBaseClass cs = cp.CSNew()) {
+                        if (cs.Open("People", $"(ID<>{cp.User.Id}) and (username={cp.Db.EncodeSQLText(username)})", "", false, "", 1, 1)) {
+                            errFlag = true;
+                            cp.Doc.SetProperty("errFlag", "1");
+                            cp.Doc.SetProperty("errMessage", "The username requested is not available, please enter an alternate username.");
+                        }
                     }
                 }
-                cs.Close();
+                if (!errFlag) {
+                    using (CPCSBaseClass cs = cp.CSNew()) {
+                        if (cs.Open("People", $"(ID<>{cp.User.Id}) and (email={cp.Db.EncodeSQLText(email)})", "", false, "", 1, 1)) {
+                            errFlag = true;
+                            cp.Doc.SetProperty("errFlag", "1");
+                            cp.Doc.SetProperty("errMessage", "The email entered is already registered. Please verify you have not already registered or enter an alternate email address.");
+                        }
+                    }
+                }
                 //
-                //  authenticate the user
+                if (!errFlag) {
+                    if (cp.User.IsRecognized && !cp.User.IsAuthenticated) {
+                        cp.User.Logout();
+                    }
+                    using (CPCSBaseClass cs = cp.CSNew()) {
+                        if (cs.Open("People", $"ID={cp.User.Id}", "", false, "", 1, 1)) {
+                            cs.SetField("name", $"{firstName} {lastName}");
+                            cs.SetField("firstName", firstName);
+                            cs.SetField("lastName", lastName);
+                            cs.SetField("email", email);
+                            cs.SetField("password", password);
+                            if (usernameValid) {
+                                cs.SetField("username", username);
+                            }
+                        }
+                    }
+                    //
+                    //  authenticate the user
+                    //
+                    cp.User.LoginByID(cp.User.Id);
+                    //
+                    s = "";
+                } else {
+                    s = cp.Addon.Execute("{E31F7A5B-FE69-4CF5-BD16-7F368192D956}");
+                }
                 //
-                cp.User.LoginByID(cp.User.Id);
-                //
-                s = "";
+                return s;
+            } catch (Exception ex) {
+                cp.Site.ErrorReport(ex, "DefaultRegistrationFormHandlerClass.Execute");
             }
-            else
-            {
-                s = cp.Addon.Execute("{E31F7A5B-FE69-4CF5-BD16-7F368192D956}");
-            }
-            //
-            return s;
+            return "";
         }
     }
 }

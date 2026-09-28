@@ -187,13 +187,7 @@ namespace Contensive.Addons {
                             //
                             swHints += ",end form  (" + sw.ElapsedMilliseconds.ToString() + ")";
                             //
-                            string editHidden = "";
                             bool isDebugging = cp.Visit.GetBoolean("allowDebugging", false);
-                            string debugHidden = "";
-                            //
-                            if (isDebugging) {
-                                debugHidden = cr + "<input type=\"hidden\" name=\"1allowDebugging\" value=\"1\">";
-                            }
                             {
                                 //
                                 // -- Edit
@@ -209,7 +203,7 @@ namespace Contensive.Addons {
                                 editUrl = cp.Utils.ModifyQueryString(editUrl, "1mb", "  Apply ");
                                 editUrl = cp.Utils.ModifyQueryString(editUrl, "1allowEditing", buttonState);
                                 
-                                layout.SetInner("#tpEditTabContent", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonContent\" data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Edit content\" >Edit</a>");
+                                layout.SetInner("#tpEditTabContent", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonContent\" data-bs-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Edit content\" >Edit</a>");
                                 jsOnReady += cr + "jQuery('#tpButtonContent').addClass('" + buttonClass + "');";
                             }
                             {
@@ -227,18 +221,18 @@ namespace Contensive.Addons {
                                 editUrl = cp.Utils.ModifyQueryString(editUrl, "1mb", "  Apply ");
                                 editUrl = cp.Utils.ModifyQueryString(editUrl, "1AllowQuickEditor", buttonState);
 
-                                layout.SetInner("#tpEditTabBlocks", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonWidget\" data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Add/remove widgets\" >Widgets</a>");
+                                layout.SetInner("#tpEditTabBlocks", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonWidget\" data-bs-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Add/remove widgets\" >Widgets</a>");
                                 jsOnReady += cr + "jQuery('#tpButtonWidget').addClass('" + buttonClass + "');";
                             }
                             {
                                 //
                                 // -- page
-                                layout.SetInner("#tpEditTabPage", $"<a href=\"{cp.Site.GetText("adminUrl")}?af=4&aa=2&ad=1&cid={cp.Content.GetID("page content")}&id={cp.Doc.PageId}\"  data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Edit page settings\" >Page</a>");
+                                layout.SetInner("#tpEditTabPage", $"<a href=\"{cp.Site.GetText("adminUrl")}?af=4&aa=2&ad=1&cid={cp.Content.GetID("page content")}&id={cp.Doc.PageId}\"  data-bs-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Edit page settings\" >Page</a>");
                             }
                             {
                                 //
                                 // -- Template
-                                layout.SetInner("#tpEditTabTemplate", "<a href=\"" + cp.Site.GetText("adminUrl") + "?af=4&aa=2&ad=1&cid=" + cp.Content.GetID("page templates") + "&id=" + cp.Doc.TemplateId + "\"  data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Edit the template used for this page\">Template</a>");
+                                layout.SetInner("#tpEditTabTemplate", "<a href=\"" + cp.Site.GetText("adminUrl") + "?af=4&aa=2&ad=1&cid=" + cp.Content.GetID("page templates") + "&id=" + cp.Doc.TemplateId + "\"  data-bs-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Edit the template used for this page\">Template</a>");
                             }
                             //
                             swHints += ",end editbutton  (" + sw.ElapsedMilliseconds.ToString() + ")";
@@ -280,9 +274,8 @@ namespace Contensive.Addons {
                                         //editHidden = "<input type=\"hidden\" name=\"1AllowAdvancedEditor\" value=\"1\">";
                                     }
                                     copy = ""
-                                        + editHidden
                                         + cr + "<input type=\"hidden\" name=\"1allowDebugging\" value=\"" + buttonState + "\">"
-                                        + cr + "<a id=\"tpButtonDebug\" href=\"#\" data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Toggle debug mode to view html hints for debugging.\">Debug</a>";
+                                        + cr + "<a id=\"tpButtonDebug\" href=\"#\" data-bs-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Toggle debug mode to view html hints for debugging.\">Debug</a>";
                                     copy = ""
                                         + cr + formOpen
                                         + cp.Html.Indent(copy, 1)
@@ -299,7 +292,7 @@ namespace Contensive.Addons {
                             //
                             // Admin button
                             //
-                            copy = "<a href=\"" + cp.Site.GetText("adminUrl", "/admin") + "\"  data-toggle=\"tooltip\"  data-bs-toggle=\"tooltip\" data-placement=\"bottom\" data-bs-placement=\"bottom\" title=\"Link to the control panel.\">Control Panel</a>";
+                            copy = "<a href=\"" + cp.Site.GetText("adminUrl", "/admin") + "\"  data-bs-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Link to the control panel.\">Control Panel</a>";
                             layout.SetInner("#tpEditTabAdmin", copy);
                         }
                     }

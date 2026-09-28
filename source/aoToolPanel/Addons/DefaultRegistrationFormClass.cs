@@ -1,4 +1,5 @@
 
+using System;
 using Contensive.BaseClasses;
 
 namespace Contensive.Addons.aoToolPanel {
@@ -12,6 +13,7 @@ namespace Contensive.Addons.aoToolPanel {
         //
         public override object Execute(Contensive.BaseClasses.CPBaseClass cp)
         {
+            try {
             string sS = "";
             bool updated = cp.Utils.EncodeBoolean(cp.Doc.GetText("acctUpdated"));
             bool errFlag = cp.Utils.EncodeBoolean(cp.Doc.GetText("errFlag"));
@@ -93,11 +95,11 @@ namespace Contensive.Addons.aoToolPanel {
             sS += "	    var username = $('#panelRegistrationUsername').val();";
             sS += "	    var password = $('#panelRegistrationPassword').val();";
             //
-            sS += "	    varString = 'panelRegistrationFirstName='+firstName;";
-            sS += "	    varString += '&panelRegistrationLastName='+lastName;";
-            sS += "	    varString += '&panelRegistrationEmail='+email;";
-            sS += "	    varString += '&panelRegistrationUsername='+username;";
-            sS += "	    varString += '&panelRegistrationPassword='+password;";
+            sS += "	    varString = 'panelRegistrationFirstName='+encodeURIComponent(firstName);";
+            sS += "	    varString += '&panelRegistrationLastName='+encodeURIComponent(lastName);";
+            sS += "	    varString += '&panelRegistrationEmail='+encodeURIComponent(email);";
+            sS += "	    varString += '&panelRegistrationUsername='+encodeURIComponent(username);";
+            sS += "	    varString += '&panelRegistrationPassword='+encodeURIComponent(password);";
             //
             sS += "     cj.ajax.addonCallback('toolpanelRegistrationFormHandler', varString, tpRedirectHome, 'panelFormContainer');";
             sS += "     tpSetSpinner('panelFormContainer', 'Updating Account....', containerHeight);";
@@ -114,6 +116,10 @@ namespace Contensive.Addons.aoToolPanel {
             cp.Doc.AddBodyJavascript(sS);
             //
             return s;
+            } catch (Exception ex) {
+                cp.Site.ErrorReport(ex, "DefaultRegistrationFormClass.Execute");
+            }
+            return "";
         }
         //
         //====================================================================================================

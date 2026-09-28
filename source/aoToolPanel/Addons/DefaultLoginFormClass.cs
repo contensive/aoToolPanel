@@ -1,4 +1,5 @@
 
+using System;
 using Contensive.BaseClasses;
 
 namespace Contensive.Addons.aoToolPanel {
@@ -11,6 +12,7 @@ namespace Contensive.Addons.aoToolPanel {
         //
         public override object Execute(CPBaseClass cp)
         {
+            try {
             string s = "";
             bool errFlag = cp.Utils.EncodeBoolean(cp.Doc.GetText("Error Flag"));    //   problem with login
             bool emailFlag = cp.Utils.EncodeBoolean(cp.Doc.GetText("Email Flag"));  //  email password sent
@@ -101,6 +103,10 @@ namespace Contensive.Addons.aoToolPanel {
             //
             s = layout.GetHtml();
             return s;
+            } catch (Exception ex) {
+                cp.Site.ErrorReport(ex, "DefaultLoginFormClass.Execute");
+            }
+            return "";
         }
         //
         //====================================================================================================

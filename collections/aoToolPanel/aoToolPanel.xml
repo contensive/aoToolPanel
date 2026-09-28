@@ -8,7 +8,7 @@
 	<Addon name="toolPanelOnInstall" guid="{4BDF8B7D-89F5-4D63-AA1C-750998C6920D}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<DotNetClass></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.Addons.Legacy.ToolPanelOnInstallClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -38,11 +38,7 @@
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<Scripting Language="" EntryPoint="" Timeout="5000">
-			<Code><![CDATA[function m
-call cp.site.setProperty("allowLegacyToolsPanel","0")
-end function]]></Code>
-		</Scripting>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="deprecated-toolPanelAccountForm" guid="{294B5C1C-B172-43F2-B787-DEFF86B16FE2}" type="Add-on">
 		<Copy></Copy>
@@ -82,7 +78,7 @@ end function]]></Code>
 	<Addon name="remoteToolPanelPosition" guid="{95481BA1-028C-48B7-91F1-8ECD7B3F9E49}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<DotNetClass></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.Addons.Legacy.RemoteToolPanelPositionClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -112,18 +108,12 @@ end function]]></Code>
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<Scripting Language="" EntryPoint="" Timeout="5000">
-			<Code><![CDATA[function f
-f = "top=" & cp.doc.getText( "top" )  & ", left=" & cp.doc.getText( "left" ) 
-call cp.visit.setProperty("toolPanelPositionTop", cp.doc.getText( "top" ))
-call cp.visit.setProperty("toolPanelPositionLeft", cp.doc.getText( "left" ))
-end function]]></Code>
-		</Scripting>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="setUserProperty" guid="{0B5BFA85-9031-456E-A0CF-82AE0F8CF555}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<DotNetClass></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.Addons.Legacy.SetUserPropertyClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -153,29 +143,7 @@ end function]]></Code>
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<Scripting Language="" EntryPoint="" Timeout="5000">
-			<Code><![CDATA[function m
-	dim name
-	dim value
-	'
-	name = cp.doc.getProperty("n")
-	value = cp.doc.getProperty("v")
-	if (name="isLockedAccountTab") Then
-		call cp.user.setProperty("isLockedAccountTab",value)
-	end if
-	if (name="tpLoginTabIsPinned") Then
-		m = m & "<div>hit on tpLoginTabIsPinned</div>"
-		call cp.user.setProperty("tpLoginTabIsPinned",value)
-	end if
-	if (name="isLockedEditTab") Then
-		call cp.user.setProperty("isLockedEditTab",value)
-	end if
-	m = m & "<div>n=[" & name & "]</div>"
-	m = m & "<div>v=[" & value & "]</div>"
-	m = m & "<div>property=[" & cp.user.getProperty("tpLoginTabIsPinned","") & "]</div>"
-	cp.utils.appendLogfile( m )
-end function]]></Code>
-		</Scripting>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="Tool Panel" guid="{32839250-841F-4BE6-A15E-CC7EAAA7C2FF}" type="Add-on">
 		<Copy></Copy>
@@ -216,14 +184,7 @@ end function]]></Code>
 		<Styles><![CDATA[
 
 ]]></Styles>
-		<Scripting Language="" EntryPoint="setPosition" Timeout="5000">
-			<Code><![CDATA[function setPosition
-    dim left
-    left =  cp.visit.getinteger("toolPanelPositionLeft")
-    left = left & "px"
-    setPosition = "<style>#tpDraggable {left: " & left & ";position: fixed;}</style>"
-end function]]></Code>
-		</Scripting>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="Tool Panel Settings" guid="{14FE7079-021C-4D21-8382-376C9C3E68BC}" type="Setting">
 		<Copy></Copy>
@@ -483,7 +444,7 @@ end function]]></Code>
 	<Addon name="toolPanelLogoutHandler" guid="{16FE5AA9-2CAE-4AF3-8AE7-D0A3D5EC39FE}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<DotNetClass></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.Addons.Legacy.ToolPanelLogoutHandlerClass]]></DotNetClass>
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
@@ -513,11 +474,7 @@ end function]]></Code>
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles></Styles>
-		<Scripting Language="" EntryPoint="getContent" Timeout="5000">
-			<Code><![CDATA[function getContent()
-	call cp.User.Logout()
-end function]]></Code>
-		</Scripting>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
 	<Addon name="toolPanelRegistrationFormHandler" guid="{010B48C0-9854-4DD5-8291-1F366CC1F30F}" type="Add-on">
 		<Copy></Copy>
