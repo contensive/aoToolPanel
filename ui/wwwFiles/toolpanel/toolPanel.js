@@ -30,8 +30,30 @@ var coordinates = function (element) {
 bind
 */
 $(document).ready(function() {
-    // Detect mouse activity to distinguish touch-only devices from hybrid devices
-    $(document).one('mousemove', function() {
+    // Detect mouse activity to distinguish touch-only devices from hybrid devices.
+    // A finger tap also fires compatibility mouse events (including mousemove), so a
+    // plain mousemove cannot tell a tap from a mouse. Use the pointer type when the
+    // browser has Pointer Events, otherwise ignore mousemoves that follow a touch.
+    if (window.PointerEvent) {
+        $(document).on('pointermove.tpMouseDetect', function (e) {
+            if (e.originalEvent.pointerType === 'mouse') {
+                $(document).off('.tpMouseDetect');
+                tpMouseActivityDetected();
+            }
+        });
+    } else {
+        var tpLastTouchTime = 0;
+        $(document).on('touchstart.tpMouseDetect touchend.tpMouseDetect', function () {
+            tpLastTouchTime = new Date().getTime();
+        });
+        $(document).on('mousemove.tpMouseDetect', function () {
+            if (new Date().getTime() - tpLastTouchTime > 1000) {
+                $(document).off('.tpMouseDetect');
+                tpMouseActivityDetected();
+            }
+        });
+    }
+    function tpMouseActivityDetected() {
         if (!tpHasMouseActivity) {
             tpHasMouseActivity = true;
             console.log('Mouse activity detected - enabling auto-hide');
@@ -49,7 +71,7 @@ $(document).ready(function() {
                 }
             }
         }
-    });
+    }
 
     $('#tpDraggable').draggable({
         axis: "x"
