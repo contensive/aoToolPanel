@@ -14,7 +14,6 @@ var tpTimerIdEditTab = 0;
 // Detect if user is primarily using touch (no mouse detected yet)
 var tpIsTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 var tpHasMouseActivity = false;
-console.log('tpIsTouchDevice (initial):', tpIsTouchDevice);
 /*
 set tool panel position
 */
@@ -34,10 +33,8 @@ $(document).ready(function() {
     $(document).one('mousemove', function() {
         if (!tpHasMouseActivity) {
             tpHasMouseActivity = true;
-            console.log('Mouse activity detected - enabling auto-hide');
             // If this is a touch device that now has mouse activity, start auto-hide timers
             if (tpIsTouchDevice) {
-                console.log('Starting auto-hide timers for hybrid device');
                 if (!isLockedEditTab) {
                     tpTimerIdEditTab = setTimeout("editTabClose()", 2000);
                 }
@@ -83,26 +80,18 @@ $(document).ready(function() {
     $('body').on('click', '#tpRegisterSubmit', function (e) { return tpRegisterSubmit(e) });
     // -- show edit tab initially, then auto-hide after 2 seconds if not locked
     $('#tpDraggable').show();
-    console.log('Initial hide check - tpIsTouchDevice:', tpIsTouchDevice, 'tpHasMouseActivity:', tpHasMouseActivity, 'isLockedEditTab:', isLockedEditTab);
-
     // For non-touch devices, start auto-hide immediately
     // For touch devices, auto-hide will be enabled once mouse activity is detected
     if (!tpIsTouchDevice) {
-        console.log('Non-touch device - setting initial timers');
         if (!isLockedEditTab) {
-            console.log('Setting editTabClose timer');
             tpTimerIdEditTab = setTimeout("editTabClose()", 2000);
         }
         if (!isLockedAccountTab) {
-            console.log('Setting accountTabClose timer');
             tpTimerIdAccountTab = setTimeout("accountTabClose()", 2000);
         }
         if (!tpLoginTabIsPinned) {
-            console.log('Setting LoginTabClose timer');
             timerIdLoginTab = setTimeout("LoginTabClose()", 2000);
         }
-    } else {
-        console.log('Touch device detected - auto-hide will activate on mouse movement');
     }
     // -- enable bootstrap tooltips
     $(function () {
@@ -133,7 +122,6 @@ function tpRedirectHome(returnVal, container) {
 tab zone
 */
 function tpMouseEnterTabZone(e) {
-    console.log('tpMouseEnterTabZone');
     tpIsWantedAccountTab = true;
     $("#tpAccountTab").slideDown("slow");
     tpAbortLoginTabClose = true;
@@ -144,7 +132,6 @@ function tpMouseEnterTabZone(e) {
 /*
 */
 function tpMouseLeaveTabZone(e) {
-    console.log('tpMouseLeaveTabZone');
     tpMouseLeaveAccountTab(e);
     mouseLeaveLoginTab(e);
     tpMouseLeaveEditTab(e);
@@ -244,14 +231,12 @@ function tpMouseLeaveAccountTab(e) {
     e.stopPropagation();
     e.preventDefault();
     var enableAutoHide = !tpIsTouchDevice || tpHasMouseActivity;
-    console.log('tpMouseLeaveAccountTab - isLocked:', isLockedAccountTab, 'isOpen:', tpIsOpenAccountPanel, 'enableAutoHide:', enableAutoHide);
     if ((!isLockedAccountTab) & (!tpIsOpenAccountPanel)) {
         if (tpTimerIdAccountTab != 0) {
             clearTimeout(tpTimerIdAccountTab);
             tpTimerIdAccountTab = 0;
         }
         if (enableAutoHide) {
-            console.log('Setting accountTabClose timer');
             tpTimerIdAccountTab = setTimeout("accountTabClose()", 2000);
         }
         tpIsWantedAccountTab = false;
@@ -260,9 +245,7 @@ function tpMouseLeaveAccountTab(e) {
 /*
 */
 function accountTabClose(e) {
-    console.log('accountTabClose - tpIsWantedAccountTab:', tpIsWantedAccountTab);
     if (!tpIsWantedAccountTab) {
-        console.log('Hiding account tab');
         $("#tpAccountTab").slideUp("slow");
     } else {
         tpIsWantedAccountTab = tpIsWantedAccountTab;
@@ -304,14 +287,12 @@ function tpMouseLeaveEditTab(e) {
     e.stopPropagation();
     e.preventDefault();
     var enableAutoHide = !tpIsTouchDevice || tpHasMouseActivity;
-    console.log('tpMouseLeaveEditTab - isLocked:', isLockedEditTab, 'enableAutoHide:', enableAutoHide);
     if (!isLockedEditTab) {
         if (tpTimerIdEditTab != 0) {
             clearTimeout(tpTimerIdEditTab);
             tpTimerIdEditTab = 0;
         }
         if (enableAutoHide) {
-            console.log('Setting editTabClose timer');
             tpTimerIdEditTab = setTimeout("editTabClose()", 2000);
         }
         tpIsWantedEditTab = false;
@@ -320,9 +301,7 @@ function tpMouseLeaveEditTab(e) {
 /*
 */
 function editTabClose() {
-    console.log('editTabClose - tpIsWantedEditTab:', tpIsWantedEditTab);
     if (!tpIsWantedEditTab) {
-        console.log('Hiding edit tab');
         $("#tpDraggable").slideUp("slow");
     }
 }
@@ -420,14 +399,12 @@ function mouseLeaveLoginTab(e) {
     e.stopPropagation();
     e.preventDefault();
     var enableAutoHide = !tpIsTouchDevice || tpHasMouseActivity;
-    console.log('mouseLeaveLoginTab - isPinned:', tpLoginTabIsPinned, 'isOpen:', isOpenLoginPanel, 'enableAutoHide:', enableAutoHide);
     if ((!tpLoginTabIsPinned) & (!isOpenLoginPanel)) {
         if (timerIdLoginTab != 0) {
             clearTimeout(timerIdLoginTab);
             timerIdLoginTab = 0;
         }
         if (enableAutoHide) {
-            console.log('Setting LoginTabClose timer');
             timerIdLoginTab = setTimeout("LoginTabClose()", 2000);
         }
         tpAbortLoginTabClose = false;
@@ -436,9 +413,7 @@ function mouseLeaveLoginTab(e) {
 /*
 */
 function LoginTabClose() {
-    console.log('LoginTabClose - tpAbortLoginTabClose:', tpAbortLoginTabClose);
     if (!tpAbortLoginTabClose) {
-        console.log('Hiding login tab');
         $("#tpLoginTab").slideUp("slow");
     } else {
         tpAbortLoginTabClose = tpAbortLoginTabClose;

@@ -208,21 +208,26 @@ namespace Contensive.Addons {
                             }
                             {
                                 //
-                                // -- widgets
-                                string buttonState = "1";
-                                string buttonClass = "tpButtonUp";
-                                if (cp.Visit.GetBoolean("allowQuickEditor", false)) {
-                                    buttonState = "0";
-                                    buttonClass = "tpButtonDown";
-                                }
-                                string editUrl = cp.Doc.RefreshQueryString;
-                                editUrl = cp.Utils.ModifyQueryString(editUrl, "ccFormSN", "1");
-                                editUrl = cp.Utils.ModifyQueryString(editUrl, "1type", "do30a8vl29");
-                                editUrl = cp.Utils.ModifyQueryString(editUrl, "1mb", "  Apply ");
-                                editUrl = cp.Utils.ModifyQueryString(editUrl, "1AllowQuickEditor", buttonState);
+                                // -- widgets (hide if unified page builder is installed)
+                                if (!cp.Site.GetBoolean("pageBuilderUnifiedEditorInstalled", false)) {
+                                    string buttonState = "1";
+                                    string buttonClass = "tpButtonUp";
+                                    if (cp.Visit.GetBoolean("allowQuickEditor", false)) {
+                                        buttonState = "0";
+                                        buttonClass = "tpButtonDown";
+                                    }
+                                    string editUrl = cp.Doc.RefreshQueryString;
+                                    editUrl = cp.Utils.ModifyQueryString(editUrl, "ccFormSN", "1");
+                                    editUrl = cp.Utils.ModifyQueryString(editUrl, "1type", "do30a8vl29");
+                                    editUrl = cp.Utils.ModifyQueryString(editUrl, "1mb", "  Apply ");
+                                    editUrl = cp.Utils.ModifyQueryString(editUrl, "1AllowQuickEditor", buttonState);
 
-                                layout.SetInner("#tpEditTabBlocks", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonWidget\" data-bs-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Add/remove widgets\" >Widgets</a>");
-                                jsOnReady += cr + "jQuery('#tpButtonWidget').addClass('" + buttonClass + "');";
+                                    layout.SetInner("#tpEditTabBlocks", $"<a href=\"{cp.Request.PathPage}?{editUrl}\"  id=\"tpButtonWidget\" data-bs-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"Add/remove widgets\" >Widgets</a>");
+                                    jsOnReady += cr + "jQuery('#tpButtonWidget').addClass('" + buttonClass + "');";
+                                } else {
+                                    // Unified page builder installed - hide this button
+                                    layout.SetOuter("#tpEditTabBlocks", "");
+                                }
                             }
                             {
                                 //
