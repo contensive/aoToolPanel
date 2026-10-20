@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="windows-1252"?>
-<Collection name="Tool Panel" guid="{374E2B8C-B29D-470B-BD1B-41CAA5BCEDCB}" system="No" updatable="Yes" blockNavigatorNode="No" onInstallAddonGuid="{4BDF8B7D-89F5-4D63-AA1C-750998C6920D}" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="https://contensive.s3.amazonaws.com/xsd/Collection.xsd"
+<Collection 
+	Name="Tool Panel" 
+	Guid="{374E2B8C-B29D-470B-BD1B-41CAA5BCEDCB}" 
+	system="No" 
+	updatable="Yes" 
+	blockNavigatorNode="No" 
+	onInstallAddonGuid="{4BDF8B7D-89F5-4D63-AA1C-750998C6920D}" 
+  	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:noNamespaceSchemaLocation="https://contensive.s3.amazonaws.com/xsd/Collection.xsd"
 >
-	<HelpLink></HelpLink>
-	<Help></Help>
-	<Addon name="toolPanelOnInstall" guid="{4BDF8B7D-89F5-4D63-AA1C-750998C6920D}" type="Add-on">
+	<Addon Name="toolPanelOnInstall" Guid="{4BDF8B7D-89F5-4D63-AA1C-750998C6920D}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.Addons.Legacy.ToolPanelOnInstallClass]]></DotNetClass>
@@ -40,7 +44,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="deprecated-toolPanelAccountForm" guid="{294B5C1C-B172-43F2-B787-DEFF86B16FE2}" type="Add-on">
+	<Addon Name="deprecated-toolPanelAccountForm" Guid="{294B5C1C-B172-43F2-B787-DEFF86B16FE2}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass></DotNetClass>
@@ -75,7 +79,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="remoteToolPanelPosition" guid="{95481BA1-028C-48B7-91F1-8ECD7B3F9E49}" type="Add-on">
+	<Addon Name="remoteToolPanelPosition" Guid="{95481BA1-028C-48B7-91F1-8ECD7B3F9E49}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.Addons.Legacy.RemoteToolPanelPositionClass]]></DotNetClass>
@@ -110,7 +114,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="setUserProperty" guid="{0B5BFA85-9031-456E-A0CF-82AE0F8CF555}" type="Add-on">
+	<Addon Name="setUserProperty" Guid="{0B5BFA85-9031-456E-A0CF-82AE0F8CF555}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.Addons.Legacy.SetUserPropertyClass]]></DotNetClass>
@@ -145,7 +149,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="Tool Panel" guid="{32839250-841F-4BE6-A15E-CC7EAAA7C2FF}" type="Add-on">
+	<Addon Name="Tool Panel" Guid="{32839250-841F-4BE6-A15E-CC7EAAA7C2FF}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.toolPanelClass]]></DotNetClass>
@@ -158,8 +162,8 @@
 		<InIframe>No</InIframe>
 		<BlockEditTools>Yes</BlockEditTools>
 		<FormXML></FormXML>
-		<IncludeAddon name="JQuery UI" guid="{840B9AEF-9470-4599-BD47-7EC0C9298614}"/>
-		<IncludeAddon name="Font Awesome" guid="{1e2f82ae-6722-4564-a461-5b2e7c5e32b3}"/>
+		<IncludeAddon Name="JQuery UI" Guid="{840B9AEF-9470-4599-BD47-7EC0C9298614}"/>
+		<IncludeAddon Name="Font Awesome" Guid="{1e2f82ae-6722-4564-a461-5b2e7c5e32b3}"/>
 		<IsInline>No</IsInline>
 		<JSHeadScriptSrc>/toolpanel/toolPanel.js</JSHeadScriptSrc>
 		<JavascriptOnLoad></JavascriptOnLoad>
@@ -186,7 +190,7 @@
 ]]></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="Tool Panel Settings" guid="{14FE7079-021C-4D21-8382-376C9C3E68BC}" type="Setting">
+	<Addon Name="Tool Panel Settings" Guid="{14FE7079-021C-4D21-8382-376C9C3E68BC}" Type="Setting">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass></DotNetClass>
@@ -202,11 +206,11 @@
 		<Description>Settings that change features/characteristics of the Tool Panel.</Description>
 		<Help></Help>
 		<HelpLink>http://www.contensive.com</HelpLink>
-		<Tab name="Tool Panel Tabs" heading="Login/Account" description="Settings and Features">
-			<SiteProperty caption="Show the Login Tab" name="toolPanelShowLoginTab" ReadOnly="0" Type="Boolean" Description="When checked, displays the Login tab at the top of every page.">False</SiteProperty>
-			<SiteProperty caption="Pin New User Login Tab" name="toolPanelPinLoginTab" ReadOnly="0" Type="Boolean" Description="When checked, the state of the Login tab for new users will not auto-hide when not in use and stay locked in the open position.">True</SiteProperty>
-			<SiteProperty caption="Show the Account Tab" name="toolPanelShowAccountTab" ReadOnly="0" Type="Boolean" Description="When checked, displays the Account tab at the top of every page.">False</SiteProperty>
-			<SiteProperty caption="Pin New User Account Tab" name="toolPanelPinAccountTab" ReadOnly="0" Type="Boolean" Description="When checked, the state of the Account tab will not auto-hide when not in use and stay locked in the open position.">True</SiteProperty>
+		<Tab Name="Tool Panel Tabs" heading="Login/Account" description="Settings and Features">
+			<SiteProperty caption="Show the Login Tab" Name="toolPanelShowLoginTab" ReadOnly="0" Type="Boolean" Description="When checked, displays the Login tab at the top of every page.">False</SiteProperty>
+			<SiteProperty caption="Pin New User Login Tab" Name="toolPanelPinLoginTab" ReadOnly="0" Type="Boolean" Description="When checked, the state of the Login tab for new users will not auto-hide when not in use and stay locked in the open position.">True</SiteProperty>
+			<SiteProperty caption="Show the Account Tab" Name="toolPanelShowAccountTab" ReadOnly="0" Type="Boolean" Description="When checked, displays the Account tab at the top of every page.">False</SiteProperty>
+			<SiteProperty caption="Pin New User Account Tab" Name="toolPanelPinAccountTab" ReadOnly="0" Type="Boolean" Description="When checked, the state of the Account tab will not auto-hide when not in use and stay locked in the open position.">True</SiteProperty>
 		</Tab>
 </Form>]]></FormXML>
 		<IsInline>No</IsInline>
@@ -231,7 +235,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="toolPanelAccountForm" guid="{7A057715-5CDD-4D9F-A12A-5CCB61F93974}" type="Add-on">
+	<Addon Name="toolPanelAccountForm" Guid="{7A057715-5CDD-4D9F-A12A-5CCB61F93974}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.toolPanelAccountFormClass]]></DotNetClass>
@@ -266,7 +270,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="toolPanelAccountFormHandler" guid="{9C09E13E-943B-416F-A7F7-5517160437F4}" type="Add-on">
+	<Addon Name="toolPanelAccountFormHandler" Guid="{9C09E13E-943B-416F-A7F7-5517160437F4}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.toolPanelAccountFormHandlerClass]]></DotNetClass>
@@ -301,7 +305,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="toolPanelDefaultLoginForm" guid="{37B7EDB3-7BE0-4E89-8012-16F0CDEED218}" type="Add-on">
+	<Addon Name="toolPanelDefaultLoginForm" Guid="{37B7EDB3-7BE0-4E89-8012-16F0CDEED218}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultLoginFormClass]]></DotNetClass>
@@ -336,7 +340,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="toolPanelDefaultRegistrationForm" guid="{E31F7A5B-FE69-4CF5-BD16-7F368192D956}" type="Add-on">
+	<Addon Name="toolPanelDefaultRegistrationForm" Guid="{E31F7A5B-FE69-4CF5-BD16-7F368192D956}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultRegistrationFormClass]]></DotNetClass>
@@ -371,7 +375,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="toolPanelLoginForm" guid="{72C78E15-BF5F-47A1-AE0A-879AEFF0C08A}" type="Add-on">
+	<Addon Name="toolPanelLoginForm" Guid="{72C78E15-BF5F-47A1-AE0A-879AEFF0C08A}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.panelLoginFormClass]]></DotNetClass>
@@ -406,7 +410,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="toolPanelLoginFormHandler" guid="{AD772459-D19B-4C8B-95CE-7E291FDF621C}" type="Add-on">
+	<Addon Name="toolPanelLoginFormHandler" Guid="{AD772459-D19B-4C8B-95CE-7E291FDF621C}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultLoginFormHandlerClass]]></DotNetClass>
@@ -441,7 +445,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="toolPanelLogoutHandler" guid="{16FE5AA9-2CAE-4AF3-8AE7-D0A3D5EC39FE}" type="Add-on">
+	<Addon Name="toolPanelLogoutHandler" Guid="{16FE5AA9-2CAE-4AF3-8AE7-D0A3D5EC39FE}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.Addons.Legacy.ToolPanelLogoutHandlerClass]]></DotNetClass>
@@ -476,7 +480,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<Addon name="toolPanelRegistrationFormHandler" guid="{010B48C0-9854-4DD5-8291-1F366CC1F30F}" type="Add-on">
+	<Addon Name="toolPanelRegistrationFormHandler" Guid="{010B48C0-9854-4DD5-8291-1F366CC1F30F}" Type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
 		<DotNetClass><![CDATA[Contensive.Addons.aoToolPanel.defaultRegistrationFormHandlerClass]]></DotNetClass>
@@ -511,7 +515,7 @@
 		<Styles></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
 	</Addon>
-	<ImportCollection name="Font Awesome">{3db6a433-59ca-43d1-9fb6-a539b6b947f2}</ImportCollection>
-	<Resource name="wwwFiles.zip" type="wwwFiles" />
-	<Resource name="HelpFiles.zip" type="privatefiles" path="helpfiles/Tool Panel" />
+	<ImportCollection Name="Font Awesome">{3db6a433-59ca-43d1-9fb6-a539b6b947f2}</ImportCollection>
+	<Resource Name="wwwFiles.zip" Type="wwwFiles" />
+	<Resource Name="HelpFiles.zip" Type="HelpFiles" />
 </Collection>
