@@ -18,6 +18,9 @@ namespace Contensive.Addons {
             var sw = Stopwatch.StartNew();
             try {
                 //
+                // -- bots do not need the tool panel
+                if (cp.Visit.GetBoolean("bot")) { return ""; }
+                //
                 // -- if contensive version < 21.11.19.1 or siteProperty(allowToolPanel) is not true return
                 bool isProperty = cp.Doc.IsProperty("allowToolPanel");
                 if (isProperty) {
