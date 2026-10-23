@@ -44,16 +44,15 @@ namespace Contensive.Addons {
                 //
                 // -- execute login form if not authenticated to execute authentication
                 string loginForm = "";
-                if(true) {
-                    // -- block because this screws up password recovery process
-                    if (!cp.User.IsAuthenticated) {
-                        loginForm = cp.Addon.Execute(Constants.guidContensiveLoginForm);
-                        if (string.IsNullOrEmpty(loginForm)) {
-                            //
-                            // -- authentication successful, redraw
-                            cp.Response.Redirect(cp.Request.PathPage + "?" + cp.Request.QueryString);
-                            return "";
-                        }
+                if (!cp.User.IsAuthenticated) {
+                    loginForm = cp.Addon.Execute(Constants.guidContensiveLoginForm);
+                    if (cp.User.IsAuthenticated) {
+                        //
+                        // -- authentication successful during login form execution, redirect to reload page with authenticated state
+                        cp.Response.Redirect(cp.Request.PathPage + "?" + cp.Request.QueryString);
+                        return "";
+                    }
+                    if (!string.IsNullOrEmpty(loginForm)) {
                         // -- hack - change forget your password to recover your password
                         loginForm = loginForm.Replace("Forget Your Password", "Recover Your Password");
                     }
