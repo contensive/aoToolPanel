@@ -5,7 +5,7 @@ param(
     [Parameter(Mandatory)][string]$CollectionPath,
     [Parameter(Mandatory)][string]$DeploymentPath,
     [string]$UiPath = '',
-    [string]$TargetDomain = 'contensive.com'
+    [string]$TargetDomain = 'www.contensive.com'
 )
 
 $ErrorActionPreference = 'Stop'
