@@ -11,7 +11,8 @@
       "Bash(pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1)",
       "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1)",
       "Bash(where.exe:*)",
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "WebFetch(domain:contensive.s3.amazonaws.com)"
     ]
   }
 }

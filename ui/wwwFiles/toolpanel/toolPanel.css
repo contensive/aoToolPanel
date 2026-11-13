@@ -441,11 +441,3 @@ background-color: transparent;
 #toolPanel div.spinner img{text-align:center;}
 #toolPanel div.spinner p img{text-align:center;}
 
-]]></Styles>
-		<Scripting Language="" EntryPoint="setPosition" Timeout="5000">
-			<Code><![CDATA[function setPosition
-    dim left
-    left =  cp.visit.getinteger("toolPanelPositionLeft")
-    left = left & "px"
-    setPosition = "<style>#tpDraggable {left: " & left & ";position: fixed;}</style>"
-end function

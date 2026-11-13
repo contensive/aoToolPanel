@@ -156,7 +156,7 @@
 		<ArgumentList></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
-		<Help></Help>
+		<Help>Adds a floating tool panel to the top of every public page on your site, giving visitors and content managers quick access to login, account management, and content editing without leaving the page they are viewing. Unauthenticated visitors see an optional Login tab with support for username or email-based authentication, automatic login, password recovery, and new-user registration. Authenticated content managers get an Account tab for updating their profile and an Edit toolbar with one-click toggles for inline content editing, widget management, page settings, and template editing, plus direct links to the control panel and debug mode. All tabs auto-hide after a brief delay to stay out of the way, with a pin option so users can keep their preferred tabs visible. The panel can be repositioned horizontally, and every preference is remembered across visits. Site administrators can control which tabs appear and their default pin state through the Tool Panel Settings page.</Help>
 		<HelpLink></HelpLink>
 		<Icon Link="" width="0" height="0" sprites="0" />
 		<InIframe>No</InIframe>
